@@ -1,5 +1,14 @@
+import { styled } from 'styled-components';
+
 const inputFilled = () => {
-  return <></>;
+  return (
+    <>
+      <InputFrame>fdsafsa</InputFrame>
+    </>
+  );
 };
 
+const InputFrame = styled.div`
+  background-color: green;
+`;
 export default inputFilled;
