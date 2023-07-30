@@ -1,9 +1,8 @@
-import SignUp from './pages/Join/signup.js';
-
+import Input from './components/Input';
 function App() {
   return (
     <div className='App'>
-      <SignUp />
+      <Input />
     </div>
   );
 }

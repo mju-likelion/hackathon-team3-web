@@ -1,11 +1,19 @@
 import { styled } from 'styled-components';
+import Input from '../../components/Input';
+import ButtonLong from '../../components/ButtonLong';
 
-const signup = () => {
+const Join = () => {
   return (
     <>
       <Header />
       <JoinFrame>
-        <JoinBox></JoinBox>
+        <JoinBox>
+          <h1>로그인</h1>
+          <InputFilled />
+          <InputFilled />
+          <LongButton />
+          <p></p>
+        </JoinBox>
       </JoinFrame>
     </>
   );
@@ -16,15 +24,14 @@ const Header = styled.div`
 `;
 
 const JoinFrame = styled.div`
-  background-color: pink;
   height: 659px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const JoinBox = styled.div`
-  background-color: rosybrown;
   height: 480px;
   width: 600px;
+  box-shadow: rgb(0, 0, 0, 0.15) 0px 5px 10px 0px;
 `;
-export default signup;
+export default Join;
