@@ -1,10 +1,14 @@
 import { styled } from 'styled-components';
 
-const Input = ({ inputType, inputName, inputMsg }) => {
+const Input = ({ inputType, inputName, inputMsg, register }) => {
   return (
     <>
       <InputFrame>
-        <InputFilled type={inputType} placeholder={inputName}></InputFilled>
+        <InputFilled
+          type={inputType}
+          placeholder={inputName}
+          {...register(register)}
+        ></InputFilled>
       </InputFrame>
       <InputText>{inputMsg}</InputText>
     </>
