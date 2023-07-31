@@ -5,6 +5,7 @@ import EducationSelect from './pages/Education/EducationSelect';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
+import Header from './components/Header';
 
 function App() {
   return (
