@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header';
-
+import Join from './pages/Join/Join';
 function App() {
   return (
     <>
@@ -17,6 +17,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/education' element={<EducationSelect />} />
+            <Route path='/join' element={<Join />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
