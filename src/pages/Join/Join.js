@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 import Input from '../../components/Input';
 import ButtonLong from '../../components/ButtonLong';
-
 const Join = () => {
   const inputMsg = {
     emil: '사용하실 이메일을 입력해주세요.',
@@ -27,7 +26,6 @@ const Join = () => {
             inputMsg={inputMsg.verifyPwd}
           />
           <ButtonLong btnName='회원가입' />
-          <p></p>
         </JoinBox>
       </JoinFrame>
     </>
@@ -43,7 +41,7 @@ const JoinFrame = styled.div`
   display: flex;
   justify-content: center;
 `;
-const JoinBox = styled.div`
+const JoinBox = styled.form`
   height: 620px;
   width: 600px;
   display: flex;

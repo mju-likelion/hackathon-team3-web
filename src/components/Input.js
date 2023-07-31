@@ -13,11 +13,10 @@ const Input = ({ inputType, inputName, inputMsg }) => {
 
 const InputFrame = styled.div`
   background-color: #eaeaea;
-  height: 65px;
+  height: 45px;
   width: 450px;
   display: flex;
   padding: 10px;
-  margin-bottom: 8px;
 `;
 const InputFilled = styled.input`
   background-color: #eaeaea;
@@ -28,8 +27,7 @@ const InputFilled = styled.input`
 const InputText = styled.p`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.GRAY2};
-  margin-bottom: 20px;
+  margin: 4px 0 20px 70px;
   align-self: flex-start;
-  margin-left: 80px;
 `;
 export default Input;

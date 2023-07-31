@@ -6,19 +6,20 @@ import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header';
-
+import Join from './pages/Join/Join';
 function App() {
   return (
     <>
       <ThemeProvider theme={Theme}>
-        <GlobalStyle />
+        {/* <GlobalStyle />
         <Header />
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/education' element={<EducationSelect />} />
           </Routes>
-        </BrowserRouter>
+        </BrowserRouter> */}
+        <Join />
       </ThemeProvider>
     </>
   );
