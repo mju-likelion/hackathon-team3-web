@@ -13,7 +13,7 @@ const Join = () => {
     pw: yup
       .string()
       .required(
-        '영문과 숫자, 특수기호를 조합하여 8~14 글자 이하로 입력해주세요.'
+        '비밀번호를 영문과 숫자, 특수기호를 조합하여 8~14 글자 이하로 입력해주세요.'
       )
       .max(14, '비밀번호는 최대 14자리로 입력해주세요.')
       .matches(
@@ -111,7 +111,7 @@ const JoinInput = styled.input`
 `;
 const ErrorMsg = styled.p`
   font-size: 14px;
-  color: red;
+  color: #ff5454;
   margin: 6px 0 30px 75px;
   align-self: flex-start;
 `;
