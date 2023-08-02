@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const ProgressRateBar = ({ rate }) => {
+const ProgressRateBar = ({ rate, className }) => {
   return (
-    <BarBox>
+    <BarBox className={className}>
       <RateTitle>진도율</RateTitle>
       <Bar_background>
         <Bar_value value={rate} />

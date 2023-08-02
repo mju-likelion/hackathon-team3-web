@@ -8,6 +8,7 @@ import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header';
 import Join from './pages/Join/Join';
 import Login from './pages/Login/Login';
+import MyPage from './pages/MyPage/MyPage';
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
             <Route path='/education' element={<EducationSelect />} />
             <Route path='/join' element={<Join />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/mypage' element={<MyPage />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
