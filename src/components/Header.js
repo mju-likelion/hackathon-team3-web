@@ -20,7 +20,7 @@ const Header = () => {
           <Learning>학습하기</Learning>
           <SignBox>
             <LoginBtn onClick={onClickLogin}>로그인</LoginBtn>
-            <SignUpText onClick={onClickJoin}>회원가입</SignUpText>
+            <JoinBtn onClick={onClickJoin}>회원가입</JoinBtn>
           </SignBox>
         </HeaderBar>
       </HeaderWrap>
@@ -74,4 +74,4 @@ const LoginBtn = styled.button`
   background-color: white;
 `;
 
-const SignUpText = styled(LoginBtn)``;
+const JoinBtn = styled(LoginBtn)``;
