@@ -13,13 +13,13 @@ function App() {
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <Header />
-        {/* <BrowserRouter>
+        <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Join />} />
+            <Route path='/' element={<Main />} />
             <Route path='/education' element={<EducationSelect />} />
+            <Route path='/join' element={<Join />} />
           </Routes>
-        </BrowserRouter> */}
-        <Join />
+        </BrowserRouter>
       </ThemeProvider>
     </>
   );

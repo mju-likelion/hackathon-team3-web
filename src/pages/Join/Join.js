@@ -4,7 +4,9 @@ import ButtonLong from '../../components/ButtonLong';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 const Join = () => {
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -29,14 +31,15 @@ const Join = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
+
   const onClickLogin = (data) => {
     console.log(data);
-    reset();
+    alert('회원가입이 완료되었습니다! 홈으로 돌아갑니다.');
+    navigate('/');
   };
 
   return (
