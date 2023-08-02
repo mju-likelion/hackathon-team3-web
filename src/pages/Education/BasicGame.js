@@ -1,7 +1,14 @@
 import styled from 'styled-components';
+import SideBar from '../../components/SideBar';
 
 const BasicGame = () => {
-  return <PageContainer>기초학습</PageContainer>;
+  const basicValue = 40;
+
+  return (
+    <PageContainer>
+      <SideBar rate={basicValue} />
+    </PageContainer>
+  );
 };
 
 const PageContainer = styled.div`

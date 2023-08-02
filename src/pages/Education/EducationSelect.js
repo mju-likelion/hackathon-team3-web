@@ -15,13 +15,23 @@ const EducationSelect = () => {
           <Circle onClick={() => navigate('/education/basic')}>
             기초 학습 하기
           </Circle>
-          <ProgressRateBar rate={basicValue} />
+          <ProgressRateBar
+            text_size={30}
+            width={300}
+            height={50}
+            rate={basicValue}
+          />
         </MenuContainer>
         <MenuContainer>
           <Circle onClick={() => navigate('/education/advanced')}>
             심화 학습 하기
           </Circle>
-          <ProgressRateBar rate={advancedValue} />
+          <ProgressRateBar
+            text_size={30}
+            width={300}
+            height={50}
+            rate={advancedValue}
+          />
         </MenuContainer>
       </ContentContainer>
     </PageContainer>
@@ -40,6 +50,7 @@ const ContentContainer = styled.div`
   margin-top: 150px;
 `;
 const MenuContainer = styled.div`
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,8 +66,9 @@ const Circle = styled.div`
   text-align: center;
   line-height: 300px;
   color: #1e1e1e;
-  background-color: #bcdfff;
+  background-color: ${({ theme }) => theme.colors.SKYBLUE};
   cursor: pointer;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 
 export default EducationSelect;

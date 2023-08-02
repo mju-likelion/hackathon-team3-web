@@ -3,7 +3,6 @@ export const Theme = {
     SKYBLUE: '#BADEFF', // 메인 배너
     BLUE: '#59A4FB',
     LIGHTBLUE: '#99CEFF', // 헤더
-
     LIGHTGRAY: '#F6F6F6', // 마이페이지 배경 그레이
     LIGHTGRAY2: '#EAEAEA',
     GRAY1: '#737373', // input 그레이
