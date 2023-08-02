@@ -7,6 +7,7 @@ import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header';
 import Join from './pages/Join/Join';
+import Login from './pages/Login/Login';
 function App() {
   return (
     <>

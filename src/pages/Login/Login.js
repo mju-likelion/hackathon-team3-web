@@ -2,16 +2,41 @@ import { styled } from 'styled-components';
 import Input from '../../components/Input';
 import ButtonLong from '../../components/ButtonLong';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const onClickLogin = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+  };
+  const onEmailHandler = (data) => {
+    setEmail(data.target.value);
+  };
+  const onPasswordHandler = (data) => {
+    setPassword(data.target.value);
+  };
   return (
     <>
       <Header />
       <JoinFrame>
-        <JoinBox>
+        <JoinBox onSubmit={onClickLogin}>
           <h1>로그인</h1>
-          <Input inputType='text' inputName='이메일' />
-          <Input inputType='password' inputName='비밀번호' />
-          <ButtonLong btnName='로그인' />
+          <Input
+            name='email'
+            value={email}
+            inputType='text'
+            inputName='이메일'
+            onChange={onEmailHandler}
+          />
+          <Input
+            name='password'
+            value={password}
+            inputType='password'
+            inputName='비밀번호'
+            onChange={onPasswordHandler}
+          />
+          <ButtonLong type='submit' btnName='로그인' />
           <BottomText>
             회원이 아니신가요 ? <Link to='/join'>회원가입 하러가기</Link>
           </BottomText>
@@ -30,7 +55,7 @@ const JoinFrame = styled.div`
   display: flex;
   justify-content: center;
 `;
-const JoinBox = styled.div`
+const JoinBox = styled.form`
   height: 480px;
   width: 600px;
   display: flex;
