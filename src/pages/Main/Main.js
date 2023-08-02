@@ -2,15 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import RightArrow from '../../assets/images/RightArrow.svg';
 import LeftArrow from '../../assets/images/LeftArrow.svg';
+import MainBanner from './MainBanner';
 
 const Main = () => {
   return (
     <>
       <BannerBox>
         <PrevBtn src={LeftArrow} />
-        <MainBanner>
-          서비스 소개, 공지사항, 도움말, ... 대회소개 등 배너 내용 들어갈 예정!
-        </MainBanner>
+        <MainBanner />
         <NextBtn src={RightArrow} />
       </BannerBox>
       <FunctionBox>
@@ -32,16 +31,16 @@ const BannerBox = styled.div`
   align-items: center;
 `;
 
-const MainBanner = styled.div`
-  width: 733px;
-  height: 305px;
-  border-radius: 20px;
-  background-color: #badeff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
-`;
+// const MainBanner = styled.div`
+//   width: 733px;
+//   height: 305px;
+//   border-radius: 20px;
+//   background-color: #badeff;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
+// `;
 
 const PrevBtn = styled.img`
   margin-right: 27px;
