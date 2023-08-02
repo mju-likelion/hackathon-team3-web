@@ -7,19 +7,22 @@ import Header from './components/Header';
 import EducationSelect from './pages/Education/EducationSelect';
 import BasicGame from './pages/Education/BasicGame';
 import AdvancedGame from './pages/Education/AdvancedGame';
-
+import Join from './pages/Join/Join';
+import Login from './pages/Login/Login';
 function App() {
   return (
     <>
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
-        <Header />
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/education' element={<EducationSelect />} />
             <Route path='/education/basic' element={<BasicGame />} />
             <Route path='/education/advanced' element={<AdvancedGame />} />
+            <Route path='/join' element={<Join />} />
+            <Route path='/login' element={<Login />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
