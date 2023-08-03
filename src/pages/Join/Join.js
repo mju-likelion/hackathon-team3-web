@@ -35,11 +35,21 @@ const Join = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-
   const onClickLogin = (data) => {
     console.log(data);
-    alert('회원가입이 완료되었습니다! 홈으로 돌아갑니다.');
-    navigate('/');
+    const userInfo = {
+      email: data.email,
+      password: data.pw,
+    };
+    const localData = JSON.parse(localStorage.getItem('userInfo'));
+    console.log(localData.email);
+    if (localData.email === data.email)
+      alert('사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
+    else {
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      alert('회원가입이 완료되었습니다! 홈으로 돌아갑니다.');
+      navigate('/');
+    }
   };
 
   return (
