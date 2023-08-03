@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
 
-const SideBar = ({ rate }) => {
+const SideBar = ({ rate, sideBarData }) => {
   return (
     <SideBarContainer>
       <SideBarHeader>
@@ -9,15 +9,13 @@ const SideBar = ({ rate }) => {
       </SideBarHeader>
       <Hr />
       <Contents>
-        <Title>1. 키워드 도출</Title>
-        <Title>2. 정의 검색</Title>
-        <Title>3. 키워드 조합</Title>
-        <Title>4. 날씨</Title>
-        <Title>5. 사전</Title>
-        <Title>6. 계산</Title>
-        <Title>7. 단위변환</Title>
-        <Title>8. 스포츠</Title>
-        <Title>9. 요약 정보</Title>
+        {sideBarData.map((content) => {
+          return (
+            <Title key={content.id} complete={content.complete}>
+              {content.id}. {content.title}
+            </Title>
+          );
+        })}
       </Contents>
       <RateBarContainer>
         <ProgressRateBar
@@ -36,7 +34,7 @@ const SideBarContainer = styled.div`
   width: 250px;
   height: 769px;
   padding: 20px;
-  border: 1px solid black;
+  box-shadow: 0 2px 1px rgba(37, 37, 37, 0.5);
   position: relative;
 `;
 const SideBarHeader = styled.div`
@@ -61,6 +59,8 @@ const Title = styled.div`
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 35px;
+  color: ${({ complete }) => (complete ? `#1E1E1E` : `#D3D3D3`)};
+  //todo 클릭 된 상태면 (state) -> BLUE
 `;
 const RateBarContainer = styled.div`
   width: 100%;
