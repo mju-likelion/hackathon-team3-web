@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const SquareButton = ({ able, asset }) => {
+const SquareButton = ({ able, asset, onClick }) => {
   return (
-    <Button able={able}>
+    <Button able={able} onClick={onClick}>
       <Icon src={asset} />
     </Button>
   );
