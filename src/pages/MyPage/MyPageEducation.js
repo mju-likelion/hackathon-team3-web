@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import ProgressRateBar from '../../components/ProgressRateBar';
 import ButtonLong from '../../components/ButtonLong';
 
-const MyPage = () => {
+const MyPageEducation = () => {
   return (
     <>
-      <MyPageBox>
+      <MyPageEduBox>
         <MyPageCategory />
         <MyPageEdu>
           <MyPageEduTitle>[username]님의 학습현황</MyPageEduTitle>
@@ -24,14 +24,14 @@ const MyPage = () => {
             <EduBtn>이어서 학습하기 ></EduBtn>
           </EduBundle>
         </MyPageEdu>
-      </MyPageBox>
+      </MyPageEduBox>
     </>
   );
 };
 
-export default MyPage;
+export default MyPageEducation;
 
-const MyPageBox = styled.div`
+const MyPageEduBox = styled.div`
   display: flex;
 `;
 
