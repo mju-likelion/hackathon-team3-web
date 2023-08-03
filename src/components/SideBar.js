@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
 
-const SideBar = ({ rate, sideBarData }) => {
+const SideBar = ({ rate, sideBarData, onClick, currentChapter }) => {
   return (
     <SideBarContainer>
       <SideBarHeader>
@@ -11,7 +11,13 @@ const SideBar = ({ rate, sideBarData }) => {
       <Contents>
         {sideBarData.map((content) => {
           return (
-            <Title key={content.id} complete={content.complete}>
+            <Title
+              key={content.id}
+              complete={content.complete}
+              onClick={() => onClick(content.id)}
+              currentChapter={currentChapter}
+              id={content.id}
+            >
               {content.id}. {content.title}
             </Title>
           );
@@ -59,8 +65,14 @@ const Title = styled.div`
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 35px;
-  color: ${({ complete }) => (complete ? `#1E1E1E` : `#D3D3D3`)};
-  //todo 클릭 된 상태면 (state) -> BLUE
+  color: ${({ theme, complete, currentChapter, id }) => {
+    if (complete) {
+      if (id === currentChapter) return theme.colors.BLUE;
+      else return `#1E1E1E`;
+    } else return `#D3D3D3`;
+  }};
+  cursor: pointer;
+  user-select: none;
 `;
 const RateBarContainer = styled.div`
   width: 100%;
