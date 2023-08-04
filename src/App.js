@@ -1,5 +1,6 @@
 import Main from './pages/Main/Main';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// import EducationSelect from './pages/Education/EducationSelect';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
