@@ -1,8 +1,6 @@
-import React from 'react';
 import MyPageCategory from './MyPageCategory';
 import styled from 'styled-components';
 import ProgressRateBar from '../../components/ProgressRateBar';
-import ButtonLong from '../../components/ButtonLong';
 
 const MyPageEducation = () => {
   return (
@@ -14,14 +12,30 @@ const MyPageEducation = () => {
           <BlackHr />
           <BasicEduTitle>기초학습</BasicEduTitle>
           <EduBundle>
-            <ProgressiveRate className='ratebar' />
-            <EduBtn>이어서 학습하기 ></EduBtn>
+            <Progressing>
+              <ProgressRateBar
+                className='ratebar'
+                text_size='24'
+                width='315'
+                height='41'
+                rate='80'
+              />
+            </Progressing>
+            <EduBtn>이어서 학습하기 &#62;</EduBtn>
           </EduBundle>
           <GrayHr />
           <BasicEduTitle>심화학습</BasicEduTitle>
           <EduBundle>
-            <ProgressiveRate className='ratebar' />
-            <EduBtn>이어서 학습하기 ></EduBtn>
+            <Progressing>
+              <ProgressRateBar
+                className='ratebar'
+                text_size='24'
+                width='315'
+                height='41'
+                rate='30'
+              />
+            </Progressing>
+            <EduBtn>이어서 학습하기 &#62;</EduBtn>
           </EduBundle>
         </MyPageEdu>
       </MyPageEduBox>
@@ -38,7 +52,6 @@ const MyPageEduBox = styled.div`
 const MyPageEdu = styled.div`
   display: flex;
   width: 1052px;
-  background-color: green;
   flex-direction: column;
 `;
 
@@ -62,12 +75,11 @@ const BasicEduTitle = styled.h3`
 const EduBundle = styled.div`
   display: flex;
   padding: 49px 0 37px 40px;
-  //background-color: gold;
   align-items: center;
 `;
 
-const ProgressiveRate = styled(ProgressRateBar)`
-  //margin: 49px 0 37px 40px;
+const Progressing = styled.div`
+  width: 450px;
 `;
 
 const EduBtn = styled.div`
