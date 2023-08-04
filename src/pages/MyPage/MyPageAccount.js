@@ -1,7 +1,5 @@
-import React from 'react';
 import MyPageCategory from './MyPageCategory';
 import styled from 'styled-components';
-import Input from '../../components/Input';
 
 const MyPageAccount = () => {
   return (
@@ -58,10 +56,7 @@ const ChangePasswordBox = styled.div`
   flex-direction: column;
   align-items: center;
   width: 1052px;
-  //background-color: mediumpurple;
 `;
-
-// const PasswordForm = styled.form``;
 
 const AccountTitle = styled.h2`
   font-size: 32px;
@@ -78,7 +73,6 @@ const InputBox = styled.div`
 `;
 
 const PasswordBox = styled.div`
-  //width: 209px;
   height: 43px;
   display: flex;
   font-size: 17px;
