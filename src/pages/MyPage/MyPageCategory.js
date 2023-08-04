@@ -1,14 +1,19 @@
-import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const MyPageCategory = () => {
+  const navigate = useNavigate();
   return (
     <>
       <CategoryBox>
         <MyPageText>마이페이지</MyPageText>
         <MyPageLine />
-        <CategoryEdu>학습현황</CategoryEdu>
-        <CategoryAccount>내 계정</CategoryAccount>
+        <CategoryEdu onClick={() => navigate('/mypage/education')}>
+          학습현황
+        </CategoryEdu>
+        <CategoryAccount onClick={() => navigate('/mypage/account')}>
+          내 계정
+        </CategoryAccount>
       </CategoryBox>
     </>
   );
@@ -19,7 +24,6 @@ export default MyPageCategory;
 const CategoryBox = styled.div`
   width: 228px;
   height: 769px;
-  //background-color: pink;
   display: flex;
   flex-direction: column;
   align-items: center;

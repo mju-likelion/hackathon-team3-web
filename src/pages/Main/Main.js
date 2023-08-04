@@ -1,15 +1,19 @@
 import styled from 'styled-components';
 import MainBanner from './MainBanner';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
+  const navigate = useNavigate();
   return (
     <>
       <BannerBox>
         <MainBanner />
       </BannerBox>
       <FunctionBox>
-        <EduBtn>학습</EduBtn>
-        <MyPageBtn>마이페이지</MyPageBtn>
+        <EduBtn onClick={() => navigate('/education')}>학습</EduBtn>
+        <MyPageBtn onClick={() => navigate('/mypage/education')}>
+          마이페이지
+        </MyPageBtn>
       </FunctionBox>
     </>
   );
