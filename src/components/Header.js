@@ -3,24 +3,15 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const navigate = useNavigate();
-  const onClickLogin = () => {
-    navigate('/login');
-  };
-  const onClickJoin = () => {
-    navigate('/join');
-  };
-  const onClickLogo = () => {
-    navigate('/');
-  };
   return (
     <>
       <HeaderWrap>
         <HeaderBar>
-          <Logo onClick={onClickLogo} />
-          <Learning>학습하기</Learning>
+          <Logo onClick={() => navigate('/')} />
+          <Learning onClick={() => navigate('/education')}>학습하기</Learning>
           <SignBox>
-            <LoginBtn onClick={onClickLogin}>로그인</LoginBtn>
-            <JoinBtn onClick={onClickJoin}>회원가입</JoinBtn>
+            <LoginBtn onClick={() => navigate('/login')}>로그인</LoginBtn>
+            <JoinBtn onClick={() => navigate('/join')}>회원가입</JoinBtn>
           </SignBox>
         </HeaderBar>
       </HeaderWrap>
@@ -36,11 +27,10 @@ const HeaderWrap = styled.div`
 const HeaderBar = styled.div`
   width: 100%;
   height: 63px;
-  box-shadow: 0 0 5px black;
+  box-shadow: 0 0 3px black;
   display: flex;
   align-items: center;
 `;
-
 const Logo = styled.button`
   width: 99px;
   height: 49px;
@@ -49,7 +39,6 @@ const Logo = styled.button`
   margin: 7px 0 7px 22px;
   border-style: none;
 `;
-
 const Learning = styled.button`
   margin-left: 79px;
   font-size: 20px;
@@ -57,14 +46,12 @@ const Learning = styled.button`
   border-style: none;
   background-color: white;
 `;
-
 const SignBox = styled.div`
   margin-left: auto;
   margin-right: 67px;
   display: flex;
   margin-top: 20px;
 `;
-
 const LoginBtn = styled.button`
   height: 27px;
   width: 90px;
@@ -73,5 +60,4 @@ const LoginBtn = styled.button`
   border-style: none;
   background-color: white;
 `;
-
 const JoinBtn = styled(LoginBtn)``;
