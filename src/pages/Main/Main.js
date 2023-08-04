@@ -1,16 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
-import RightArrow from '../../assets/images/RightArrow.svg';
-import LeftArrow from '../../assets/images/LeftArrow.svg';
 import MainBanner from './MainBanner';
 
 const Main = () => {
   return (
     <>
       <BannerBox>
-        <PrevBtn src={LeftArrow} />
         <MainBanner />
-        <NextBtn src={RightArrow} />
       </BannerBox>
       <FunctionBox>
         <EduBtn>학습</EduBtn>
