@@ -31,24 +31,36 @@ const Join = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
+
+  const getSavedUserInfos = () => {
+    const userInfosJSON = localStorage.getItem('userInfos');
+    try {
+      return userInfosJSON ? JSON.parse(userInfosJSON) : [];
+    } catch {
+      return [];
+    }
+  };
+  const userInfos = getSavedUserInfos();
+  const saveUserInfos = (userInfos) => {
+    localStorage.setItem('userInfos', JSON.stringify(userInfos));
+  };
   const onClickLogin = (data) => {
-    console.log(data);
-    const userInfo = {
-      email: data.email,
-      password: data.pw,
-    };
-    const localData = JSON.parse(localStorage.getItem('userInfo'));
-    console.log(localData.email);
-    if (localData.email === data.email)
-      alert('사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
-    else {
-      localStorage.setItem('userInfo', JSON.stringify(userInfo));
-      alert('회원가입이 완료되었습니다! 홈으로 돌아갑니다.');
-      navigate('/');
+    if (userInfos.findIndex(({ email }) => email === data.email) === -1) {
+      userInfos.push({
+        email: data.email,
+        password: data.pw,
+      });
+      saveUserInfos(userInfos);
+      alert('회원가입이 완료되었습니다.');
+      navigate('/login');
+    } else {
+      alert('이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
+      reset();
     }
   };
 
