@@ -4,7 +4,9 @@ import ButtonLong from '../../components/ButtonLong';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+
 const Join = () => {
   const navigate = useNavigate();
   const schema = yup.object().shape({
@@ -63,12 +65,12 @@ const Join = () => {
       reset();
     }
   };
-
   return (
     <>
       <Header />
       <JoinFrame>
         <JoinBox onSubmit={handleSubmit(onClickLogin)}>
+          {/* handleSubmit() 이용시 새로고침 현상 X => e.preventDefualt() 설정 필요없다! */}
           <h1>회원가입</h1>
           <JoinInput
             id='email'

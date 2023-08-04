@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { styled } from 'styled-components';
 
 const ButtonLong = ({ btnName }) => {
@@ -18,4 +19,5 @@ const LongBtn = styled.button`
   margin-top: 30px;
   font-weight: 700;
 `;
+
 export default ButtonLong;
