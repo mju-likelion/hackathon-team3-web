@@ -8,7 +8,8 @@ import Fill_Dummy from '../assets/data/Content_Fill_Dummy.json';
 
 const Content = ({ currentChapter }) => {
   //todo currentChapter 값으로 API 요청
-  const { type, title, scenario, question, help, option } = Choice_Dummy[0];
+  // const { type, title, scenario, question, help, option } = Choice_Dummy[0]; //객관식 더미데이터
+  const { type, title, scenario, question, help } = Short_Dummy[0];
 
   return (
     <ContentContainer>
@@ -60,7 +61,7 @@ const ScenarioBox = styled.div`
 const ScenarioText = styled.p`
   color: #1e1e1e;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 40px;
 `;
 const QuestionBox = styled.div`
