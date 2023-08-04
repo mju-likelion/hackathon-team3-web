@@ -1,14 +1,17 @@
 import Main from './pages/Main/Main';
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import EducationSelect from './pages/Education/EducationSelect';
+// import EducationSelect from './pages/Education/EducationSelect';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
 import Header from './components/Header';
+import EducationSelect from './pages/Education/EducationSelect';
+import BasicGame from './pages/Education/BasicGame';
+import AdvancedGame from './pages/Education/AdvancedGame';
 import Join from './pages/Join/Join';
 import Login from './pages/Login/Login';
-import MyPage from './pages/MyPage/MyPage';
+import MyPageEducation from './pages/MyPage/MyPageEducation';
+import MyPageAccount from './pages/MyPage/MyPageAccount';
 function App() {
   return (
     <>
@@ -19,9 +22,11 @@ function App() {
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/education' element={<EducationSelect />} />
+            <Route path='/education/basic' element={<BasicGame />} />
+            <Route path='/education/advanced' element={<AdvancedGame />} />
             <Route path='/join' element={<Join />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/mypage' element={<MyPage />} />
+            <Route path='/mypage' element={<MyPageAccount />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

@@ -10,23 +10,24 @@ const MyPageAccount = () => {
         <MyPageCategory />
         <MyPageAcc>
           <ChangePasswordBox>
-            <InputBox>
-              <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
-              <PasswordBox>
-                <MyAccountText>기존 비밀번호</MyAccountText>
-                <PasswordInput />
-              </PasswordBox>
-              <PasswordBox>
-                <MyAccountText>변경 비밀번호</MyAccountText>
-                <PasswordInput />
-              </PasswordBox>
-              <PasswordBox>
-                <MyAccountText>비밀번호 확인</MyAccountText>
-                <PasswordInput />
-              </PasswordBox>
-            </InputBox>
-
-            <ChangeButton>변경하기</ChangeButton>
+            <form>
+              <InputBox>
+                <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
+                <PasswordBox>
+                  <MyAccountText>기존 비밀번호</MyAccountText>
+                  <PasswordInput />
+                </PasswordBox>
+                <PasswordBox>
+                  <MyAccountText>변경 비밀번호</MyAccountText>
+                  <PasswordInput />
+                </PasswordBox>
+                <PasswordBox>
+                  <MyAccountText>비밀번호 확인</MyAccountText>
+                  <PasswordInput />
+                </PasswordBox>
+              </InputBox>
+              <ChangeButton>변경하기</ChangeButton>
+            </form>
           </ChangePasswordBox>
           <QuitAccountBox>
             <AccountTitle>회원 탈퇴</AccountTitle>
@@ -59,6 +60,8 @@ const ChangePasswordBox = styled.div`
   width: 1052px;
   //background-color: mediumpurple;
 `;
+
+// const PasswordForm = styled.form``;
 
 const AccountTitle = styled.h2`
   font-size: 32px;
