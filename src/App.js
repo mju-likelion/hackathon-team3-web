@@ -26,7 +26,8 @@ function App() {
             <Route path='/education/advanced' element={<AdvancedGame />} />
             <Route path='/join' element={<Join />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/mypage' element={<MyPageAccount />} />
+            <Route path='/mypage/education' element={<MyPageEducation />} />
+            <Route path='/mypage/account' element={<MyPageAccount />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
