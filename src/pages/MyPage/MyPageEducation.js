@@ -14,7 +14,6 @@ const MyPageEducation = () => {
           <EduBundle>
             <Progressing>
               <ProgressRateBar
-                className='ratebar'
                 text_size='24'
                 width='315'
                 height='41'

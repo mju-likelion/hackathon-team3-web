@@ -35,7 +35,7 @@ const Logo = styled.button`
   width: 99px;
   height: 49px;
   border-radius: 25px;
-  background-color: ${({ theme }) => theme.colors.LIGHTBLUE};
+  background-color: ${({ theme }) => theme.colors.BTN_ABLE};
   margin: 7px 0 7px 22px;
   border-style: none;
 `;
