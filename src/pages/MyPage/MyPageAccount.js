@@ -1,5 +1,6 @@
 import MyPageCategory from './MyPageCategory';
 import styled from 'styled-components';
+import ChangePassword from './ChangePassword';
 
 const MyPageAccount = () => {
   return (
@@ -8,24 +9,25 @@ const MyPageAccount = () => {
         <MyPageCategory />
         <MyPageAcc>
           <ChangePasswordBox>
-            <form>
-              <InputBox>
-                <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
-                <PasswordBox>
-                  <MyAccountText>기존 비밀번호</MyAccountText>
-                  <PasswordInput />
-                </PasswordBox>
-                <PasswordBox>
-                  <MyAccountText>변경 비밀번호</MyAccountText>
-                  <PasswordInput />
-                </PasswordBox>
-                <PasswordBox>
-                  <MyAccountText>비밀번호 확인</MyAccountText>
-                  <PasswordInput />
-                </PasswordBox>
-              </InputBox>
-              <ChangeButton>변경하기</ChangeButton>
-            </form>
+            {/*<form>*/}
+            <ChangePassword />
+            {/*<InputBox>*/}
+            {/*  <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>*/}
+            {/*  <PasswordBox>*/}
+            {/*    <MyAccountText>기존 비밀번호</MyAccountText>*/}
+            {/*    <PasswordInput />*/}
+            {/*  </PasswordBox>*/}
+            {/*  <PasswordBox>*/}
+            {/*    <MyAccountText>변경 비밀번호</MyAccountText>*/}
+            {/*    <PasswordInput />*/}
+            {/*  </PasswordBox>*/}
+            {/*  <PasswordBox>*/}
+            {/*    <MyAccountText>비밀번호 확인</MyAccountText>*/}
+            {/*    <PasswordInput />*/}
+            {/*  </PasswordBox>*/}
+            {/*</InputBox>*/}
+            <ChangeButton>변경하기</ChangeButton>
+            {/*</form>*/}
           </ChangePasswordBox>
           <QuitAccountBox>
             <AccountTitle>회원 탈퇴</AccountTitle>
