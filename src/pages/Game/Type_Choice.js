@@ -35,7 +35,6 @@ const TypeChoice = ({ option }) => {
         btnName='제출하기'
         width={300}
         isBtnAble={isBtnAble}
-        className='submit'
       />
     </ChoiceWrapper>
   );
@@ -53,9 +52,7 @@ const CircleContainer = styled.div`
   align-items: center;
 `;
 const SubmitBtn = styled(ButtonLong)`
-  &.submit {
     align-self: center;
-  }
 `;
 
 export default TypeChoice;

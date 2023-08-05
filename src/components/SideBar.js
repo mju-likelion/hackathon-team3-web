@@ -51,6 +51,7 @@ const EducationTitle = styled.div`
 `;
 const Hr = styled.hr`
   width: 200px;
+  color: ${({ theme }) => theme.colors.GRAY3};
 `;
 const Contents = styled.div`
   padding: 15px;

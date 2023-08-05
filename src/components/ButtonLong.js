@@ -1,9 +1,9 @@
 import { styled } from 'styled-components';
 
-const ButtonLong = ({ btnName, width, isBtnAble, className }) => {
+const ButtonLong = ({ btnName, width, isBtnAble, ...attrProps }) => {
   return (
     <>
-      <LongBtn width={width} className={className} isBtnAble={isBtnAble}>
+      <LongBtn width={width} isBtnAble={isBtnAble} {...attrProps} >
         {btnName}
       </LongBtn>
     </>

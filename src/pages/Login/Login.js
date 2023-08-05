@@ -36,7 +36,7 @@ const Login = () => {
             inputName='비밀번호'
             onChange={onPasswordHandler}
           />
-          <ButtonLong type='submit' btnName='로그인' width={400} />
+          <ButtonLong type='submit' btnName='로그인' width={400} isBtnAble={true}/>
           <BottomText>
             회원이 아니신가요 ? <Link to='/join'>회원가입 하러가기</Link>
           </BottomText>
