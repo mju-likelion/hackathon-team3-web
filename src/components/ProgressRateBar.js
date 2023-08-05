@@ -26,7 +26,7 @@ const Bar_background = styled.div`
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  background-color: #ededed;
+  background-color: ${({ theme }) => theme.colors.BG_LIGHTGRAY};
   border-radius: 8px;
   overflow: hidden;
 `;

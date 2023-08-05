@@ -13,7 +13,6 @@ const TypeChoice = ({ option }) => {
 
   useEffect(() => {
     setIsBtnAble(clickedId !== undefined);
-    console.log(isBtnAble);
   }, [clickedId, isBtnAble]);
 
   return (
@@ -31,11 +30,7 @@ const TypeChoice = ({ option }) => {
           );
         })}
       </CircleContainer>
-      <SubmitBtn
-        btnName='제출하기'
-        width={300}
-        isBtnAble={isBtnAble}
-      />
+      <SubmitBtn btnName='제출하기' width={300} isBtnAble={isBtnAble} />
     </ChoiceWrapper>
   );
 };
@@ -52,7 +47,7 @@ const CircleContainer = styled.div`
   align-items: center;
 `;
 const SubmitBtn = styled(ButtonLong)`
-    align-self: center;
+  align-self: center;
 `;
 
 export default TypeChoice;

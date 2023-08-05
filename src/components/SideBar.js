@@ -51,7 +51,7 @@ const EducationTitle = styled.div`
 `;
 const Hr = styled.hr`
   width: 200px;
-  color: ${({ theme }) => theme.colors.GRAY3};
+  color: ${({ theme }) => theme.colors.LIGHTGRAY};
 `;
 const Contents = styled.div`
   padding: 15px;
@@ -63,8 +63,8 @@ const Title = styled.div`
   color: ${({ theme, complete, currentChapter, id }) => {
     if (complete) {
       if (id === currentChapter) return theme.colors.BLUE;
-      else return `#1E1E1E`;
-    } else return `#D3D3D3`;
+      else return theme.colors.TEXT_BLACK;
+    } else return theme.colors.LIGHTGRAY;
   }};
   cursor: pointer;
   user-select: none;

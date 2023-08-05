@@ -13,7 +13,7 @@ const Button = styled.button`
   height: 70px;
   padding: 10px;
   background-color: ${({ theme, able }) =>
-    able ? theme.colors.LIGHTBLUE : theme.colors.LIGHTGRAY3};
+    able ? theme.colors.BTN_ABLE : theme.colors.BTN_DISABLE};
   border-radius: 8px;
   cursor: ${({ able }) => (able ? `pointer` : `default`)};
   &:hover {
