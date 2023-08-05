@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const ProgressRateBar = ({ className, text_size, width, height, rate }) => {
+const ProgressRateBar = ({ text_size, width, height, rate, ...attrProps }) => {
   return (
-    <BarBox className={className}>
+    <BarBox {...attrProps}>
       <RateTitle text_size={text_size}>진도율</RateTitle>
       <Bar_background width={width} height={height}>
         <Bar_value height={height} value={rate} />

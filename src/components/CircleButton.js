@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const CircleButton = ({ value, onClick, className }) => {
+const CircleButton = ({ value, onClick, ...attrProps }) => {
   return (
-    <Circle onClick={onClick} className={className}>
+    <Circle onClick={onClick} {...attrProps}>
       {value}
     </Circle>
   );

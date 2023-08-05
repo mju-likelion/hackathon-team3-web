@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar';
 import SquareButton from '../../components/SquareButton';
@@ -12,6 +12,14 @@ const BasicGame = () => {
   const basicValue = 40;
   const navigate = useNavigate();
   const [currentChapter, setCurrentChapter] = useState(1);
+  const [isLastPage, setIsLastPage] = useState(false);
+
+  useEffect(() => {
+    setIsLastPage(currentChapter === sideBarData.length);
+  }, [isLastPage, currentChapter]);
+
+  //todo currentChapter 값으로 API 요청해서 Content로 보내기
+
   const toggleChapter = (title) => {
     setCurrentChapter(title);
   };
@@ -32,10 +40,11 @@ const BasicGame = () => {
             asset={logout_icon}
             onClick={() => navigate('/education')}
           />
-          <SquareButton
+          <NextBtn
             able={true}
             asset={next_icon}
             onClick={() => setCurrentChapter(currentChapter + 1)}
+            isLastPage={isLastPage}
           />
         </ButtonWrapper>
       </ContentWrapper>
@@ -62,6 +71,9 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+`;
+const NextBtn = styled(SquareButton)`
+  visibility: ${({ isLastPage }) => (isLastPage ? `hidden` : `visible`)};
 `;
 
 export default BasicGame;

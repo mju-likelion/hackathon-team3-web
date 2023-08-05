@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-const ChoiceCircle = ({ value, onClick, className, idx, clickedId }) => {
+const ChoiceCircle = ({ value, onClick, idx, clickedId }) => {
   return (
     <Circle
       onClick={onClick}
-      className={className}
       idx={idx}
       clickedId={clickedId}
     >

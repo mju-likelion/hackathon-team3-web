@@ -7,9 +7,8 @@ import Short_Dummy from '../assets/data/Content_Short_Dummy.json';
 import Fill_Dummy from '../assets/data/Content_Fill_Dummy.json';
 
 const Content = ({ currentChapter }) => {
-  //todo currentChapter 값으로 API 요청
   // const { type, title, scenario, question, help, option } = Choice_Dummy[0]; //객관식 더미데이터
-  const { type, title, scenario, question, help } = Short_Dummy[0];
+  const { type, title, scenario, question, help } = Short_Dummy[0]; //주관식 더미데이터
 
   return (
     <ContentContainer>

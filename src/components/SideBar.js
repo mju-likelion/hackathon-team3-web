@@ -24,13 +24,7 @@ const SideBar = ({ rate, sideBarData, onClick, currentChapter }) => {
         })}
       </Contents>
       <RateBarContainer>
-        <ProgressRateBar
-          className='RateBar'
-          text_size={18}
-          width={150}
-          height={25}
-          rate={rate}
-        />
+        <ProgressRateBar text_size={18} width={150} height={25} rate={rate} />
       </RateBarContainer>
     </SideBarContainer>
   );

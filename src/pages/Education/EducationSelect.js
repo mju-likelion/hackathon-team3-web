@@ -15,7 +15,6 @@ const EducationSelect = () => {
           <CircleBtn
             onClick={() => navigate('/education/basic')}
             value='기초 학습 하기'
-            className='selectCircle'
           />
           <ProgressRateBar
             text_size={30}
@@ -28,7 +27,6 @@ const EducationSelect = () => {
           <CircleBtn
             onClick={() => navigate('/education/advanced')}
             value='심화 학습 하기'
-            className='selectCircle'
           />
           <ProgressRateBar
             text_size={30}
@@ -61,8 +59,6 @@ const MenuContainer = styled.div`
   gap: 60px;
 `;
 const CircleBtn = styled(CircleButton)`
-  &.selectCircle {
-    margin-left: 50px;
-  }
+  margin-left: 50px;
 `;
 export default EducationSelect;
