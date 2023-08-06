@@ -18,7 +18,6 @@ const TypeShortInput = () => {
 const InputWrapper = styled.div`
   width: 100%;
   height: 100%;
-  margin-top: 50px;
 `;
 const Form = styled.form`
   display: flex;
