@@ -9,25 +9,7 @@ const MyPageAccount = () => {
         <MyPageCategory />
         <MyPageAcc>
           <ChangePasswordBox>
-            {/*<form>*/}
             <ChangePassword />
-            {/*<InputBox>*/}
-            {/*  <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>*/}
-            {/*  <PasswordBox>*/}
-            {/*    <MyAccountText>기존 비밀번호</MyAccountText>*/}
-            {/*    <PasswordInput />*/}
-            {/*  </PasswordBox>*/}
-            {/*  <PasswordBox>*/}
-            {/*    <MyAccountText>변경 비밀번호</MyAccountText>*/}
-            {/*    <PasswordInput />*/}
-            {/*  </PasswordBox>*/}
-            {/*  <PasswordBox>*/}
-            {/*    <MyAccountText>비밀번호 확인</MyAccountText>*/}
-            {/*    <PasswordInput />*/}
-            {/*  </PasswordBox>*/}
-            {/*</InputBox>*/}
-            <ChangeButton>변경하기</ChangeButton>
-            {/*</form>*/}
           </ChangePasswordBox>
           <QuitAccountBox>
             <AccountTitle>회원 탈퇴</AccountTitle>
@@ -64,34 +46,8 @@ const AccountTitle = styled.h2`
   font-size: 32px;
 `;
 
-const ChangePasswordTitle = styled(AccountTitle)`
-  margin: 91px 0 49px 0;
-`;
-
-const InputBox = styled.div`
-  :last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const PasswordBox = styled.div`
-  height: 43px;
-  display: flex;
-  font-size: 17px;
-  align-items: center;
-  margin-bottom: 16px;
-`;
-
 const MyAccountText = styled.p`
   font-size: 17px;
-`;
-
-const PasswordInput = styled.input`
-  width: 260px;
-  height: 38px;
-  border: 1px solid black;
-  border-radius: 8px;
-  margin-left: 26px;
 `;
 
 const DoButton = styled.button`
@@ -104,10 +60,6 @@ const DoButton = styled.button`
   font-weight: 600;
   margin-top: 28px;
   margin-left: 250px; // 다시 확인해야함
-`;
-
-const ChangeButton = styled(DoButton)`
-  background-color: #27b141;
 `;
 
 const QuitButton = styled(DoButton)`

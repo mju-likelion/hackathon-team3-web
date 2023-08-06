@@ -22,31 +22,48 @@ const ChangePassword = () => {
     // 비밀번호 변경 api 호출 및 처리
   };
 
+  // // 비밀번호 변경 성공했다는 가정
+  // const passwordChangedSuccess = true;
+  //
+  // if (passwordChangedSuccess) {
+  //   const newPassword = data.newPassword;
+  // }
+  //
+  // // 로컬스토리지에 저장
+  // localStorage.setItem('password', newPassword);
+
   return (
     <>
       <AllContainer>
         <ChangePasswordBox onSubmit={handleSubmit(onSubmit)}>
           <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
-          {/*기존 비밀번호 로직*/}
-          <PasswordText>비밀번호 변경</PasswordText>
-          <ChangePasswordInput
-            name='password'
-            placeholder='변경할 비밀번호'
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            setValue={setValue}
-            inputValue={inputValue}
-          />
-          <ChangePasswordInput
-            name='checkPassword'
-            placeholder='비밀번호 확인'
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            setValue={setValue}
-            inputValue={inputValue}
-          />
+          <InputBox>
+            <DisplayBox>
+              <PasswordText>변경 비밀번호</PasswordText>
+              <ChangePasswordInput
+                name='newPassword'
+                placeholder='변경할 비밀번호'
+                register={register}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                setValue={setValue}
+                inputValue={inputValue}
+              />
+            </DisplayBox>
+            <DisplayBox>
+              <PasswordText>비밀번호 확인</PasswordText>
+              <ChangePasswordInput
+                name='checkPassword'
+                placeholder='비밀번호 확인'
+                register={register}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                setValue={setValue}
+                inputValue={inputValue}
+              />
+            </DisplayBox>
+          </InputBox>
+          <ChangeButton type='submit'>변경하기</ChangeButton>
         </ChangePasswordBox>
       </AllContainer>
     </>
@@ -59,6 +76,7 @@ const AllContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  last-child
 `;
 
 const ChangePasswordBox = styled.div`
@@ -70,9 +88,34 @@ const ChangePasswordBox = styled.div`
 
 const ChangePasswordTitle = styled.h2`
   font-size: 32px;
-  margin: 91px 0 49px 0;
+  margin: 94px 0 45px 0;
+`;
+
+const InputBox = styled.div`
+  :last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const DisplayBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
 `;
 
 const PasswordText = styled.p`
   font-size: 17px;
+`;
+
+const ChangeButton = styled.button`
+  width: 139px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 17px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  margin-top: 28px;
+  margin-left: 250px; // 재확인
+  background-color: ${({ theme }) => theme.colors.GREEN};
 `;

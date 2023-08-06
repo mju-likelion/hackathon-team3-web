@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const schema = yup.object().shape({
-  password: yup
+  newPassword: yup
     .string()
     .required(
       '변경할 비밀번호를 영문과 숫자, 특수기호를 조합하여 8~14자 사이로 입력해주세요.'
@@ -13,6 +13,6 @@ export const schema = yup.object().shape({
     ),
   checkPassword: yup
     .string()
-    .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.')
+    .oneOf([yup.ref('newPassword'), null], '비밀번호가 일치하지 않습니다.')
     .required('비밀번호를 한번 더 입력해주세요.'),
 });
