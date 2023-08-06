@@ -39,7 +39,7 @@ const ChoiceWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 `;
 const CircleContainer = styled.div`
   display: flex;
@@ -48,6 +48,7 @@ const CircleContainer = styled.div`
 `;
 const SubmitBtn = styled(ButtonLong)`
   align-self: center;
+  margin: 0;
 `;
 
 export default TypeChoice;

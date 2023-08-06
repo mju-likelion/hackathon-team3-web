@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
 
-const SideBar = ({ rate, sideBarData, onClick, currentChapter }) => {
+const SideBar = ({ title, sideBarData, onClick, currentChapter }) => {
+  // 진도율 API로부터 받아온 값
+  const basicValue = 40;
+
   return (
     <SideBarContainer>
       <SideBarHeader>
-        <EducationTitle>기초 학습</EducationTitle>
+        <EducationTitle>{title}</EducationTitle>
       </SideBarHeader>
       <Hr />
       <Contents>
@@ -24,7 +27,12 @@ const SideBar = ({ rate, sideBarData, onClick, currentChapter }) => {
         })}
       </Contents>
       <RateBarContainer>
-        <ProgressRateBar text_size={18} width={150} height={25} rate={rate} />
+        <ProgressRateBar
+          text_size={18}
+          width={150}
+          height={25}
+          rate={basicValue}
+        />
       </RateBarContainer>
     </SideBarContainer>
   );
@@ -54,10 +62,10 @@ const Hr = styled.hr`
   color: ${({ theme }) => theme.colors.LIGHTGRAY};
 `;
 const Contents = styled.div`
-  padding: 15px;
+  white-space: normal;
 `;
 const Title = styled.div`
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 600;
   margin-bottom: 35px;
   color: ${({ theme, complete, currentChapter, id }) => {

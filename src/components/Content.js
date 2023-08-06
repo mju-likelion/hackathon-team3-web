@@ -30,7 +30,11 @@ const Content = ({ currentChapter }) => {
     if (completeArr.length === completeCount) setAllComplete((prev) => !prev);
   }, [completeArr, completeCount]);
 
-  const { type, title, scenario, question, help, option } = Choice_Dummy[currentQuestion]; //객관식 더미데이터
+  // 더미데이터는 문제 유형 별로 나눠서 추가 해두었지만,
+  // 실제 로직은 목차 API에서 가져온 Chapter id로 문제들 요청, 해당 문제 API를 뿌림
+  // 문제 유형 정보는 해당 문제 API response에 들어있음
+  const { type, title, scenario, question, help, option } =
+    Choice_Dummy[currentQuestion]; //객관식 더미데이터
   // const { type, title, scenario, question, help } = Short_Dummy[0]; //주관식 더미데이터
 
   return (
@@ -79,11 +83,11 @@ const Content = ({ currentChapter }) => {
 };
 
 const ContentContainer = styled.div`
-  width: 920px;
+  width: 900px;
   height: 100%;
 `;
 const ChapterTitle = styled.p`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 40px;
   font-weight: bold;
   text-align: center;
@@ -94,12 +98,13 @@ const TapContainer = styled.div`
   align-items: flex-end;
 `;
 const Tap = styled.button`
-  width: 65px;
-  height: ${({ currentQuestion, index }) => index === currentQuestion ? 75 : 65}px;
+  width: 60px;
+  height: ${({ currentQuestion, index }) =>
+    index === currentQuestion ? 60 : 50}px;
   border-radius: 8px 8px 0 0;
   font-size: 36px;
   font-weight: bold;
-  line-height: 65px;
+  line-height: 50px;
   text-align: center;
   color: ${({ theme }) => theme.colors.BLUE};
   color: ${({ theme, complete, currentQuestion, index }) => {
@@ -115,13 +120,12 @@ const Tap = styled.button`
     } else return theme.colors.BTN_DISABLE;
   }};
 };
-
 `;
 const ContentBox = styled.div`
   margin: 0 auto;
   width: 880px;
   height: 600px;
-  padding: 20px 70px;
+  padding: 20px 70px 10px 70px;
   border-radius: 25px;
   background-color: #f1f8ff;
 `;
@@ -153,7 +157,7 @@ const QuestionBox = styled.div`
 `;
 const SubmitBox = styled.div`
   width: 100%;
-  height: 330px;
+  height: 320px;
   margin-top: 30px;
 `;
 
