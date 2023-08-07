@@ -14,23 +14,13 @@ const ChangePassword = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-
+  제;
   const inputValue = watch(); // 현재 필드의 값
 
   const onSubmit = (data) => {
     console.log(data);
     // 비밀번호 변경 api 호출 및 처리
   };
-
-  // // 비밀번호 변경 성공했다는 가정
-  // const passwordChangedSuccess = true;
-  //
-  // if (passwordChangedSuccess) {
-  //   const newPassword = data.newPassword;
-  // }
-  //
-  // // 로컬스토리지에 저장
-  // localStorage.setItem('password', newPassword);
 
   return (
     <>
