@@ -13,14 +13,17 @@ const AdvancedGame = () => {
   const navigate = useNavigate();
   const [currentChapter, setCurrentChapter] = useState(1);
   const [isLastPage, setIsLastPage] = useState(false);
-
-  useEffect(() => {
-    setIsLastPage(currentChapter === sideBarAdvancedData.chapters.length);
-  }, [isLastPage, currentChapter]);
-
   const toggleChapter = (title) => {
     setCurrentChapter(title);
   };
+
+  useEffect(() => {
+    console.log(isLastPage);
+  }, []);
+  useEffect(() => {
+    setIsLastPage(!sideBarAdvancedData.chapters[currentChapter].isCompleted);
+    console.log(isLastPage);
+  }, [isLastPage, currentChapter]);
 
   return (
     <PageContainer>

@@ -32,9 +32,10 @@ const Content = ({ currentChapter }) => {
   // 더미데이터는 문제 유형 별로 나눠서 추가 해두었지만,
   // 실제 로직은 목차 API에서 가져온 Chapter id로 문제들 요청, 해당 문제 API를 뿌림
   // 문제 유형 정보는 해당 문제 API response에 들어있음
-  // const { type, title, scenario, question, help, option } = Choice_Dummy[currentQuestion]; //객관식 더미데이터
+  const { type, title, scenario, question, help, option } =
+    Choice_Dummy[currentQuestion]; //객관식 더미데이터
   // const { type, title, scenario, question, help } = Short_Dummy[0]; //주관식 더미데이터
-  const { type, title, scenario, question, help } = Fill_Dummy[0]; //빈칸 채우기 더미데이터
+  // const { type, title, scenario, question, help } = Fill_Dummy[0]; //빈칸 채우기 더미데이터
 
   return (
     <ContentContainer>
@@ -51,7 +52,7 @@ const Content = ({ currentChapter }) => {
                   onClick={() => togglecurrentQuestion(index)}
                   index={index}
                   currentQuestion={currentQuestion}
-                  complete={completeArr.includes(tap.id)}
+                  disabled={!completeArr.includes(tap.id)}
                 >
                   {index + 1}
                 </Tap>
@@ -105,15 +106,15 @@ const Tap = styled.button`
   font-weight: bold;
   line-height: 50px;
   text-align: center;
-  color: ${({ theme }) => theme.colors.BLUE};
-  color: ${({ theme, complete, currentQuestion, index }) => {
-    if (complete) {
+  cursor: ${({ disabled }) => (disabled ? `default` : `pointer`)};
+  color: ${({ theme, disabled, currentQuestion, index }) => {
+    if (!disabled) {
       if (index === currentQuestion) return theme.colors.BTN_ABLE;
       else return `white`;
     } else return `white`;
   }};
-  background-color: ${({ theme, complete, currentQuestion, index }) => {
-    if (complete) {
+  background-color: ${({ theme, disabled, currentQuestion, index }) => {
+    if (!disabled) {
       if (index === currentQuestion) return theme.colors.BG_SKYBLUE;
       else return theme.colors.BTN_ABLE;
     } else return theme.colors.BTN_DISABLE;

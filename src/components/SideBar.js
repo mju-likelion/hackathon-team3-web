@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
 
 const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
-
   return (
     <SideBarContainer>
       <SideBarHeader>
@@ -14,7 +13,7 @@ const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
           return (
             <Title
               key={content.id}
-              isCompleted={content.isCompleted}
+              disabled={!content.isCompleted}
               onClick={() => onClick(index + 1)}
               currentChapter={currentChapter}
               idx={index}
@@ -25,12 +24,7 @@ const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
         })}
       </Contents>
       <RateBarContainer>
-        <ProgressRateBar
-          text_size={18}
-          width={150}
-          height={25}
-          rate={rate}
-        />
+        <ProgressRateBar text_size={18} width={150} height={25} rate={rate} />
       </RateBarContainer>
     </SideBarContainer>
   );
@@ -61,19 +55,24 @@ const Hr = styled.hr`
 `;
 const Contents = styled.div`
   white-space: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 `;
-const Title = styled.div`
-  font-size: 21px;
-  font-weight: 600;
+const Title = styled.button`
+  font-size: 22px;
+  font-weight: bold;
   margin-bottom: 35px;
-  color: ${({ theme, isCompleted, currentChapter, idx }) => {
-    if (isCompleted) {
+  color: ${({ theme, disabled, currentChapter, idx }) => {
+    if (!disabled) {
       if (idx === currentChapter - 1) return theme.colors.BLUE;
       else return theme.colors.TEXT_BLACK;
     } else return theme.colors.LIGHTGRAY;
   }};
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? `default` : `pointer`)};
   user-select: none;
+  background-color: transparent;
+  letter-spacing: -1px;
 `;
 const RateBarContainer = styled.div`
   width: 100%;

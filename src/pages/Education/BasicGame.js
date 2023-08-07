@@ -13,14 +13,16 @@ const BasicGame = () => {
   const navigate = useNavigate();
   const [currentChapter, setCurrentChapter] = useState(1);
   const [isLastPage, setIsLastPage] = useState(false);
-
-  useEffect(() => {
-    setIsLastPage(currentChapter === sideBarBasicData.chapters.length);
-  }, [isLastPage, currentChapter]);
-
   const toggleChapter = (current) => {
     setCurrentChapter(current);
   };
+  useEffect(() => {
+    console.log(isLastPage)
+  }, []);
+  useEffect(() => {
+    setIsLastPage(!(sideBarBasicData.chapters[currentChapter].isCompleted));
+    console.log(isLastPage)
+  }, [isLastPage, currentChapter]);
 
   return (
     <PageContainer>
@@ -35,12 +37,12 @@ const BasicGame = () => {
         <Content currentChapter={currentChapter} />
         <ButtonWrapper>
           <SquareButton
-            able={true}
+            disabled={false}
             asset={logout_icon}
             onClick={() => navigate('/education')}
           />
           <NextBtn
-            able={true}
+            disabled={false}
             asset={next_icon}
             onClick={() => setCurrentChapter(currentChapter + 1)}
             isLastPage={isLastPage}
