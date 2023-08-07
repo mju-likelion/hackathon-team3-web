@@ -7,6 +7,7 @@ import Content from '../../components/Content';
 import logout_icon from '../../assets/images/logout_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
 import sideBarBasicData from '../../assets/data/SideBar_DummyData_Basic.json';
+import rateBasic from '../../assets/data/Rate_DummyData_Basic.json';
 
 const BasicGame = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const BasicGame = () => {
         sideBarData={sideBarBasicData.chapters}
         onClick={toggleChapter}
         currentChapter={currentChapter}
+        rate={rateBasic.progress}
       />
       <ContentWrapper>
         <Content currentChapter={currentChapter} />

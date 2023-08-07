@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
-import { useEffect } from 'react';
-import sideBarBasicData from '../assets/data/SideBar_DummyData_Basic.json';
 
-const SideBar = ({ title, sideBarData, onClick, currentChapter }) => {
-  // 진도율 API로부터 받아온 값
-  const basicValue = 40;
+const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
 
   return (
     <SideBarContainer>
@@ -33,7 +29,7 @@ const SideBar = ({ title, sideBarData, onClick, currentChapter }) => {
           text_size={18}
           width={150}
           height={25}
-          rate={basicValue}
+          rate={rate}
         />
       </RateBarContainer>
     </SideBarContainer>

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import SideBar from '../../components/SideBar';
-import sideBarData from '../../assets/data/SideBar_DummyData_Advanced.json';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
 import logout_icon from '../../assets/images/logout_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
-import { useNavigate } from 'react-router-dom';
+import sideBarAdvancedData from '../../assets/data/SideBar_DummyData_Advanced.json';
+import rateAdvanced from '../../assets/data/Rate_DummyData_Advanced.json';
 
 const AdvancedGame = () => {
   const navigate = useNavigate();
@@ -14,10 +15,7 @@ const AdvancedGame = () => {
   const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
-    // todo 이 때 currentChapter는 id값 X, index 값이 되어야 함
-    // 현재 더미데이터에서 각 챕터 id값 === index+1
-    // todo 해당 chapter의 문제를 요청할 때는 currentChapter의 id값이 필요
-    setIsLastPage(currentChapter === sideBarData.length);
+    setIsLastPage(currentChapter === sideBarAdvancedData.chapters.length);
   }, [isLastPage, currentChapter]);
 
   const toggleChapter = (title) => {
@@ -28,9 +26,10 @@ const AdvancedGame = () => {
     <PageContainer>
       <SideBar
         title='심화 학습'
-        sideBarData={sideBarData}
+        sideBarData={sideBarAdvancedData.chapters}
         onClick={toggleChapter}
         currentChapter={currentChapter}
+        rate={rateAdvanced.progress}
       />
       <ContentWrapper>
         <Content currentChapter={currentChapter} />
