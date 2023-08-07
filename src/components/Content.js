@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 const Content = ({ currentChapter }) => {
   /*todo 현재 클릭 된 문제 currentQuestion state로 관리*/
 
-  //todo complete 로직
   const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
   const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 선택된 문제
   const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
+import { useEffect } from 'react';
+import sideBarBasicData from '../assets/data/SideBar_DummyData_Basic.json';
 
 const SideBar = ({ title, sideBarData, onClick, currentChapter }) => {
   // 진도율 API로부터 받아온 값
@@ -12,16 +14,16 @@ const SideBar = ({ title, sideBarData, onClick, currentChapter }) => {
       </SideBarHeader>
       <Hr />
       <Contents>
-        {sideBarData.map((content) => {
+        {sideBarData.map((content, index) => {
           return (
             <Title
               key={content.id}
-              complete={content.complete}
-              onClick={() => onClick(content.id)}
+              isCompleted={content.isCompleted}
+              onClick={() => onClick(index + 1)}
               currentChapter={currentChapter}
-              id={content.id}
+              idx={index}
             >
-              {content.id}. {content.title}
+              {index + 1}. {content.title}
             </Title>
           );
         })}
@@ -68,9 +70,9 @@ const Title = styled.div`
   font-size: 21px;
   font-weight: 600;
   margin-bottom: 35px;
-  color: ${({ theme, complete, currentChapter, id }) => {
-    if (complete) {
-      if (id === currentChapter) return theme.colors.BLUE;
+  color: ${({ theme, isCompleted, currentChapter, idx }) => {
+    if (isCompleted) {
+      if (idx === currentChapter - 1) return theme.colors.BLUE;
       else return theme.colors.TEXT_BLACK;
     } else return theme.colors.LIGHTGRAY;
   }};

@@ -6,30 +6,26 @@ import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
 import logout_icon from '../../assets/images/logout_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
-import sideBarData from '../../assets/data/SideBar_DummyData.json';
+import sideBarBasicData from '../../assets/data/SideBar_DummyData_Basic.json';
 
 const BasicGame = () => {
-
   const navigate = useNavigate();
   const [currentChapter, setCurrentChapter] = useState(1);
   const [isLastPage, setIsLastPage] = useState(false);
 
   useEffect(() => {
-    // todo 이 때 currentChapter는 id값 X, index 값이 되어야 함
-    // 현재 더미데이터에서 각 챕터 id값 === index+1
-    // todo 해당 chapter의 문제를 요청할 때는 currentChapter의 id값이 필요
-    setIsLastPage(currentChapter === sideBarData.length);
+    setIsLastPage(currentChapter === sideBarBasicData.chapters.length);
   }, [isLastPage, currentChapter]);
 
-  const toggleChapter = (title) => {
-    setCurrentChapter(title);
+  const toggleChapter = (current) => {
+    setCurrentChapter(current);
   };
 
   return (
     <PageContainer>
       <SideBar
         title='기초 학습'
-        sideBarData={sideBarData}
+        sideBarData={sideBarBasicData.chapters}
         onClick={toggleChapter}
         currentChapter={currentChapter}
       />
