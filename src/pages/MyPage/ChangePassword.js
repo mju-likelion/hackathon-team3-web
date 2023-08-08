@@ -14,7 +14,6 @@ const ChangePassword = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-  제;
   const inputValue = watch(); // 현재 필드의 값
 
   const onSubmit = (data) => {
@@ -28,6 +27,18 @@ const ChangePassword = () => {
         <ChangePasswordBox onSubmit={handleSubmit(onSubmit)}>
           <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
           <InputBox>
+            <DisplayBox>
+              <PasswordText>기존 비밀번호</PasswordText>
+              <ChangePasswordInput
+                name='password'
+                placeholder='기존 비밀번호'
+                register={register}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                setValue={setValue}
+                inputValue={inputValue}
+              />
+            </DisplayBox>
             <DisplayBox>
               <PasswordText>변경 비밀번호</PasswordText>
               <ChangePasswordInput
@@ -108,4 +119,11 @@ const ChangeButton = styled.button`
   margin-top: 28px;
   margin-left: 250px; // 재확인
   background-color: ${({ theme }) => theme.colors.GREEN};
+`;
+
+const ErrorMsg = styled.p`
+  font-size: 14px;
+  color: #ff5454;
+  //margin: 6px 0 30px 75px;
+  align-self: flex-start;
 `;
