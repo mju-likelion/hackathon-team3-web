@@ -25,7 +25,7 @@ const Join = () => {
             inputName='비밀번호 확인'
             inputMsg={inputMsg.verifyPwd}
           />
-          <ButtonLong btnName='회원가입' />
+          <ButtonLong btnName='회원가입' width={400} isBtnAble={true}/>
         </JoinBox>
       </JoinFrame>
     </>
