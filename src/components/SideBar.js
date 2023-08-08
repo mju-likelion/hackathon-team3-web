@@ -9,19 +9,20 @@ const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
       </SideBarHeader>
       <Hr />
       <Contents>
-        {sideBarData.map((content, index) => {
-          return (
-            <Title
-              key={content.id}
-              disabled={!content.isCompleted}
-              onClick={() => onClick(index + 1)}
-              currentChapter={currentChapter}
-              idx={index}
-            >
-              {index + 1}. {content.title}
-            </Title>
-          );
-        })}
+        {sideBarData &&
+          sideBarData.map((content, index) => {
+            return (
+              <Title
+                key={content.id}
+                disabled={content.isCompleted}
+                onClick={() => onClick(index + 1)}
+                currentChapter={currentChapter}
+                idx={index}
+              >
+                {index + 1}. {content.title}
+              </Title>
+            );
+          })}
       </Contents>
       <RateBarContainer>
         <ProgressRateBar text_size={18} width={150} height={25} rate={rate} />
