@@ -14,7 +14,6 @@ const ChangePassword = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-  제;
   const inputValue = watch(); // 현재 필드의 값
 
   const onSubmit = (data) => {
