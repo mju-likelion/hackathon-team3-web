@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const SquareButton = ({ able, asset, onClick }) => {
+const SquareButton = ({ disabled, asset, ...attrProps }) => {
   return (
-    <Button able={able} onClick={onClick}>
+    <Button disabled={disabled} {...attrProps}>
       <Icon src={asset} />
     </Button>
   );
@@ -12,13 +12,14 @@ const Button = styled.button`
   width: 70px;
   height: 70px;
   padding: 10px;
-  background-color: ${({ theme, able }) =>
-    able ? theme.colors.LIGHTBLUE : theme.colors.LIGHTGRAY3};
+  background-color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.BTN_DISABLE : theme.colors.BTN_ABLE};
   border-radius: 8px;
-  cursor: ${({ able }) => (able ? `pointer` : `default`)};
   &:hover {
-    background-color: ${({ theme, able }) => able && theme.colors.BLUE};
+    background-color: ${({ theme, disabled }) =>
+      !disabled && theme.colors.BLUE};
   }
+  cursor: ${({ disabled }) => disabled && `default`};
 `;
 const Icon = styled.img`
   width: 50px;

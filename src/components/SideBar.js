@@ -1,36 +1,30 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
 
-const SideBar = ({ rate, sideBarData, onClick, currentChapter }) => {
+const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
   return (
     <SideBarContainer>
       <SideBarHeader>
-        <EducationTitle>기초 학습</EducationTitle>
+        <EducationTitle>{title}</EducationTitle>
       </SideBarHeader>
       <Hr />
       <Contents>
-        {sideBarData.map((content) => {
+        {sideBarData.map((content, index) => {
           return (
             <Title
               key={content.id}
-              complete={content.complete}
-              onClick={() => onClick(content.id)}
+              disabled={!content.isCompleted}
+              onClick={() => onClick(index + 1)}
               currentChapter={currentChapter}
-              id={content.id}
+              idx={index}
             >
-              {content.id}. {content.title}
+              {index + 1}. {content.title}
             </Title>
           );
         })}
       </Contents>
       <RateBarContainer>
-        <ProgressRateBar
-          className='RateBar'
-          text_size={18}
-          width={150}
-          height={25}
-          rate={rate}
-        />
+        <ProgressRateBar text_size={18} width={150} height={25} rate={rate} />
       </RateBarContainer>
     </SideBarContainer>
   );
@@ -57,22 +51,28 @@ const EducationTitle = styled.div`
 `;
 const Hr = styled.hr`
   width: 200px;
+  color: ${({ theme }) => theme.colors.LIGHTGRAY};
 `;
 const Contents = styled.div`
-  padding: 15px;
+  white-space: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 `;
-const Title = styled.div`
+const Title = styled.button`
   font-size: 22px;
-  font-weight: 600;
+  font-weight: bold;
   margin-bottom: 35px;
-  color: ${({ theme, complete, currentChapter, id }) => {
-    if (complete) {
-      if (id === currentChapter) return theme.colors.BLUE;
-      else return `#1E1E1E`;
-    } else return `#D3D3D3`;
+  color: ${({ theme, disabled, currentChapter, idx }) => {
+    if (!disabled) {
+      if (idx === currentChapter - 1) return theme.colors.BLUE;
+      else return theme.colors.TEXT_BLACK;
+    } else return theme.colors.LIGHTGRAY;
   }};
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? `default` : `pointer`)};
   user-select: none;
+  background-color: transparent;
+  letter-spacing: -1px;
 `;
 const RateBarContainer = styled.div`
   width: 100%;
