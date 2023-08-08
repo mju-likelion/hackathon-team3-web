@@ -6,13 +6,15 @@ import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
 import logout_icon from '../../assets/images/logout_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
-import rateBasic from '../../assets/data/Rate_DummyData_Basic.json';
+// import rateBasic from '../../assets/data/Rate_DummyData_Basic.json';
 // import sideBarBasicData from '../../assets/data/SideBar_DummyData_Basic.json';
 import { GetChapters } from '../../api/GetChapters';
+import { GetRate } from '../../api/GetRate';
 
 const BasicGame = () => {
   const navigate = useNavigate();
   const [sideBarData, setSideBarData] = useState(null);
+  const [rateData, setRateData] = useState(null);
   const [currentChapter, setCurrentChapter] = useState(1);
   const [isLastPage, setIsLastPage] = useState(false);
   const toggleChapter = (current) => {
@@ -23,7 +25,7 @@ const BasicGame = () => {
 
   useEffect(() => {
     GetChapters(0, accessToken, (res) => setSideBarData(res.data));
-    console.log(sideBarData);
+    GetRate(0, accessToken, (res) => setRateData(res.data.progress));
   }, []);
 
   useEffect(() => {
@@ -32,14 +34,15 @@ const BasicGame = () => {
   }, [sideBarData, isLastPage, currentChapter]);
 
   return (
-    sideBarData && (
+    sideBarData &&
+    rateData !== null && (
       <PageContainer>
         <SideBar
           title='기초 학습'
           sideBarData={sideBarData.chapters}
           onClick={toggleChapter}
           currentChapter={currentChapter}
-          rate={rateBasic.progress}
+          rate={0}
         />
         <ContentWrapper>
           <Content currentChapter={currentChapter} />

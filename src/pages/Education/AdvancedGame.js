@@ -23,7 +23,6 @@ const AdvancedGame = () => {
 
   useEffect(() => {
     GetChapters(1, accessToken, (res) => setSideBarData(res.data));
-    console.log(sideBarData);
   }, []);
 
   useEffect(() => {
