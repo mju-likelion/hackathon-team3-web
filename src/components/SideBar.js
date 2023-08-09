@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
 
-const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
+const SideBar = ({ title, sideBarData, onClick, currentChapterId, rate }) => {
   return (
     <SideBarContainer>
       <SideBarHeader>
@@ -16,7 +16,7 @@ const SideBar = ({ title, sideBarData, onClick, currentChapter, rate }) => {
                 key={content.id}
                 disabled={content.isCompleted}
                 onClick={() => onClick(index + 1)}
-                currentChapter={currentChapter}
+                currentChapterId={currentChapterId}
                 idx={index}
               >
                 {index + 1}. {content.title}
@@ -64,9 +64,10 @@ const Title = styled.button`
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 35px;
-  color: ${({ theme, disabled, currentChapter, idx }) => {
+  color: ${({ theme, disabled, currentChapterId, idx }) => {
     if (!disabled) {
-      if (idx === currentChapter - 1) return theme.colors.BLUE;
+      //index 변경 필요
+      if (idx === currentChapterId - 1) return theme.colors.BLUE;
       else return theme.colors.TEXT_BLACK;
     } else return theme.colors.LIGHTGRAY;
   }};
