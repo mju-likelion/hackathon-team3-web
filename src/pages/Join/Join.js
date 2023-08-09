@@ -1,31 +1,82 @@
 import { styled } from 'styled-components';
 import Input from '../../components/Input';
 import ButtonLong from '../../components/ButtonLong';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { schema } from '../../hooks/validationYup';
+
 const Join = () => {
-  const inputMsg = {
-    emil: '사용하실 이메일을 입력해주세요.',
-    password:
-      '영문과 숫자, 특수기호를 조합하여 8~14 글자 미만으로 입력해주세요.',
-    verifyPwd: '입력하신 비밀번호를 한번 더 입력해주세요.',
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
+
+  const getSavedUserInfos = () => {
+    const userInfosJSON = localStorage.getItem('userInfos');
+    try {
+      return userInfosJSON ? JSON.parse(userInfosJSON) : [];
+    } catch {
+      return [];
+    }
+  };
+  const userInfos = getSavedUserInfos();
+  const saveUserInfos = (userInfos) => {
+    localStorage.setItem('userInfos', JSON.stringify(userInfos));
+  };
+  const onClickJoin = (data) => {
+    console.log(data);
+    if (userInfos.findIndex(({ email }) => email === data.email) === -1) {
+      userInfos.push({
+        email: data.email,
+        password: data.pw,
+      });
+      saveUserInfos(userInfos);
+      alert('회원가입이 완료되었습니다.');
+      navigate('/login');
+    } else {
+      alert('이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
+      reset();
+    }
   };
   return (
     <>
       <Header />
       <JoinFrame>
-        <JoinBox>
+        <JoinBox onSubmit={handleSubmit(onClickJoin)}>
+          {/* handleSubmit() 이용시 새로고침 현상 X => e.preventDefualt() 설정 필요없다! */}
           <h1>회원가입</h1>
-          <Input inputType='text' inputName='이메일' inputMsg={inputMsg.emil} />
           <Input
-            inputType='password'
-            inputName='비밀번호'
-            inputMsg={inputMsg.password}
+            id='email'
+            name='email'
+            type='text'
+            placeholder='이메일'
+            register={register}
+            errorMsg={errors.email && errors.email.message}
           />
           <Input
-            inputType='password'
-            inputName='비밀번호 확인'
-            inputMsg={inputMsg.verifyPwd}
+            id='password'
+            name='pw'
+            type='password'
+            placeholder='비밀번호'
+            register={register}
+            errorMsg={errors.pw && errors.pw.message}
           />
-          <ButtonLong btnName='회원가입' width={400} isBtnAble={true}/>
+          <Input
+            id='checkPassword'
+            name='checkPw'
+            type='password'
+            placeholder='비밀번호 확인'
+            register={register}
+            errorMsg={errors.checkPw && errors.checkPw.message}
+          />
+          <ButtonLong btnName='회원가입' width={400} isBtnAble={true} />
         </JoinBox>
       </JoinFrame>
     </>
