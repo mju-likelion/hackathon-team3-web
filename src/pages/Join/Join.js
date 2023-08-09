@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { schema } from '../../hooks/validationYup';
+import { JoinApi } from '../../api/JoinApi';
 
 const Join = () => {
   const navigate = useNavigate();
@@ -18,32 +19,12 @@ const Join = () => {
     mode: 'onChange',
   });
 
-  const getSavedUserInfos = () => {
-    const userInfosJSON = localStorage.getItem('userInfos');
-    try {
-      return userInfosJSON ? JSON.parse(userInfosJSON) : [];
-    } catch {
-      return [];
-    }
-  };
-  const userInfos = getSavedUserInfos();
-  const saveUserInfos = (userInfos) => {
-    localStorage.setItem('userInfos', JSON.stringify(userInfos));
-  };
   const onClickJoin = (data) => {
     console.log(data);
-    if (userInfos.findIndex(({ email }) => email === data.email) === -1) {
-      userInfos.push({
-        email: data.email,
-        password: data.pw,
-      });
-      saveUserInfos(userInfos);
-      alert('회원가입이 완료되었습니다.');
-      navigate('/login');
-    } else {
-      alert('이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
-      reset();
-    }
+    JoinApi(data, callbackFunctions);
+  };
+  const callbackFunctions = {
+    navigateSuccess: () => navigate('/login'),
   };
   return (
     <>
@@ -52,6 +33,14 @@ const Join = () => {
         <JoinBox onSubmit={handleSubmit(onClickJoin)}>
           {/* handleSubmit() 이용시 새로고침 현상 X => e.preventDefualt() 설정 필요없다! */}
           <h1>회원가입</h1>
+          <Input
+            id='name'
+            name='name'
+            type='text'
+            placeholder='닉네임'
+            register={register}
+            errorMsg={errors.name && errors.name.message}
+          />
           <Input
             id='email'
             name='email'

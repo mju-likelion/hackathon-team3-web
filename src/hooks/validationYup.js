@@ -1,6 +1,13 @@
 import * as yup from 'yup';
 
 export const schema = yup.object().shape({
+  name: yup
+    .string()
+    .required('사용하실 닉네임을 입력해주세요.')
+    .matches(
+      /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$/,
+      '영문과 숫자 또는 한글로 조합하여 2~16 글자 이하로 입력해주세요.'
+    ),
   email: yup
     .string()
     .required('사용하실 이메일을 입력해주세요.')

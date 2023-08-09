@@ -65,7 +65,6 @@ const AllContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  last-child
 `;
 
 const ChangePasswordBox = styled.div`

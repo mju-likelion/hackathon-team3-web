@@ -1,15 +1,16 @@
 import { Axios } from './Axios';
 
-const JoinApi = (email, password) => {
-  Axios.post(`/auto/join`),
-    {
-      email: email,
-      password: password,
-    }
-      .then((res) => {
-        callbackFunction(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+export const JoinApi = (data, callbackFunctions) => {
+  const { navigateSuccess } = callbackFunctions;
+  Axios.post(`/auto/join`, {
+    email: data.email,
+    password: data.password,
+  })
+    .then((res) => {
+      console.log(res);
+      navigateSuccess();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
