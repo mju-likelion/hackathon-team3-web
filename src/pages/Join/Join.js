@@ -76,7 +76,7 @@ const Join = () => {
             register={register}
             errorMsg={errors.checkPw && errors.checkPw.message}
           />
-          <ButtonLong type='submit' btnName='회원가입' />
+          <ButtonLong btnName='회원가입' width={400} isBtnAble={true} />
         </JoinBox>
       </JoinFrame>
     </>
