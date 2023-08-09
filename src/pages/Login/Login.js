@@ -2,46 +2,50 @@ import { styled } from 'styled-components';
 import Input from '../../components/Input';
 import ButtonLong from '../../components/ButtonLong';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { schema } from '../../hooks/validationYup';
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const onClickLogin = (e) => {
-    e.preventDefault();
-    console.log(email, password);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
+  const onClickLogin = (data) => {
+    console.log(data);
   };
-  const onEmailHandler = (data) => {
-    setEmail(data.target.value);
-  };
-  const onPasswordHandler = (data) => {
-    setPassword(data.target.value);
-  };
+
   return (
     <>
       <Header />
-      <JoinFrame>
-        <JoinBox onSubmit={onClickLogin}>
+      <LoginFrame>
+        <LoginBox onSubmit={handleSubmit(onClickLogin)}>
           <h1>로그인</h1>
           <Input
+            id='email'
             name='email'
-            value={email}
-            inputType='text'
-            inputName='이메일'
-            onChange={onEmailHandler}
+            type='text'
+            placeholder='이메일'
+            register={register}
+            errorMsg={errors.email && errors.email.message}
           />
           <Input
-            name='password'
-            value={password}
-            inputType='password'
-            inputName='비밀번호'
-            onChange={onPasswordHandler}
+            id='password'
+            name='pw'
+            type='password'
+            placeholder='비밀번호'
+            errorMsg={errors.pw && errors.pw.message}
+            register={register}
           />
           <ButtonLong type='submit' btnName='로그인' width={400} isBtnAble={true}/>
           <BottomText>
             회원이 아니신가요 ? <Link to='/join'>회원가입 하러가기</Link>
           </BottomText>
-        </JoinBox>
-      </JoinFrame>
+        </LoginBox>
+      </LoginFrame>
     </>
   );
 };
@@ -50,12 +54,12 @@ const Header = styled.div`
   height: 100px;
 `;
 
-const JoinFrame = styled.div`
+const LoginFrame = styled.div`
   height: 660px;
   display: flex;
   justify-content: center;
 `;
-const JoinBox = styled.form`
+const LoginBox = styled.form`
   height: 480px;
   width: 600px;
   display: flex;
@@ -65,7 +69,7 @@ const JoinBox = styled.form`
   h1 {
     font-size: 28px;
     font-weight: 700;
-    margin: 50px;
+    margin: 40px;
   }
 `;
 const BottomText = styled.p`
