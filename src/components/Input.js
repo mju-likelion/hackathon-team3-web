@@ -32,7 +32,7 @@ const InputWrap = styled.div`
   margin-bottom: 30px;
 `;
 const InputFrame = styled.div`
-  background-color: ${({ theme }) => theme.colors.LIGHTGRAY2};
+  background-color: ${({ theme }) => theme.colors.INPUT_GRAY2};
   font-size: 20px;
   height: 55px;
   width: 450px;
@@ -42,7 +42,7 @@ const InputFrame = styled.div`
   padding: 10px;
 `;
 const InputFilled = styled.input`
-  background-color: ${({ theme }) => theme.colors.LIGHTGRAY2};
+  background-color: ${({ theme }) => theme.colors.INPUT_GRAY2};
   font-size: 20px;
   border-style: none;
   outline: none;

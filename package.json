@@ -15,7 +15,8 @@
     "styled-components": "^6.0.5",
     "styled-reset": "^4.5.1",
     "web-vitals": "^2.1.0",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "swiper": "^10.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

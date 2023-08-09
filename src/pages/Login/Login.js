@@ -69,7 +69,7 @@ const LoginBox = styled.form`
   h1 {
     font-size: 28px;
     font-weight: 700;
-    margin: 50px;
+    margin: 40px;
   }
 `;
 const BottomText = styled.p`
