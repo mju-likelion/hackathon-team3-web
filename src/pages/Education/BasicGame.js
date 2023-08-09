@@ -1,45 +1,67 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar';
 import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
 import logout_icon from '../../assets/images/logout_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
-import sideBarData from '../../assets/data/SideBar_DummyData.json';
+// import rateBasic from '../../assets/data/Rate_DummyData_Basic.json';
+// import sideBarBasicData from '../../assets/data/SideBar_DummyData_Basic.json';
+import { GetChapters } from '../../api/GetChapters';
+import { GetRate } from '../../api/GetRate';
 
 const BasicGame = () => {
-  const basicValue = 40;
   const navigate = useNavigate();
+  const [sideBarData, setSideBarData] = useState(null);
+  const [rateData, setRateData] = useState(null);
   const [currentChapter, setCurrentChapter] = useState(1);
-  const toggleChapter = (title) => {
-    setCurrentChapter(title);
+  const [isLastPage, setIsLastPage] = useState(false);
+  const toggleChapter = (current) => {
+    setCurrentChapter(current);
   };
 
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  useEffect(() => {
+    GetChapters(0, accessToken, (res) => setSideBarData(res.data));
+    GetRate(0, accessToken, (res) => setRateData(res.data.progress));
+  }, []);
+
+  useEffect(() => {
+    sideBarData &&
+      setIsLastPage(!sideBarData.chapters[currentChapter - 1].isCompleted);
+  }, [sideBarData, isLastPage, currentChapter]);
+
   return (
-    <PageContainer>
-      <SideBar
-        rate={basicValue}
-        sideBarData={sideBarData}
-        onClick={toggleChapter}
-        currentChapter={currentChapter}
-      />
-      <ContentWrapper>
-        <Content currentChapter={currentChapter} />
-        <ButtonWrapper>
-          <SquareButton
-            able={true}
-            asset={logout_icon}
-            onClick={() => navigate('/education')}
-          />
-          <SquareButton
-            able={true}
-            asset={next_icon}
-            onClick={() => setCurrentChapter(currentChapter + 1)}
-          />
-        </ButtonWrapper>
-      </ContentWrapper>
-    </PageContainer>
+    sideBarData &&
+    rateData !== null && (
+      <PageContainer>
+        <SideBar
+          title='기초 학습'
+          sideBarData={sideBarData.chapters}
+          onClick={toggleChapter}
+          currentChapter={currentChapter}
+          rate={0}
+        />
+        <ContentWrapper>
+          <Content currentChapter={currentChapter} />
+          <ButtonWrapper>
+            <SquareButton
+              disabled={false}
+              asset={logout_icon}
+              onClick={() => navigate('/education')}
+            />
+            <NextBtn
+              disabled={false}
+              asset={next_icon}
+              onClick={() => setCurrentChapter(currentChapter + 1)}
+              isLastPage={isLastPage}
+            />
+          </ButtonWrapper>
+        </ContentWrapper>
+      </PageContainer>
+    )
   );
 };
 
@@ -62,6 +84,9 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+`;
+const NextBtn = styled(SquareButton)`
+  visibility: ${({ isLastPage }) => (isLastPage ? `hidden` : `visible`)};
 `;
 
 export default BasicGame;

@@ -12,11 +12,9 @@ const EducationSelect = () => {
     <PageContainer>
       <ContentContainer>
         <MenuContainer>
-          <CircleButton
+          <CircleBtn
             onClick={() => navigate('/education/basic')}
             value='기초 학습 하기'
-            width='300'
-            fontsize='40'
           />
           <ProgressRateBar
             text_size={30}
@@ -26,11 +24,9 @@ const EducationSelect = () => {
           />
         </MenuContainer>
         <MenuContainer>
-          <CircleButton
+          <CircleBtn
             onClick={() => navigate('/education/advanced')}
             value='심화 학습 하기'
-            width='300'
-            fontsize='40'
           />
           <ProgressRateBar
             text_size={30}
@@ -62,5 +58,7 @@ const MenuContainer = styled.div`
   align-items: center;
   gap: 60px;
 `;
-
+const CircleBtn = styled(CircleButton)`
+  margin-left: 50px;
+`;
 export default EducationSelect;

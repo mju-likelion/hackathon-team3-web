@@ -4,6 +4,7 @@ export const Theme = {
     SKYBLUE: '#BADEFF', // 메인 배너, 버튼
     BTN_ABLE: '#99CEFF', // 헤더,
     BLUE: '#59A4FB', // '마이페이지' 파랑, 사이드바 타이틀, 현재 목차 글씨 색, able 버튼 색, 진도율 등 파란 글씨 전부
+    BG_LIGHTGRAY: '#ECECEC', // 진도율 바 배경색
     LIGHTGRAY: '#D3D3D3', // hr, disable 글씨, 흰색 텍스트
     BTN_DISABLE: '#C4C4C4', // 버튼 disable
     INPUT_GRAY: '#737373', // input 그레이
