@@ -21,6 +21,11 @@ const Join = () => {
 
   const onClickJoin = (data) => {
     console.log(data);
+    // const joinData = {
+    //   nickname: data.nickname,
+    //   email: data.email,
+
+    // }
     JoinApi(data, callbackFunctions);
   };
   const callbackFunctions = {
@@ -34,12 +39,12 @@ const Join = () => {
           {/* handleSubmit() 이용시 새로고침 현상 X => e.preventDefualt() 설정 필요없다! */}
           <h1>회원가입</h1>
           <Input
-            id='name'
-            name='name'
+            id='nickname'
+            name='nickname'
             type='text'
             placeholder='닉네임'
             register={register}
-            errorMsg={errors.name && errors.name.message}
+            errorMsg={errors.nickname && errors.nickname.message}
           />
           <Input
             id='email'

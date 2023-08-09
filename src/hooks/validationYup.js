@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const schema = yup.object().shape({
-  name: yup
+  nickname: yup
     .string()
     .required('사용하실 닉네임을 입력해주세요.')
     .matches(
