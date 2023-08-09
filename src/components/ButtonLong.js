@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { styled } from 'styled-components';
 
 const ButtonLong = ({ btnName, width, isBtnAble, ...attrProps }) => {
@@ -22,4 +23,5 @@ const LongBtn = styled.button`
   font-weight: 700;
   cursor: ${({ isBtnAble }) => (isBtnAble ? `pointer` : `default`)};
 `;
+
 export default ButtonLong;
