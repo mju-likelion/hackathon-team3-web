@@ -60,7 +60,6 @@ const Join = () => {
             register={register}
             errorMsg={errors.email && errors.email.message}
           />
-          {/* <ErrorMsg>{errors.email && errors.email.message}</ErrorMsg> */}
           <Input
             id='password'
             name='pw'
@@ -69,19 +68,14 @@ const Join = () => {
             register={register}
             errorMsg={errors.pw && errors.pw.message}
           />
-          {/* <ErrorMsg>{errors.pw && errors.pw.message}</ErrorMsg> */}
           <Input
             id='checkPassword'
             name='checkPw'
             type='password'
             placeholder='비밀번호 확인'
-            // {...register('checkPw', {
-            //   required: true,
-            // })}
             register={register}
             errorMsg={errors.checkPw && errors.checkPw.message}
           />
-          {/* <ErrorMsg>{errors.checkPw && errors.checkPw.message}</ErrorMsg> */}
           <ButtonLong type='submit' btnName='회원가입' />
         </JoinBox>
       </JoinFrame>
