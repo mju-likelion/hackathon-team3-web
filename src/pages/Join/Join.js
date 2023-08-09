@@ -2,33 +2,12 @@ import { styled } from 'styled-components';
 import Input from '../../components/Input';
 import ButtonLong from '../../components/ButtonLong';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { schema } from '../../hooks/validationYup';
 
 const Join = () => {
   const navigate = useNavigate();
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .required('사용하실 이메일을 입력해주세요.')
-      .email('이메일형식에 맞지 않습니다.'),
-    pw: yup
-      .string()
-      .required(
-        '비밀번호를 영문과 숫자, 특수기호를 조합하여 8~14 글자 이하로 입력해주세요.'
-      )
-      .max(14, '비밀번호는 최대 14자리로 입력해주세요.')
-      .matches(
-        /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}[^\s]*$/,
-        '영문과 숫자, 특수기호를 조합하여 8~14 글자 이하로 입력해주세요.'
-      ),
-    checkPw: yup
-      .string()
-      .oneOf([yup.ref('pw'), null], '비밀번호가 일치하지 않습니다.')
-      .required('입력하신 비밀번호를 한번 더 입력해주세요.'),
-  });
   const {
     register,
     handleSubmit,
@@ -51,7 +30,8 @@ const Join = () => {
   const saveUserInfos = (userInfos) => {
     localStorage.setItem('userInfos', JSON.stringify(userInfos));
   };
-  const onClickLogin = (data) => {
+  const onClickJoin = (data) => {
+    console.log(data);
     if (userInfos.findIndex(({ email }) => email === data.email) === -1) {
       userInfos.push({
         email: data.email,
@@ -69,35 +49,39 @@ const Join = () => {
     <>
       <Header />
       <JoinFrame>
-        <JoinBox onSubmit={handleSubmit(onClickLogin)}>
+        <JoinBox onSubmit={handleSubmit(onClickJoin)}>
           {/* handleSubmit() 이용시 새로고침 현상 X => e.preventDefualt() 설정 필요없다! */}
           <h1>회원가입</h1>
-          <JoinInput
+          <Input
             id='email'
-            name='emil'
+            name='email'
             type='text'
             placeholder='이메일'
-            {...register('email')}
+            register={register}
+            errorMsg={errors.email && errors.email.message}
           />
-          <ErrorMsg>{errors.email && errors.email.message}</ErrorMsg>
-          <JoinInput
+          {/* <ErrorMsg>{errors.email && errors.email.message}</ErrorMsg> */}
+          <Input
             id='password'
             name='pw'
             type='password'
             placeholder='비밀번호'
-            {...register('pw')}
+            register={register}
+            errorMsg={errors.pw && errors.pw.message}
           />
-          <ErrorMsg>{errors.pw && errors.pw.message}</ErrorMsg>
-          <JoinInput
+          {/* <ErrorMsg>{errors.pw && errors.pw.message}</ErrorMsg> */}
+          <Input
             id='checkPassword'
             name='checkPw'
             type='password'
             placeholder='비밀번호 확인'
-            {...register('checkPw', {
-              required: true,
-            })}
+            // {...register('checkPw', {
+            //   required: true,
+            // })}
+            register={register}
+            errorMsg={errors.checkPw && errors.checkPw.message}
           />
-          <ErrorMsg>{errors.checkPw && errors.checkPw.message}</ErrorMsg>
+          {/* <ErrorMsg>{errors.checkPw && errors.checkPw.message}</ErrorMsg> */}
           <ButtonLong type='submit' btnName='회원가입' />
         </JoinBox>
       </JoinFrame>
@@ -126,20 +110,5 @@ const JoinBox = styled.form`
     font-weight: 700;
     margin: 50px;
   }
-`;
-const JoinInput = styled.input`
-  background-color: #eaeaea;
-  font-size: 20px;
-  border-style: none;
-  outline: none;
-  height: 55px;
-  width: 450px;
-  padding: 10px;
-`;
-const ErrorMsg = styled.p`
-  font-size: 14px;
-  color: #ff5454;
-  margin: 6px 0 30px 75px;
-  align-self: flex-start;
 `;
 export default Join;
