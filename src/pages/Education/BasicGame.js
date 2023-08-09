@@ -17,7 +17,7 @@ const BasicGame = () => {
   const [sideBarData, setSideBarData] = useState(null); // 목차 데이터
   const [rateData, setRateData] = useState(null); //진도율 데이터
   const [chapterData, setChapterData] = useState(null); // 문제 데이터
-  const [currentChapterId, setCurrentChapterId] = useState(null); // 현재 챕터
+  const [currentChapterId, setCurrentChapterId] = useState(undefined); // 현재 챕터
   const [isLastPage, setIsLastPage] = useState(false);
 
   const toggleChapter = (currentId) => {
@@ -28,7 +28,7 @@ const BasicGame = () => {
 
   useEffect(() => {
     GetChapters(0, accessToken, (res) => setSideBarData(res.data));
-  }, []);
+  }, []); //목차 불러오는 API
 
   useEffect(() => {
     GetRate(0, accessToken, (res) => setRateData(res.data.progress));
@@ -43,14 +43,23 @@ const BasicGame = () => {
   }, [currentChapterId]);
 
   useEffect(() => {
-    if (sideBarData) {
+    if (
+      sideBarData &&
+      sideBarData.chapters &&
+      sideBarData.chapters.length > 0
+    ) {
       setCurrentChapterId(sideBarData.chapters[0].id);
     }
   }, [sideBarData]);
 
   useEffect(() => {
-    sideBarData &&
+    if (
+      sideBarData &&
+      sideBarData.chapters &&
+      sideBarData.chapters.length > 0
+    ) {
       setIsLastPage(!sideBarData.chapters[currentChapterId - 1].isCompleted);
+    }
   }, []);
 
   return (
@@ -61,7 +70,7 @@ const BasicGame = () => {
         <SideBar
           title='기초 학습'
           sideBarData={sideBarData.chapters}
-          onClick={toggleChapter}
+          onClick={(currentId) => toggleChapter(currentId)}
           currentChapterId={currentChapterId}
           rate={rateData}
         />

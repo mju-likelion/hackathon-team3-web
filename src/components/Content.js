@@ -4,11 +4,9 @@ import Type_ShortInput from '../pages/Game/Type_ShortInput';
 import Type_FillBlank from '../pages/Game/Type_FillBlank';
 import { useEffect, useState } from 'react';
 
-const Content = ({ currentChapterId, chapterData }) => {
-  /*todo 현재 클릭 된 문제 currentQuestion state로 관리*/
-
-  const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
+const Content = ({ chapterData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 선택된 문제
+  const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
   const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수
   const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
@@ -21,8 +19,7 @@ const Content = ({ currentChapterId, chapterData }) => {
   const handleComplete = (id) => {
     setCompleteArr([...completeArr, id]);
   };
-  const { helpMessage, id, problemList, title, message, statusCode } =
-    chapterData || {}; //객관식 테스트중
+  const { helpMessage, problemList, title } = chapterData || {};
 
   useEffect(() => {
     setCompleteCount(completeArr.length);

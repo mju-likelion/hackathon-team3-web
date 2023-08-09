@@ -15,9 +15,9 @@ const SideBar = ({ title, sideBarData, onClick, currentChapterId, rate }) => {
               <Title
                 key={content.id}
                 disabled={content.isCompleted}
-                onClick={() => onClick(index + 1)}
+                onClick={() => onClick(content.id)}
                 currentChapterId={currentChapterId}
-                idx={index}
+                id={content.id}
               >
                 {index + 1}. {content.title}
               </Title>
@@ -64,10 +64,9 @@ const Title = styled.button`
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 35px;
-  color: ${({ theme, disabled, currentChapterId, idx }) => {
+  color: ${({ theme, disabled, currentChapterId, id }) => {
     if (!disabled) {
-      //index 변경 필요
-      if (idx === currentChapterId - 1) return theme.colors.BLUE;
+      if (id === currentChapterId) return theme.colors.BLUE;
       else return theme.colors.TEXT_BLACK;
     } else return theme.colors.LIGHTGRAY;
   }};
