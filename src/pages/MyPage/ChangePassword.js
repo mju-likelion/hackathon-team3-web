@@ -16,21 +16,31 @@ const ChangePassword = () => {
   });
   const inputValue = watch(); // 현재 필드의 값
 
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  const callbackFunction = () => {
+    console.log('성공!');
+  };
+
   const onSubmit = (data) => {
     console.log(data);
+    console.log(accessToken);
+    const { oldPassword, password } = data;
     // 비밀번호 변경 api 호출 및 처리
+    console.log(data);
+    PatchPassword(oldPassword, password, accessToken, callbackFunction);
   };
 
   return (
     <>
       <AllContainer>
-        <ChangePasswordBox onSubmit={handleSubmit(onSubmit)}>
+        <ChangePasswordForm onSubmit={handleSubmit(onSubmit)}>
           <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
           <InputBox>
             <DisplayBox>
               <PasswordText>기존 비밀번호</PasswordText>
               <ChangePasswordInput
-                name='password'
+                name='oldPassword'
                 placeholder='기존 비밀번호'
                 register={register}
                 handleSubmit={handleSubmit}
@@ -42,7 +52,7 @@ const ChangePassword = () => {
             <DisplayBox>
               <PasswordText>변경 비밀번호</PasswordText>
               <ChangePasswordInput
-                name='newPassword'
+                name='password'
                 placeholder='변경할 비밀번호'
                 register={register}
                 handleSubmit={handleSubmit}
@@ -65,7 +75,7 @@ const ChangePassword = () => {
             </DisplayBox>
           </InputBox>
           <ChangeButton type='submit'>변경하기</ChangeButton>
-        </ChangePasswordBox>
+        </ChangePasswordForm>
       </AllContainer>
     </>
   );
@@ -73,14 +83,14 @@ const ChangePassword = () => {
 
 export default ChangePassword;
 
-const AllContainer = styled.form`
+const ChangePasswordForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  last-child
+  //last-child
 `;
 
-const ChangePasswordBox = styled.div`
+const AllContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
