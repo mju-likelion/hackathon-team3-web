@@ -2,12 +2,9 @@ import styled from 'styled-components';
 import Type_Choice from '../pages/Game/Type_Choice';
 import Type_ShortInput from '../pages/Game/Type_ShortInput';
 import Type_FillBlank from '../pages/Game/Type_FillBlank';
-import Choice_Dummy from '../assets/data/Content_Choice_Dummy.json';
-import Short_Dummy from '../assets/data/Content_Short_Dummy.json';
-import Fill_Dummy from '../assets/data/Content_Fill_Dummy.json';
 import { useEffect, useState } from 'react';
 
-const Content = ({ currentChapter }) => {
+const Content = ({ currentChapterId, chapterData }) => {
   /*todo 현재 클릭 된 문제 currentQuestion state로 관리*/
 
   const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
@@ -24,35 +21,29 @@ const Content = ({ currentChapter }) => {
   const handleComplete = (id) => {
     setCompleteArr([...completeArr, id]);
   };
+  const { helpMessage, id, problemList, title, message, statusCode } =
+    chapterData || {}; //객관식 테스트중
+
   useEffect(() => {
     setCompleteCount(completeArr.length);
     if (completeArr.length === completeCount) setAllComplete((prev) => !prev);
   }, [completeArr, completeCount]);
 
-  // 더미데이터는 문제 유형 별로 나눠서 추가 해두었지만,
-  // 실제 로직은 목차 API에서 가져온 Chapter id로 문제들 요청, 해당 문제 API를 뿌림
-  // 문제 유형 정보는 해당 문제 API response에 들어있음
-  const { type, title, scenario, question, help, option } =
-    Choice_Dummy[currentQuestion]; //객관식 더미데이터
-  // const { type, title, scenario, question, help } = Short_Dummy[0]; //주관식 더미데이터
-  // const { type, title, scenario, question, help } = Fill_Dummy[0]; //빈칸 채우기 더미데이터
-
   return (
     <ContentContainer>
-      {Choice_Dummy && (
+      {problemList && (
         <>
-          <ChapterTitle>
-            {currentChapter}. {title}
-          </ChapterTitle>
+          <ChapterTitle>{title}</ChapterTitle>
           <TapContainer>
-            {Choice_Dummy.map((tap, index) => {
+            {problemList.map((tap, index) => {
               return (
                 <Tap
                   key={tap.id}
                   onClick={() => togglecurrentQuestion(index)}
                   index={index}
                   currentQuestion={currentQuestion}
-                  disabled={!completeArr.includes(tap.id)}
+                  // disabled={!completeArr.includes(tap.id)}
+                  disabled={false} //채점 전 임시
                 >
                   {index + 1}
                 </Tap>
@@ -61,17 +52,23 @@ const Content = ({ currentChapter }) => {
           </TapContainer>
           <ContentBox>
             <ScenarioBox>
-              <ScenarioText>{scenario}</ScenarioText>
+              <ScenarioText>
+                {problemList[currentQuestion].scenario}
+              </ScenarioText>
             </ScenarioBox>
-            <QuestionBox>{question}</QuestionBox>
+            <QuestionBox>{problemList[currentQuestion].question}</QuestionBox>
             <SubmitBox>
-              {type === 'a' && (
-                <Type_Choice option={option} handleComplete={handleComplete} />
+              {problemList[currentQuestion].type === 'MCQ' && (
+                <Type_Choice
+                  options={problemList[currentQuestion].answerOptions}
+                  handleComplete={handleComplete}
+                />
               )}
-              {type === 'b' && (
+              {problemList[currentQuestion].type === 'SAQ' && (
                 <Type_ShortInput handleComplete={handleComplete} />
               )}
-              {type === 'c' && (
+
+              {problemList[currentQuestion].type === 'FITB' && (
                 <Type_FillBlank handleComplete={handleComplete} />
               )}
             </SubmitBox>
@@ -119,7 +116,9 @@ const Tap = styled.button`
       else return theme.colors.BTN_ABLE;
     } else return theme.colors.BTN_DISABLE;
   }};
-};
+}
+
+;
 `;
 const ContentBox = styled.div`
   margin: 0 auto;
@@ -149,6 +148,7 @@ const QuestionBox = styled.div`
   width: 100%;
   height: 55px;
   margin-top: 10px;
+  padding-left: 10px;
   color: ${({ theme }) => theme.colors.BLUE};
   border-bottom: ${({ theme }) => theme.colors.BLUE} 5px dashed;
   font-size: 24px;

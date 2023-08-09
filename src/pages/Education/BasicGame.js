@@ -6,46 +6,70 @@ import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
 import logout_icon from '../../assets/images/logout_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
-// import rateBasic from '../../assets/data/Rate_DummyData_Basic.json';
-// import sideBarBasicData from '../../assets/data/SideBar_DummyData_Basic.json';
+
 import { GetChapters } from '../../api/GetChapters';
 import { GetRate } from '../../api/GetRate';
+import { GetChapter } from '../../api/GetChapter';
 
 const BasicGame = () => {
   const navigate = useNavigate();
-  const [sideBarData, setSideBarData] = useState(null);
-  const [rateData, setRateData] = useState(null);
-  const [currentChapter, setCurrentChapter] = useState(1);
+
+  const [sideBarData, setSideBarData] = useState(null); // 목차 데이터
+  const [rateData, setRateData] = useState(null); //진도율 데이터
+  const [chapterData, setChapterData] = useState(null); // 문제 데이터
+  const [currentChapterId, setCurrentChapterId] = useState(null); // 현재 챕터
   const [isLastPage, setIsLastPage] = useState(false);
-  const toggleChapter = (current) => {
-    setCurrentChapter(current);
+
+  const toggleChapter = (currentId) => {
+    setCurrentChapterId(currentId);
   };
 
   const accessToken = process.env.REACT_APP_TOKEN;
 
   useEffect(() => {
     GetChapters(0, accessToken, (res) => setSideBarData(res.data));
+  }, []);
+
+  useEffect(() => {
     GetRate(0, accessToken, (res) => setRateData(res.data.progress));
   }, []);
 
   useEffect(() => {
+    if (currentChapterId !== null) {
+      GetChapter(currentChapterId, accessToken, (res) =>
+        setChapterData(res.data.chapter)
+      );
+    }
+  }, [currentChapterId]);
+
+  useEffect(() => {
+    if (sideBarData) {
+      setCurrentChapterId(sideBarData.chapters[0].id);
+    }
+  }, [sideBarData]);
+
+  useEffect(() => {
     sideBarData &&
-      setIsLastPage(!sideBarData.chapters[currentChapter - 1].isCompleted);
-  }, [sideBarData, isLastPage, currentChapter]);
+      setIsLastPage(!sideBarData.chapters[currentChapterId - 1].isCompleted);
+  }, []);
 
   return (
     sideBarData &&
-    rateData !== null && (
+    rateData !== null &&
+    chapterData && (
       <PageContainer>
         <SideBar
           title='기초 학습'
           sideBarData={sideBarData.chapters}
           onClick={toggleChapter}
-          currentChapter={currentChapter}
-          rate={0}
+          currentChapterId={currentChapterId}
+          rate={rateData}
         />
         <ContentWrapper>
-          <Content currentChapter={currentChapter} />
+          <Content
+            currentChapterId={currentChapterId}
+            chapterData={chapterData}
+          />
           <ButtonWrapper>
             <SquareButton
               disabled={false}
@@ -53,9 +77,10 @@ const BasicGame = () => {
               onClick={() => navigate('/education')}
             />
             <NextBtn
-              disabled={false}
+              disabled={true}
               asset={next_icon}
-              onClick={() => setCurrentChapter(currentChapter + 1)}
+              //todo 다음 index 값으로 변경
+              onClick={() => setCurrentChapterId(currentChapterId)}
               isLastPage={isLastPage}
             />
           </ButtonWrapper>

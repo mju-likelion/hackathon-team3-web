@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ChoiceCircle from '../../components/ChoiceCircle';
 import ButtonLong from '../../components/ButtonLong';
 
-const TypeChoice = ({ option }) => {
+const TypeChoice = ({ options }) => {
   const [clickedId, setClickedId] = useState(undefined);
   const [isBtnAble, setIsBtnAble] = useState(false);
 
@@ -18,7 +18,7 @@ const TypeChoice = ({ option }) => {
   return (
     <ChoiceWrapper>
       <CircleContainer>
-        {option.map((option, index) => {
+        {options.map((option, index) => {
           return (
             <ChoiceCircle
               key={option}
