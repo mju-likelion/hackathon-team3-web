@@ -68,7 +68,6 @@ const Join = () => {
             register={register}
             errorMsg={errors.pw && errors.pw.message}
           />
-<<<<<<< HEAD
           <Input
             id='checkPassword'
             name='checkPw'
@@ -78,9 +77,6 @@ const Join = () => {
             errorMsg={errors.checkPw && errors.checkPw.message}
           />
           <ButtonLong btnName='회원가입' width={400} isBtnAble={true} />
-=======
-          <ButtonLong btnName='회원가입' width={400} isBtnAble={true}/>
->>>>>>> develop
         </JoinBox>
       </JoinFrame>
     </>
