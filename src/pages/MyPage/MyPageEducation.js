@@ -1,8 +1,17 @@
 import MyPageCategory from './MyPageCategory';
 import styled from 'styled-components';
 import ProgressRateBar from '../../components/ProgressRateBar';
+import {useEffect, useState} from "react";
+import {GetRate} from "../../api/GetRate";
 
 const MyPageEducation = () => {
+  const [rateBasic, setRateBasic] = useState(null);
+  const [rateAdvanced, setRateAdvanced] = useState(null);
+  const accessToken = process.env.REACT_APP_TOKEN;
+  useEffect(() => {
+   GetRate(0, accessToken, (res) => setRateBasic(res.data.progress));
+   GetRate(1, accessToken, (res) => setRateAdvanced(res.data.progress));
+  }, []);
   return (
     <>
       <MyPageEduBox>
@@ -17,7 +26,7 @@ const MyPageEducation = () => {
                 text_size='24'
                 width='315'
                 height='41'
-                rate='80'
+                rate={rateBasic}
               />
             </Progressing>
             <EduBtn>이어서 학습하기 &#62;</EduBtn>
@@ -31,7 +40,7 @@ const MyPageEducation = () => {
                 text_size='24'
                 width='315'
                 height='41'
-                rate='30'
+                rate={rateAdvanced}
               />
             </Progressing>
             <EduBtn>이어서 학습하기 &#62;</EduBtn>
