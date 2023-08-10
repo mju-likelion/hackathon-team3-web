@@ -7,27 +7,24 @@ import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
 
 const Content = ({ chapterData }) => {
+  const { helpMessage, problemList, title } = chapterData || {};
   const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 선택된 문제
-  const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
-  const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수
-  const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
-
-  const [isModal, setIsModal] = useState(false);
-
   const togglecurrentQuestion = (index) => {
     setCurrentQuestion(index);
   };
-
   const toggleModal = () => {
     setIsModal((prev) => !prev);
   };
 
-  //todo 한 문제 풀 때 마다 채점 API요청, (요청할 때 문제 id 보냄)
-  //todo 정답일 경우 해당 문제 id를 completeArr 배열에 저장 : 맞은 문제 추가
+  const [isModal, setIsModal] = useState(false);
+  const [completeArr, setCompleteArr] = useState([]);
+  const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수
+  const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
+
   const handleComplete = (id) => {
     setCompleteArr([...completeArr, id]);
+    console.log(completeArr);
   };
-  const { helpMessage, problemList, title } = chapterData || {};
 
   useEffect(() => {
     setCompleteCount(completeArr.length);
@@ -77,15 +74,22 @@ const Content = ({ chapterData }) => {
                   {problemList[currentQuestion].type === 'MCQ' && (
                     <Type_Choice
                       options={problemList[currentQuestion].answerOptions}
-                      handleComplete={handleComplete}
+                      handleComplete={(correctId) => handleComplete(correctId)}
+                      problemId={problemList[currentQuestion].id}
                     />
                   )}
                   {problemList[currentQuestion].type === 'SAQ' && (
-                    <Type_ShortInput handleComplete={handleComplete} />
+                    <Type_ShortInput
+                      handleComplete={handleComplete}
+                      problemId={problemList[currentQuestion].id}
+                    />
                   )}
 
                   {problemList[currentQuestion].type === 'FITB' && (
-                    <Type_FillBlank handleComplete={handleComplete} />
+                    <Type_FillBlank
+                      handleComplete={handleComplete}
+                      problemId={problemList[currentQuestion].id}
+                    />
                   )}
                 </SubmitBox>
               </>

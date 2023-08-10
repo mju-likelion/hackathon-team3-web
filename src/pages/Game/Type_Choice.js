@@ -2,35 +2,55 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import ChoiceCircle from '../../components/ChoiceCircle';
 import ButtonLong from '../../components/ButtonLong';
+import { PostScoring } from '../../api/PostScoring';
 
-const TypeChoice = ({ options }) => {
-  const [clickedId, setClickedId] = useState(undefined);
+const TypeChoice = ({ options, problemId, handleComplete }) => {
+  const [userAnswer, setUserAnswer] = useState(undefined);
   const [isBtnAble, setIsBtnAble] = useState(false);
 
-  const toggleClick = (idx) => {
-    setClickedId(idx);
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  const toggleClick = (userans) => {
+    setUserAnswer(userans);
+  };
+
+  const onSubmit = () => {
+    console.log(userAnswer);
+
+    PostScoring(
+      problemId,
+      accessToken,
+      userAnswer,
+      (res) => res.data.isCorrect && handleComplete(problemId)
+    );
+
+    //body에 answer 보내야 함
   };
 
   useEffect(() => {
-    setIsBtnAble(clickedId !== undefined);
-  }, [clickedId, isBtnAble]);
+    setIsBtnAble(userAnswer !== undefined);
+  }, [userAnswer, isBtnAble]);
 
   return (
     <ChoiceWrapper>
       <CircleContainer>
-        {options.map((option, index) => {
+        {options.map((option) => {
           return (
             <ChoiceCircle
               key={option}
               value={option}
-              onClick={() => toggleClick(index)}
-              idx={index}
-              clickedId={clickedId}
+              onClick={() => toggleClick(option)}
+              userAnswer={userAnswer}
             />
           );
         })}
       </CircleContainer>
-      <SubmitBtn btnName='제출하기' width={300} isBtnAble={isBtnAble} />
+      <SubmitBtn
+        btnName='제출하기'
+        width={300}
+        isBtnAble={isBtnAble}
+        onClick={() => onSubmit()}
+      />
     </ChoiceWrapper>
   );
 };
