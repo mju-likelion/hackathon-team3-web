@@ -21,11 +21,6 @@ const Join = () => {
 
   const onClickJoin = (data) => {
     console.log(data);
-    // const joinData = {
-    //   nickname: data.nickname,
-    //   email: data.email,
-
-    // }
     JoinApi(data, callbackFunctions);
   };
   const callbackFunctions = {
