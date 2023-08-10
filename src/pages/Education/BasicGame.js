@@ -52,16 +52,6 @@ const BasicGame = () => {
     }
   }, [sideBarData]);
 
-  useEffect(() => {
-    if (
-      sideBarData &&
-      sideBarData.chapters &&
-      sideBarData.chapters.length > 0
-    ) {
-      // setIsLastPage(!sideBarData.chapters[currentChapterId - 1].isCompleted);
-    }
-  }, []);
-
   return (
     sideBarData &&
     rateData !== null &&

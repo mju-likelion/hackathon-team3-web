@@ -1,20 +1,32 @@
 import styled from 'styled-components';
 import search_icon from '../../assets/images/search_icon.svg';
 import SquareButton from '../../components/SquareButton';
+import { useState } from 'react';
 
-const TypeFillBlank = () => {
+const TypeFillBlank = ({ problemId, handleComplete }) => {
+  const [userAnswer, setUserAnswer] = useState(undefined);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    handleComplete(problemId, userAnswer);
+  };
+
   return (
     <FillBlankWrapper>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <QuestionBox>
           <InputContainer>
             <QuestionText>기후변화</QuestionText>
-            <AnswerInput placeHolder='정답' autoFocus />
+            <AnswerInput
+              placeHolder='정답'
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              autoFocus
+            />
             <QuestionText>nytimes.com</QuestionText>
           </InputContainer>
         </QuestionBox>
 
-        <SearchBtn able={true} asset={search_icon} />
+        <SearchBtn able={true} asset={search_icon} type='submit' />
       </Form>
     </FillBlankWrapper>
   );

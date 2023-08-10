@@ -1,18 +1,27 @@
 import styled from 'styled-components';
 import SquareButton from '../../components/SquareButton';
 import search_icon from '../../assets/images/search_icon.svg';
-import {useState} from "react";
+import { useState } from 'react';
 
-const TypeShortInput = () => {
-    const onSubmit = () => {
-    };
+const TypeShortInput = ({ problemId, handleComplete }) => {
+  const [userAnswer, setUserAnswer] = useState(undefined);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    handleComplete(problemId, userAnswer);
+  };
+
   return (
     <InputWrapper>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <InputContainer>
-          <AnswerInput placeHolder='검색어를 입력하세요' />
+          <AnswerInput
+            placeHolder='검색어를 입력하세요'
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+            autoFocus
+          />
         </InputContainer>
-        <SearchBtn able={true} asset={search_icon} onClick={() => onSubmit()} />
+        <SearchBtn able={true} asset={search_icon} type='submit' />
       </Form>
     </InputWrapper>
   );

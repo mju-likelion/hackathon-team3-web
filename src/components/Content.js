@@ -107,14 +107,18 @@ const Content = ({ chapterData }) => {
                   )}
                   {currentProblem.type === 'SAQ' && (
                     <Type_ShortInput
-                      handleComplete={handleComplete}
+                      handleComplete={(problemId, userAnswer) =>
+                        handleComplete(problemId, userAnswer)
+                      }
                       problemId={currentProblem.id}
                     />
                   )}
 
                   {currentProblem.type === 'FITB' && (
                     <Type_FillBlank
-                      handleComplete={handleComplete}
+                      handleComplete={(problemId, userAnswer) =>
+                        handleComplete(problemId, userAnswer)
+                      }
                       problemId={currentProblem.id}
                     />
                   )}
