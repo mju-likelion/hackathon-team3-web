@@ -16,7 +16,6 @@ const ChangePassword = () => {
     mode: 'onChange',
   });
   const inputValue = watch(); // 현재 필드의 값
-
   const accessToken = process.env.REACT_APP_TOKEN;
 
   const callbackFunction = () => {
@@ -24,8 +23,8 @@ const ChangePassword = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(accessToken);
+    // console.log(data);
+    // console.log(accessToken);
     const { oldPassword, password } = data;
     // 비밀번호 변경 api 호출 및 처리
     console.log(data);
@@ -39,8 +38,8 @@ const ChangePassword = () => {
           <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
           <InputBox>
             <DisplayBox>
-              <PasswordText>기존 비밀번호</PasswordText>
               <ChangePasswordInput
+                type='기존 비밀번호'
                 name='oldPassword'
                 placeholder='기존 비밀번호'
                 register={register}
@@ -51,8 +50,8 @@ const ChangePassword = () => {
               />
             </DisplayBox>
             <DisplayBox>
-              <PasswordText>변경 비밀번호</PasswordText>
               <ChangePasswordInput
+                type='변경 비밀번호'
                 name='password'
                 placeholder='변경할 비밀번호'
                 register={register}
@@ -63,8 +62,8 @@ const ChangePassword = () => {
               />
             </DisplayBox>
             <DisplayBox>
-              <PasswordText>비밀번호 확인</PasswordText>
               <ChangePasswordInput
+                type='비밀번호 확인'
                 name='checkPassword'
                 placeholder='비밀번호 확인'
                 register={register}
@@ -112,10 +111,6 @@ const DisplayBox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 32px;
-`;
-
-const PasswordText = styled.p`
-  font-size: 17px;
 `;
 
 const ChangeButton = styled.button`
