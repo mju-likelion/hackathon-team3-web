@@ -3,6 +3,7 @@ import { schema } from './Validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
 import ChangePasswordInput from './ChangePasswordInput';
+import { PatchPassword } from '../../api/PatchPassword';
 const ChangePassword = () => {
   const {
     register,
@@ -87,7 +88,6 @@ const ChangePasswordForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //last-child
 `;
 
 const AllContainer = styled.div`
@@ -129,11 +129,4 @@ const ChangeButton = styled.button`
   margin-top: 28px;
   margin-left: 250px; // 재확인
   background-color: ${({ theme }) => theme.colors.GREEN};
-`;
-
-const ErrorMsg = styled.p`
-  font-size: 14px;
-  color: #ff5454;
-  //margin: 6px 0 30px 75px;
-  align-self: flex-start;
 `;
