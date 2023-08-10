@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import SquareButton from '../../components/SquareButton';
 import search_icon from '../../assets/images/search_icon.svg';
+import {useState} from "react";
 
 const TypeShortInput = () => {
+    const onSubmit = () => {
+    };
   return (
     <InputWrapper>
       <Form>
         <InputContainer>
           <AnswerInput placeHolder='검색어를 입력하세요' />
         </InputContainer>
-        <SearchBtn able={true} asset={search_icon} />
+        <SearchBtn able={true} asset={search_icon} onClick={() => onSubmit()} />
       </Form>
     </InputWrapper>
   );

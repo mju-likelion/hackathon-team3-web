@@ -2,31 +2,13 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import ChoiceCircle from '../../components/ChoiceCircle';
 import ButtonLong from '../../components/ButtonLong';
-import { PostScoring } from '../../api/PostScoring';
 
 const TypeChoice = ({ options, problemId, handleComplete }) => {
   const [userAnswer, setUserAnswer] = useState(undefined);
   const [isBtnAble, setIsBtnAble] = useState(false);
-
-  const accessToken = process.env.REACT_APP_TOKEN;
-
   const toggleClick = (userans) => {
     setUserAnswer(userans);
   };
-
-  const onSubmit = () => {
-    console.log(userAnswer);
-
-    PostScoring(
-      problemId,
-      accessToken,
-      userAnswer,
-      (res) => res.data.isCorrect && handleComplete(problemId)
-    );
-
-    //body에 answer 보내야 함
-  };
-
   useEffect(() => {
     setIsBtnAble(userAnswer !== undefined);
   }, [userAnswer, isBtnAble]);
@@ -49,7 +31,7 @@ const TypeChoice = ({ options, problemId, handleComplete }) => {
         btnName='제출하기'
         width={300}
         isBtnAble={isBtnAble}
-        onClick={() => onSubmit()}
+        onClick={() => handleComplete(problemId, userAnswer)}
       />
     </ChoiceWrapper>
   );

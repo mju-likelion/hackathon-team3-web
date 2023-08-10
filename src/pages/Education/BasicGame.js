@@ -58,7 +58,7 @@ const BasicGame = () => {
       sideBarData.chapters &&
       sideBarData.chapters.length > 0
     ) {
-      setIsLastPage(!sideBarData.chapters[currentChapterId - 1].isCompleted);
+      // setIsLastPage(!sideBarData.chapters[currentChapterId - 1].isCompleted);
     }
   }, []);
 

@@ -5,24 +5,54 @@ import Type_FillBlank from '../pages/Game/Type_FillBlank';
 import { useEffect, useState } from 'react';
 import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
+import { PostScoring } from '../api/PostScoring';
 
 const Content = ({ chapterData }) => {
   const { helpMessage, problemList, title } = chapterData || {};
-  const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 선택된 문제
-  const togglecurrentQuestion = (index) => {
-    setCurrentQuestion(index);
-  };
-  const toggleModal = () => {
-    setIsModal((prev) => !prev);
-  };
+
+  const [currentProblemId, setCurrentProblemId] = useState(
+    problemList?.[0]?.id || null
+  ); // 현재 선택된 문제
+  const [currentProblem, setCurrentProblem] = useState(problemList?.[0]);
 
   const [isModal, setIsModal] = useState(false);
   const [completeArr, setCompleteArr] = useState([]);
   const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수
   const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
-  const handleComplete = (id) => {
-    setCompleteArr([...completeArr, id]);
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  const togglecurrentQuestion = (curProblemId) => {
+    setCurrentProblemId(curProblemId);
+  };
+  const toggleModal = () => {
+    setIsModal((prev) => !prev);
+  };
+
+  useEffect(() => {
+    setCurrentProblemId(problemList?.[0]?.id || null);
+  }, [chapterData]);
+
+  useEffect(() => {
+    setCurrentProblem(
+      problemList.find((problem) => problem.id === currentProblemId)
+    );
+  }, [currentProblemId]);
+
+  useEffect(() => {
+    setCurrentProblem(problemList?.[0]);
+  }, [chapterData]);
+
+  const handleComplete = (problemId, userAnswer) => {
+    PostScoring(
+      problemId,
+      accessToken,
+      userAnswer,
+      (res) =>
+        res.data.isCorrect &&
+        !completeArr.includes(problemId) &&
+        setCompleteArr([...completeArr, problemId])
+    );
     console.log(completeArr);
   };
 
@@ -33,7 +63,7 @@ const Content = ({ chapterData }) => {
 
   return (
     <ContentContainer>
-      {problemList && (
+      {problemList && currentProblemId && (
         <>
           <ChapterTitle>{title}</ChapterTitle>
           <TapWrapper>
@@ -42,11 +72,10 @@ const Content = ({ chapterData }) => {
                 return (
                   <Tap
                     key={tap.id}
-                    onClick={() => togglecurrentQuestion(index)}
-                    index={index}
-                    currentQuestion={currentQuestion}
-                    // disabled={!completeArr.includes(tap.id)}
-                    disabled={false} //채점 전 임시
+                    onClick={() => togglecurrentQuestion(tap.id)}
+                    id={tap.id}
+                    currentProblemId={currentProblemId}
+                    disabled={completeArr.includes(currentProblemId)} //채점 전 임시
                   >
                     {index + 1}
                   </Tap>
@@ -63,32 +92,30 @@ const Content = ({ chapterData }) => {
             ) : (
               <>
                 <ScenarioBox>
-                  <ScenarioText>
-                    {problemList[currentQuestion].scenario}
-                  </ScenarioText>
+                  <ScenarioText>{currentProblem.scenario}</ScenarioText>
                 </ScenarioBox>
-                <QuestionBox>
-                  {problemList[currentQuestion].question}
-                </QuestionBox>
+                <QuestionBox>{currentProblem.question}</QuestionBox>
                 <SubmitBox>
-                  {problemList[currentQuestion].type === 'MCQ' && (
+                  {currentProblem.type === 'MCQ' && (
                     <Type_Choice
-                      options={problemList[currentQuestion].answerOptions}
-                      handleComplete={(correctId) => handleComplete(correctId)}
-                      problemId={problemList[currentQuestion].id}
+                      options={currentProblem.answerOptions}
+                      handleComplete={(problemId, userAnswer) =>
+                        handleComplete(problemId, userAnswer)
+                      }
+                      problemId={currentProblem.id}
                     />
                   )}
-                  {problemList[currentQuestion].type === 'SAQ' && (
+                  {currentProblem.type === 'SAQ' && (
                     <Type_ShortInput
                       handleComplete={handleComplete}
-                      problemId={problemList[currentQuestion].id}
+                      problemId={currentProblem.id}
                     />
                   )}
 
-                  {problemList[currentQuestion].type === 'FITB' && (
+                  {currentProblem.type === 'FITB' && (
                     <Type_FillBlank
                       handleComplete={handleComplete}
-                      problemId={problemList[currentQuestion].id}
+                      problemId={currentProblem.id}
                     />
                   )}
                 </SubmitBox>
@@ -139,29 +166,26 @@ const HelpIcon = styled.img`
 `;
 const Tap = styled.button`
   width: 60px;
-  height: ${({ currentQuestion, index }) =>
-    index === currentQuestion ? 60 : 50}px;
+  height: ${({ currentProblemId, id }) =>
+    id === currentProblemId ? 60 : 50}px;
   border-radius: 8px 8px 0 0;
   font-size: 36px;
   font-weight: bold;
   line-height: 50px;
   text-align: center;
   cursor: ${({ disabled }) => (disabled ? `default` : `pointer`)};
-  color: ${({ theme, disabled, currentQuestion, index }) => {
+  color: ${({ theme, disabled, currentProblemId, id }) => {
     if (!disabled) {
-      if (index === currentQuestion) return theme.colors.BTN_ABLE;
+      if (id === currentProblemId) return theme.colors.BTN_ABLE;
       else return `white`;
     } else return `white`;
   }};
-  background-color: ${({ theme, disabled, currentQuestion, index }) => {
+  background-color: ${({ theme, disabled, currentProblemId, id }) => {
     if (!disabled) {
-      if (index === currentQuestion) return theme.colors.BG_SKYBLUE;
+      if (id === currentProblemId) return theme.colors.BG_SKYBLUE;
       else return theme.colors.BTN_ABLE;
     } else return theme.colors.BTN_DISABLE;
   }};
-}
-
-;
 `;
 const ContentBox = styled.div`
   margin: 0 auto;
