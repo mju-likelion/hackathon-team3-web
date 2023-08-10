@@ -1,16 +1,14 @@
 import { Axios } from './Axios';
 
-export const GetRate = (type, accessToken, callbackFunction) => {
-  Axios.get(`/learnings/progress`, {
+export const GetChapter = (currentChapterId, accessToken, callbackFunction) => {
+  Axios.get(`/chapters/${currentChapterId}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
-    },
-    params: {
-      type: type,
     },
   })
     .then((res) => {
       callbackFunction(res);
+      console.log(res.data);
     })
 
     .catch((error) => {
