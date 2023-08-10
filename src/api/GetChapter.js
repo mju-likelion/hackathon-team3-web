@@ -1,7 +1,7 @@
 import { Axios } from './Axios';
 
-export const GetChapter = (id, accessToken, callbackFunction) => {
-  Axios.get(`/chapters/${id}`, {
+export const GetChapter = (currentChapterId, accessToken, callbackFunction) => {
+  Axios.get(`/chapters/${currentChapterId}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

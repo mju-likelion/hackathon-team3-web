@@ -3,17 +3,23 @@ import Type_Choice from '../pages/Game/Type_Choice';
 import Type_ShortInput from '../pages/Game/Type_ShortInput';
 import Type_FillBlank from '../pages/Game/Type_FillBlank';
 import { useEffect, useState } from 'react';
+import bulb_icon from '../assets/images/bulb_icon.svg';
+import HelpModal from './HelpModal';
 
-const Content = ({ currentChapterId, chapterData }) => {
-  /*todo 현재 클릭 된 문제 currentQuestion state로 관리*/
-
-  const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
+const Content = ({ chapterData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 선택된 문제
+  const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
   const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수
   const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
+  const [isModal, setIsModal] = useState(false);
+
   const togglecurrentQuestion = (index) => {
     setCurrentQuestion(index);
+  };
+
+  const toggleModal = () => {
+    setIsModal((prev) => !prev);
   };
 
   //todo 한 문제 풀 때 마다 채점 API요청, (요청할 때 문제 id 보냄)
@@ -21,8 +27,7 @@ const Content = ({ currentChapterId, chapterData }) => {
   const handleComplete = (id) => {
     setCompleteArr([...completeArr, id]);
   };
-  const { helpMessage, id, problemList, title, message, statusCode } =
-    chapterData || {}; //객관식 테스트중
+  const { helpMessage, problemList, title } = chapterData || {};
 
   useEffect(() => {
     setCompleteCount(completeArr.length);
@@ -34,44 +39,57 @@ const Content = ({ currentChapterId, chapterData }) => {
       {problemList && (
         <>
           <ChapterTitle>{title}</ChapterTitle>
-          <TapContainer>
-            {problemList.map((tap, index) => {
-              return (
-                <Tap
-                  key={tap.id}
-                  onClick={() => togglecurrentQuestion(index)}
-                  index={index}
-                  currentQuestion={currentQuestion}
-                  // disabled={!completeArr.includes(tap.id)}
-                  disabled={false} //채점 전 임시
-                >
-                  {index + 1}
-                </Tap>
-              );
-            })}
-          </TapContainer>
-          <ContentBox>
-            <ScenarioBox>
-              <ScenarioText>
-                {problemList[currentQuestion].scenario}
-              </ScenarioText>
-            </ScenarioBox>
-            <QuestionBox>{problemList[currentQuestion].question}</QuestionBox>
-            <SubmitBox>
-              {problemList[currentQuestion].type === 'MCQ' && (
-                <Type_Choice
-                  options={problemList[currentQuestion].answerOptions}
-                  handleComplete={handleComplete}
-                />
-              )}
-              {problemList[currentQuestion].type === 'SAQ' && (
-                <Type_ShortInput handleComplete={handleComplete} />
-              )}
+          <TapWrapper>
+            <TapContainer>
+              {problemList.map((tap, index) => {
+                return (
+                  <Tap
+                    key={tap.id}
+                    onClick={() => togglecurrentQuestion(index)}
+                    index={index}
+                    currentQuestion={currentQuestion}
+                    // disabled={!completeArr.includes(tap.id)}
+                    disabled={false} //채점 전 임시
+                  >
+                    {index + 1}
+                  </Tap>
+                );
+              })}
+            </TapContainer>
+            <HelpButton onClick={toggleModal} isModal={isModal}>
+              <HelpIcon src={bulb_icon} />
+            </HelpButton>
+          </TapWrapper>
+          <ContentBox isModal={isModal}>
+            {isModal ? (
+              <HelpModal isModal={isModal} helpMsg={helpMessage} />
+            ) : (
+              <>
+                <ScenarioBox>
+                  <ScenarioText>
+                    {problemList[currentQuestion].scenario}
+                  </ScenarioText>
+                </ScenarioBox>
+                <QuestionBox>
+                  {problemList[currentQuestion].question}
+                </QuestionBox>
+                <SubmitBox>
+                  {problemList[currentQuestion].type === 'MCQ' && (
+                    <Type_Choice
+                      options={problemList[currentQuestion].answerOptions}
+                      handleComplete={handleComplete}
+                    />
+                  )}
+                  {problemList[currentQuestion].type === 'SAQ' && (
+                    <Type_ShortInput handleComplete={handleComplete} />
+                  )}
 
-              {problemList[currentQuestion].type === 'FITB' && (
-                <Type_FillBlank handleComplete={handleComplete} />
-              )}
-            </SubmitBox>
+                  {problemList[currentQuestion].type === 'FITB' && (
+                    <Type_FillBlank handleComplete={handleComplete} />
+                  )}
+                </SubmitBox>
+              </>
+            )}
           </ContentBox>
         </>
       )}
@@ -84,15 +102,36 @@ const ContentContainer = styled.div`
   height: 100%;
 `;
 const ChapterTitle = styled.p`
-  margin-bottom: 10px;
   font-size: 40px;
   font-weight: bold;
   text-align: center;
 `;
-const TapContainer = styled.div`
+const TapWrapper = styled.div`
   display: flex;
-  margin-left: 50px;
+  justify-content: space-between;
+`;
+
+const TapContainer = styled.div`
+  margin-left: 40px;
+  display: flex;
   align-items: flex-end;
+`;
+
+const HelpButton = styled.button`
+  width: 70px;
+  height: 70px;
+  margin-right: 25px;
+  border-radius: 20px 20px 0 0;
+  background-color: ${({ theme, isModal }) =>
+    isModal ? `#ffe755` : theme.colors.YELLOW};
+  &:hover {
+    background-color: #ffe755;
+  }
+`;
+const HelpIcon = styled.img`
+  width: 60px;
+  height: 65px;
+  backdrop-filter: drop-shadow(white);
 `;
 const Tap = styled.button`
   width: 60px;
@@ -123,8 +162,8 @@ const Tap = styled.button`
 const ContentBox = styled.div`
   margin: 0 auto;
   width: 880px;
-  height: 600px;
-  padding: 20px 70px 10px 70px;
+  height: 590px;
+  padding: 15px 70px 0 70px;
   border-radius: 25px;
   background-color: #f1f8ff;
 `;
