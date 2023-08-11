@@ -6,14 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { schemaJoin } from '../../hooks/validationYup';
 import { JoinApi } from '../../api/JoinApi';
-
 const Join = () => {
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(schemaJoin),
     mode: 'onChange',
@@ -26,6 +24,13 @@ const Join = () => {
     navigateSuccess: () => {
       alert('회원가입 성공! 로그인화면으로 돌아갑니다.');
       navigate('/login');
+    },
+    navigateError: (error) => {
+      if (error.response && error.response.status === 404) {
+        navigate('/*');
+      } else if (error.response && error.response.status === 409) {
+        alert('이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
+      } else alert('예상치 못한 오류가 발생했습니다.');
     },
   };
   return (
