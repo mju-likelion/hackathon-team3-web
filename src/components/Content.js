@@ -7,7 +7,7 @@ import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
 import { PostScoring } from '../api/PostScoring';
 
-const Content = ({ chapterData, ...attrProps }) => {
+const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
   const { helpMessage, problemList, title } = chapterData || {};
   const [isModal, setIsModal] = useState(false);
   const [currentProblemId, setCurrentProblemId] = useState(
@@ -49,11 +49,6 @@ const Content = ({ chapterData, ...attrProps }) => {
   };
 
   useEffect(() => {
-    console.log(completeArr);
-  }, [completeArr]);
-
-  //chapterData가 바뀔 때마다 초기화
-  useEffect(() => {
     setCompleteArr([]);
   }, [chapterData]);
 
@@ -76,11 +71,16 @@ const Content = ({ chapterData, ...attrProps }) => {
   }, [chapterData]);
 
   useEffect(() => {
-    if (completeArr.length === problemList.length) setAbleProblem([]);
-    else
-      setAbleProblem((prev) => [...prev, problemList[completeArr.length].id]);
-    console.log(ableProblem);
-  }, [completeArr, problemList]);
+    if (completeArr.length === problemList.length) {
+      setAbleProblem([]);
+      toggleComplete(true);
+    } else {
+      const nextProblemId = problemList[completeArr.length].id;
+      if (!ableProblem.includes(nextProblemId)) {
+        setAbleProblem((prev) => [...prev, nextProblemId]);
+      }
+    }
+  }, [chapterData, completeArr, problemList]);
 
   useEffect(() => {
     if (isCorrect) {
@@ -95,8 +95,6 @@ const Content = ({ chapterData, ...attrProps }) => {
 
     return () => clearTimeout(timeout); // cleanup function
   }, [isCorrect]);
-
-  //todo able Arr에 문제가 있어 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
 
   return (
     <ContentContainer {...attrProps}>

@@ -15,16 +15,20 @@ const BasicGame = () => {
   const navigate = useNavigate();
 
   const [sideBarData, setSideBarData] = useState(null); // 목차 데이터
-  const [rateData, setRateData] = useState(null); //진도율 데이터
+  const [rateData, setRateData] = useState(null); // 진도율 데이터
   const [chapterData, setChapterData] = useState(null); // 문제 데이터
   const [currentChapterId, setCurrentChapterId] = useState(undefined); // 현재 챕터
-  const [isLastPage, setIsLastPage] = useState(false);
+  const [isChapterComplete, setIsChapterComplete] = useState(false);
+
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  const toggleNextChapterBtn = () => {
+    setIsChapterComplete();
+  };
 
   const toggleChapter = (currentId) => {
     setCurrentChapterId(currentId);
   };
-
-  const accessToken = process.env.REACT_APP_TOKEN;
 
   useEffect(() => {
     GetChapters(0, accessToken, (res) => setSideBarData(res.data));
@@ -66,8 +70,9 @@ const BasicGame = () => {
         />
         <ContentWrapper>
           <Content
-            currentChapterId={currentChapterId}
             chapterData={chapterData}
+            toggleComplete={toggleNextChapterBtn}
+            isChapterComplete={isChapterComplete}
           />
           <ButtonWrapper>
             <SquareButton
@@ -76,11 +81,10 @@ const BasicGame = () => {
               onClick={() => navigate('/education')}
             />
             <NextBtn
-              disabled={true}
+              disabled={isChapterComplete}
               asset={next_icon}
               //todo 다음 index 값으로 변경
               onClick={() => setCurrentChapterId(currentChapterId)}
-              isLastPage={isLastPage}
             />
           </ButtonWrapper>
         </ContentWrapper>
