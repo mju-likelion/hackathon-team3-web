@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import SquareButton from '../../components/SquareButton';
 import search_icon from '../../assets/images/search_icon.svg';
-import { useState } from 'react';
+import next_icon from '../../assets/images/right_arrow_icon.svg'
+import { useEffect, useState } from 'react';
 
-const TypeShortInput = ({ problemId, handleComplete }) => {
+const TypeShortInput = ({ problemId, handleComplete, completeArr, onClick }) => {
+  const [isNextBtnAble, setIsNextBtnAble] = useState(false);
   const [userAnswer, setUserAnswer] = useState(undefined);
   const onSubmit = (event) => {
     event.preventDefault();
     handleComplete(problemId, userAnswer);
   };
+  useEffect(() => {
+    setIsNextBtnAble(completeArr.includes(problemId));
+  }, [completeArr, problemId]);
 
   return (
     <InputWrapper>
@@ -23,6 +28,7 @@ const TypeShortInput = ({ problemId, handleComplete }) => {
         </InputContainer>
         <SearchBtn able={true} asset={search_icon} type='submit' />
       </Form>
+      <NextBtn disabled={!isNextBtnAble} asset={next_icon} onClick={() => onClick()}/>
     </InputWrapper>
   );
 };
@@ -30,6 +36,9 @@ const TypeShortInput = ({ problemId, handleComplete }) => {
 const InputWrapper = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const Form = styled.form`
   display: flex;
@@ -55,7 +64,9 @@ const AnswerInput = styled.input`
     outline: none;
   }
 `;
-
 const SearchBtn = styled(SquareButton)``;
+const NextBtn = styled(SquareButton)`
+  align-self: end;
+`;
 
 export default TypeShortInput;

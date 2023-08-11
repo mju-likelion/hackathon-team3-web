@@ -1,33 +1,48 @@
 import styled from 'styled-components';
 import search_icon from '../../assets/images/search_icon.svg';
 import SquareButton from '../../components/SquareButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import next_icon from "../../assets/images/right_arrow_icon.svg";
 
-const TypeFillBlank = ({ problemId, handleComplete }) => {
+const TypeFillBlank = ({
+  defaultMsg,
+  problemId,
+  handleComplete,
+  completeArr,
+    onClick
+}) => {
   const [userAnswer, setUserAnswer] = useState(undefined);
+  const [isNextBtnAble, setIsNextBtnAble] = useState(false);
+  const inputTexts = defaultMsg.split('@');
+  const answerlength = inputTexts.length - 2;
+
   const onSubmit = (event) => {
     event.preventDefault();
     handleComplete(problemId, userAnswer);
   };
+  useEffect(() => {
+    setIsNextBtnAble(completeArr.includes(problemId));
+  }, [completeArr, problemId]);
 
   return (
     <FillBlankWrapper>
       <Form onSubmit={onSubmit}>
         <QuestionBox>
           <InputContainer>
-            <QuestionText>기후변화</QuestionText>
+            <QuestionText>{inputTexts[0]}</QuestionText>
             <AnswerInput
               placeHolder='정답'
+              answerlength={answerlength}
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               autoFocus
             />
-            <QuestionText>nytimes.com</QuestionText>
+            <QuestionText>{inputTexts[answerlength + 1]}</QuestionText>
           </InputContainer>
         </QuestionBox>
-
         <SearchBtn able={true} asset={search_icon} type='submit' />
       </Form>
+      <NextBtn disabled={!isNextBtnAble} asset={next_icon} onClick={() => onClick()}/>
     </FillBlankWrapper>
   );
 };
@@ -35,6 +50,9 @@ const TypeFillBlank = ({ problemId, handleComplete }) => {
 const FillBlankWrapper = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const Form = styled.form`
   display: flex;
@@ -58,8 +76,7 @@ const QuestionText = styled.p`
   font-weight: 500;
 `;
 const AnswerInput = styled.input`
-  // todo 정답에 비례한 width
-  width: 70px;
+  width: ${({ answerlength }) => answerlength * 40}px;
   height: 35px;
   padding: 5px;
   border: none;
@@ -72,5 +89,8 @@ const AnswerInput = styled.input`
   }
 `;
 const SearchBtn = styled(SquareButton)``;
+const NextBtn = styled(SquareButton)`
+  align-self: end;
+`;
 
 export default TypeFillBlank;

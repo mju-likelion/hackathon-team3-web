@@ -9,16 +9,15 @@ import { PostScoring } from '../api/PostScoring';
 
 const Content = ({ chapterData }) => {
   const { helpMessage, problemList, title } = chapterData || {};
-
+  const [isModal, setIsModal] = useState(false);
   const [currentProblemId, setCurrentProblemId] = useState(
     problemList?.[0]?.id || null
-  ); // 현재 선택된 문제
+  );
   const [currentProblem, setCurrentProblem] = useState(problemList?.[0]);
-
-  const [isModal, setIsModal] = useState(false);
   const [completeArr, setCompleteArr] = useState([]);
-  const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수
-  const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
+  const [ableProblem, setAbleProblem] = useState([]);
+
+  // const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
   const accessToken = process.env.REACT_APP_TOKEN;
 
@@ -28,6 +27,30 @@ const Content = ({ chapterData }) => {
   const toggleModal = () => {
     setIsModal((prev) => !prev);
   };
+  const handleNext = () => {
+    setCurrentProblemId(problemList[completeArr.length].id);
+  };
+  const handleComplete = (problemId, userAnswer) => {
+    PostScoring(
+      problemId,
+      accessToken,
+      userAnswer,
+      (res) =>
+        res.data.isCorrect &&
+        !completeArr.includes(problemId) &&
+        setCompleteArr([...completeArr, problemId]) &&
+        setAbleProblem([...ableProblem, problemId])
+    );
+  };
+
+  //chapterData가 바뀔 때마다 초기화
+  useEffect(() => {
+    setCompleteArr([]);
+  }, [chapterData]);
+
+  useEffect(() => {
+    setAbleProblem([]);
+  }, [chapterData]);
 
   useEffect(() => {
     setCurrentProblemId(problemList?.[0]?.id || null);
@@ -43,23 +66,10 @@ const Content = ({ chapterData }) => {
     setCurrentProblem(problemList?.[0]);
   }, [chapterData]);
 
-  const handleComplete = (problemId, userAnswer) => {
-    PostScoring(
-      problemId,
-      accessToken,
-      userAnswer,
-      (res) =>
-        res.data.isCorrect &&
-        !completeArr.includes(problemId) &&
-        setCompleteArr([...completeArr, problemId])
-    );
-    console.log(completeArr);
-  };
-
   useEffect(() => {
-    setCompleteCount(completeArr.length);
-    if (completeArr.length === completeCount) setAllComplete((prev) => !prev);
-  }, [completeArr, completeCount]);
+    if (completeArr.length === problemList.length) setAbleProblem([]);
+    else setAbleProblem(problemList[completeArr.length].id);
+  }, [completeArr, problemList]);
 
   return (
     <ContentContainer>
@@ -75,7 +85,12 @@ const Content = ({ chapterData }) => {
                     onClick={() => togglecurrentQuestion(tap.id)}
                     id={tap.id}
                     currentProblemId={currentProblemId}
-                    disabled={completeArr.includes(currentProblemId)} //채점 전 임시
+                    disabled={
+                      tap.id === problemList[0].id
+                        ? false
+                        : !ableProblem.includes(tap.id) &&
+                          !completeArr.includes(tap.id)
+                    }
                   >
                     {index + 1}
                   </Tap>
@@ -103,6 +118,8 @@ const Content = ({ chapterData }) => {
                         handleComplete(problemId, userAnswer)
                       }
                       problemId={currentProblem.id}
+                      completeArr={completeArr}
+                      onClick={() => handleNext()}
                     />
                   )}
                   {currentProblem.type === 'SAQ' && (
@@ -111,15 +128,19 @@ const Content = ({ chapterData }) => {
                         handleComplete(problemId, userAnswer)
                       }
                       problemId={currentProblem.id}
+                      completeArr={completeArr}
+                      onClick={() => handleNext()}
                     />
                   )}
-
                   {currentProblem.type === 'FITB' && (
                     <Type_FillBlank
+                      defaultMsg={currentProblem.question}
                       handleComplete={(problemId, userAnswer) =>
                         handleComplete(problemId, userAnswer)
                       }
                       problemId={currentProblem.id}
+                      completeArr={completeArr}
+                      onClick={() => handleNext()}
                     />
                   )}
                 </SubmitBox>

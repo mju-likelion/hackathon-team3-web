@@ -20,6 +20,7 @@ const Button = styled.button`
       !disabled && theme.colors.BLUE};
   }
   cursor: ${({ disabled }) => disabled && `default`};
+  visibility:  ${({ disabled }) => disabled ? `hidden` : `visible`};
 `;
 const Icon = styled.img`
   width: 50px;

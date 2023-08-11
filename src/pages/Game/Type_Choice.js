@@ -2,13 +2,19 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import ChoiceCircle from '../../components/ChoiceCircle';
 import ButtonLong from '../../components/ButtonLong';
+import SquareButton from '../../components/SquareButton';
+import next_icon from "../../assets/images/right_arrow_icon.svg";
 
-const TypeChoice = ({ options, problemId, handleComplete }) => {
+const TypeChoice = ({ options, problemId, handleComplete, completeArr, onClick }) => {
   const [userAnswer, setUserAnswer] = useState(undefined);
+  const [isNextBtnAble, setIsNextBtnAble] = useState(false);
   const [isBtnAble, setIsBtnAble] = useState(false);
   const toggleClick = (userans) => {
     setUserAnswer(userans);
   };
+  useEffect(() => {
+    setIsNextBtnAble(completeArr.includes(problemId));
+  }, [completeArr, problemId]);
   useEffect(() => {
     setIsBtnAble(userAnswer !== undefined);
   }, [userAnswer, isBtnAble]);
@@ -27,12 +33,15 @@ const TypeChoice = ({ options, problemId, handleComplete }) => {
           );
         })}
       </CircleContainer>
-      <SubmitBtn
-        btnName='제출하기'
-        width={300}
-        isBtnAble={isBtnAble}
-        onClick={() => handleComplete(problemId, userAnswer)}
-      />
+      <ButtonContainer>
+        <SubmitBtn
+          btnName='제출하기'
+          width={300}
+          isBtnAble={isBtnAble}
+          onClick={() => handleComplete(problemId, userAnswer)}
+        />
+        <SquareButton disabled={!isNextBtnAble} asset={next_icon} onClick={() => onClick()}/>
+      </ButtonContainer>
     </ChoiceWrapper>
   );
 };
@@ -48,9 +57,12 @@ const CircleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 const SubmitBtn = styled(ButtonLong)`
-  align-self: center;
-  margin: 0;
+  margin: 0 auto 0 220px;
 `;
 
 export default TypeChoice;
