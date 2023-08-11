@@ -7,7 +7,7 @@ import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
 import { PostScoring } from '../api/PostScoring';
 
-const Content = ({ chapterData }) => {
+const Content = ({ chapterData, ...attrProps }) => {
   const { helpMessage, problemList, title } = chapterData || {};
   const [isModal, setIsModal] = useState(false);
   const [currentProblemId, setCurrentProblemId] = useState(
@@ -15,8 +15,9 @@ const Content = ({ chapterData }) => {
   );
   const [currentProblem, setCurrentProblem] = useState(problemList?.[0]);
   const [completeArr, setCompleteArr] = useState([]);
-  const [ableProblem, setAbleProblem] = useState([]);
-
+  const [ableProblem, setAbleProblem] = useState(problemList?.[0].id);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [bgColor, setBgColor] = useState('BG_SKYBLUE');
   // const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
   const accessToken = process.env.REACT_APP_TOKEN;
@@ -31,17 +32,25 @@ const Content = ({ chapterData }) => {
     setCurrentProblemId(problemList[completeArr.length].id);
   };
   const handleComplete = (problemId, userAnswer) => {
-    PostScoring(
-      problemId,
-      accessToken,
-      userAnswer,
-      (res) =>
-        res.data.isCorrect &&
-        !completeArr.includes(problemId) &&
-        setCompleteArr([...completeArr, problemId]) &&
-        setAbleProblem([...ableProblem, problemId])
-    );
+    setIsCorrect(null); // 요청 전에 isCorrect를 초기화
+    PostScoring(problemId, accessToken, userAnswer, (res) => {
+      if (res.data.isCorrect) {
+        if (!completeArr.includes(problemId)) {
+          setCompleteArr((prev) => [...prev, problemId]);
+        }
+        if (!ableProblem.includes(problemId)) {
+          setAbleProblem((prev) => [...prev, problemId]);
+        }
+        setIsCorrect(true);
+      } else {
+        setIsCorrect(false);
+      }
+    });
   };
+
+  useEffect(() => {
+    console.log(completeArr);
+  }, [completeArr]);
 
   //chapterData가 바뀔 때마다 초기화
   useEffect(() => {
@@ -68,11 +77,29 @@ const Content = ({ chapterData }) => {
 
   useEffect(() => {
     if (completeArr.length === problemList.length) setAbleProblem([]);
-    else setAbleProblem(problemList[completeArr.length].id);
+    else
+      setAbleProblem((prev) => [...prev, problemList[completeArr.length].id]);
+    console.log(ableProblem);
   }, [completeArr, problemList]);
 
+  useEffect(() => {
+    if (isCorrect) {
+      setBgColor('BG_LIGHTGREEN'); // 정답일 경우의 배경색으로 설정
+    } else if (isCorrect === false) {
+      setBgColor('BG_LIGHTPINK'); // 오답일 경우의 배경색으로 설정
+    } else setBgColor('BG_SKYBLUE'); // 초기 true/ false 모두 아닌 경우
+
+    const timeout = setTimeout(() => {
+      setBgColor('BG_SKYBLUE'); // 1초 후 원래의 배경색으로 복구
+    }, 1000);
+
+    return () => clearTimeout(timeout); // cleanup function
+  }, [isCorrect]);
+
+  //todo able Arr에 문제가 있어 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!111
+
   return (
-    <ContentContainer>
+    <ContentContainer {...attrProps}>
       {problemList && currentProblemId && (
         <>
           <ChapterTitle>{title}</ChapterTitle>
@@ -91,6 +118,7 @@ const Content = ({ chapterData }) => {
                         : !ableProblem.includes(tap.id) &&
                           !completeArr.includes(tap.id)
                     }
+                    bgColor={bgColor} //임시
                   >
                     {index + 1}
                   </Tap>
@@ -101,7 +129,7 @@ const Content = ({ chapterData }) => {
               <HelpIcon src={bulb_icon} />
             </HelpButton>
           </TapWrapper>
-          <ContentBox isModal={isModal}>
+          <ContentWrapper isModal={isModal} bgColor={bgColor}>
             {isModal ? (
               <HelpModal isModal={isModal} helpMsg={helpMessage} />
             ) : (
@@ -146,7 +174,7 @@ const Content = ({ chapterData }) => {
                 </SubmitBox>
               </>
             )}
-          </ContentBox>
+          </ContentWrapper>
         </>
       )}
     </ContentContainer>
@@ -205,21 +233,23 @@ const Tap = styled.button`
       else return `white`;
     } else return `white`;
   }};
-  background-color: ${({ theme, disabled, currentProblemId, id }) => {
+  background-color: ${({ theme, disabled, currentProblemId, id, bgColor }) => {
     if (!disabled) {
-      if (id === currentProblemId) return theme.colors.BG_SKYBLUE;
-      else return theme.colors.BTN_ABLE;
+      if (id === currentProblemId) {
+        return bgColor ? theme.colors[bgColor] : theme.colors.BG_SKYBLUE;
+      } else return theme.colors.BTN_ABLE;
     } else return theme.colors.BTN_DISABLE;
   }};
 `;
-const ContentBox = styled.div`
+const ContentWrapper = styled.div`
   margin: 0 auto;
   width: 880px;
   height: 590px;
   padding: 15px 70px 0 70px;
   border-radius: 25px;
-  background-color: #f1f8ff;
+  background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};
 `;
+
 const ScenarioBox = styled.div`
   width: 100%;
   height: 140px;
