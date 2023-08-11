@@ -4,7 +4,7 @@ import ButtonLong from '../../components/ButtonLong';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { schema } from '../../hooks/validationYup';
+import { schemaJoin } from '../../hooks/validationYup';
 import { JoinApi } from '../../api/JoinApi';
 
 const Join = () => {
@@ -15,12 +15,11 @@ const Join = () => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaJoin),
     mode: 'onChange',
   });
 
   const onClickJoin = (data) => {
-    console.log(data);
     JoinApi(data, callbackFunctions);
   };
   const callbackFunctions = {
