@@ -13,5 +13,6 @@ export const JoinApi = (data, callbackFunctions) => {
     })
     .catch((error) => {
       console.log(error);
+      alert(error);
     });
 };

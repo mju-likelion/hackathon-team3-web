@@ -24,7 +24,10 @@ const Join = () => {
     JoinApi(data, callbackFunctions);
   };
   const callbackFunctions = {
-    navigateSuccess: () => navigate('/login'),
+    navigateSuccess: () => {
+      alert('회원가입 성공! 로그인화면으로 돌아갑니다.');
+      navigate('/login');
+    },
   };
   return (
     <>
