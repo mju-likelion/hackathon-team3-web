@@ -4,7 +4,7 @@ import ButtonLong from '../../components/ButtonLong';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { schema } from '../../hooks/validationYup';
+import { schemaJoin } from '../../hooks/ValidationYup';
 
 const Join = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Join = () => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaJoin),
     mode: 'onChange',
   });
 
