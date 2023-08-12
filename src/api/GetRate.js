@@ -1,10 +1,7 @@
 import { Axios } from './Axios';
 
-export const GetRate = (type, accessToken, callbackFunction) => {
+export const GetRate = (type, callbackFunction) => {
   Axios.get(`/learnings/progress`, {
-    // headers: {
-    //   Authorization: `Bearer ${accessToken}`,
-    // },
     params: {
       type: type,
     },
