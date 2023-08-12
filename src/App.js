@@ -17,25 +17,23 @@ import { CookiesProvider } from 'react-cookie';
 function App() {
   return (
     <>
-      <CookiesProvider>
-        <ThemeProvider theme={Theme}>
-          <GlobalStyle />
-          <BrowserRouter>
-            <Header />
-            <Routes>
-              <Route path='/' element={<Main />} />
-              <Route path='/education' element={<EducationSelect />} />
-              <Route path='/education/basic' element={<BasicGame />} />
-              <Route path='/education/advanced' element={<AdvancedGame />} />
-              <Route path='/join' element={<Join />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/mypage/education' element={<MyPageEducation />} />
-              <Route path='/mypage/account' element={<MyPageAccount />} />
-              <Route path='/*' element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </ThemeProvider>
-      </CookiesProvider>
+      <ThemeProvider theme={Theme}>
+        <GlobalStyle />
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route path='/education' element={<EducationSelect />} />
+            <Route path='/education/basic' element={<BasicGame />} />
+            <Route path='/education/advanced' element={<AdvancedGame />} />
+            <Route path='/join' element={<Join />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/mypage/education' element={<MyPageEducation />} />
+            <Route path='/mypage/account' element={<MyPageAccount />} />
+            <Route path='/*' element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </>
   );
 }
