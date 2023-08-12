@@ -25,3 +25,6 @@ yarn-error.log*
 .env
 
 .idea/vcs.xml
+
+# cert
+/cert
