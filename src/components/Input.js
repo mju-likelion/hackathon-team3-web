@@ -49,7 +49,7 @@ const InputFilled = styled.input`
 `;
 const ErrorMsg = styled.div`
   font-size: 14px;
-  color: #ff5454;
+  color: ${({ theme }) => theme.colors.RED};
   align-self: flex-start;
   margin-top: 5px;
 `;

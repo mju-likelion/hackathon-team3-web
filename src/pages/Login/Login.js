@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { schemaLogin } from '../../hooks/ValidationYup';
+import { LoginApi } from '../../api/LoginApi';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,10 +17,24 @@ const Login = () => {
     resolver: yupResolver(schemaLogin),
     mode: 'onChange',
   });
+
   const onClickLogin = (data) => {
     console.log(data);
+    LoginApi(data, callbackFunctions);
   };
-
+  const callbackFunctions = {
+    navigateSuccess: () => {
+      alert('로그인되었습니다. 메인으로 돌아갑니다.');
+      navigate('/');
+    },
+    navigateError: (error) => {
+      if (error.response && error.response.status === 401)
+        alert('비밀번호가 일치하지 않습니다.');
+      else if (error.response && error.response.status === 404)
+        alert('존재하지 않는 사용자입니다.');
+      else navigate('/*');
+    },
+  };
   return (
     <>
       <Header />
