@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { schemaJoin } from '../../hooks/ValidationYup';
 import { JoinApi } from '../../api/JoinApi';
+
 const Join = () => {
   const navigate = useNavigate();
   const {
