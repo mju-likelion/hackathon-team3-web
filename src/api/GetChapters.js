@@ -11,6 +11,7 @@ export const GetChapters = (type, accessToken, callbackFunction) => {
   })
     .then((res) => {
       callbackFunction(res);
+      console.log(res)
     })
 
     .catch((error) => {

@@ -5,38 +5,100 @@ import Type_FillBlank from '../pages/Game/Type_FillBlank';
 import { useEffect, useState } from 'react';
 import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
+import { PostScoring } from '../api/PostScoring';
 
-const Content = ({ chapterData }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0); // 현재 선택된 문제
-  const [completeArr, setCompleteArr] = useState(['a', 'b']); // 임시 값
-  const [completeCount, setCompleteCount] = useState(0); // 완료 된 문제 수
-  const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
-
+const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
+  const { helpMessage, problemList, title } = chapterData || {};
   const [isModal, setIsModal] = useState(false);
+  const [currentProblemId, setCurrentProblemId] = useState(
+    problemList?.[0]?.id || null
+  );
+  const [currentProblem, setCurrentProblem] = useState(problemList?.[0]);
+  const [completeArr, setCompleteArr] = useState([]);
+  const [ableProblem, setAbleProblem] = useState(problemList?.[0].id);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [bgColor, setBgColor] = useState('BG_SKYBLUE');
+  // const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
-  const togglecurrentQuestion = (index) => {
-    setCurrentQuestion(index);
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  const togglecurrentQuestion = (curProblemId) => {
+    setCurrentProblemId(curProblemId);
   };
-
   const toggleModal = () => {
     setIsModal((prev) => !prev);
   };
-
-  //todo 한 문제 풀 때 마다 채점 API요청, (요청할 때 문제 id 보냄)
-  //todo 정답일 경우 해당 문제 id를 completeArr 배열에 저장 : 맞은 문제 추가
-  const handleComplete = (id) => {
-    setCompleteArr([...completeArr, id]);
+  const handleNext = () => {
+    setCurrentProblemId(problemList[completeArr.length].id);
   };
-  const { helpMessage, problemList, title } = chapterData || {};
+  const handleComplete = (problemId, userAnswer) => {
+    setIsCorrect(null); // 요청 전에 isCorrect를 초기화
+    PostScoring(problemId, accessToken, userAnswer, (res) => {
+      if (res.data.isCorrect) {
+        if (!completeArr.includes(problemId)) {
+          setCompleteArr((prev) => [...prev, problemId]);
+        }
+        if (!ableProblem.includes(problemId)) {
+          setAbleProblem((prev) => [...prev, problemId]);
+        }
+        setIsCorrect(true);
+      } else {
+        setIsCorrect(false);
+      }
+    });
+  };
 
   useEffect(() => {
-    setCompleteCount(completeArr.length);
-    if (completeArr.length === completeCount) setAllComplete((prev) => !prev);
-  }, [completeArr, completeCount]);
+    setCompleteArr([]);
+  }, [chapterData]);
+
+  useEffect(() => {
+    setAbleProblem([]);
+  }, [chapterData]);
+
+  useEffect(() => {
+    setCurrentProblemId(problemList?.[0]?.id || null);
+  }, [chapterData]);
+
+  useEffect(() => {
+    setCurrentProblem(
+      problemList.find((problem) => problem.id === currentProblemId)
+    );
+  }, [currentProblemId]);
+
+  useEffect(() => {
+    setCurrentProblem(problemList?.[0]);
+  }, [chapterData]);
+
+  useEffect(() => {
+    if (completeArr.length === problemList.length) {
+      setAbleProblem([]);
+      toggleComplete(true);
+    } else {
+      const nextProblemId = problemList[completeArr.length].id;
+      if (!ableProblem.includes(nextProblemId)) {
+        setAbleProblem((prev) => [...prev, nextProblemId]);
+      }
+    }
+  }, [chapterData, completeArr, problemList]);
+
+  useEffect(() => {
+    if (isCorrect) {
+      setBgColor('BG_LIGHTGREEN'); // 정답일 경우의 배경색으로 설정
+    } else if (isCorrect === false) {
+      setBgColor('BG_LIGHTPINK'); // 오답일 경우의 배경색으로 설정
+    } else setBgColor('BG_SKYBLUE'); // 초기 true/ false 모두 아닌 경우
+
+    const timeout = setTimeout(() => {
+      setBgColor('BG_SKYBLUE'); // 1초 후 원래의 배경색으로 복구
+    }, 1000);
+
+    return () => clearTimeout(timeout); // cleanup function
+  }, [isCorrect]);
 
   return (
-    <ContentContainer>
-      {problemList && (
+    <ContentContainer {...attrProps}>
+      {problemList && currentProblemId && (
         <>
           <ChapterTitle>{title}</ChapterTitle>
           <TapWrapper>
@@ -45,11 +107,16 @@ const Content = ({ chapterData }) => {
                 return (
                   <Tap
                     key={tap.id}
-                    onClick={() => togglecurrentQuestion(index)}
-                    index={index}
-                    currentQuestion={currentQuestion}
-                    // disabled={!completeArr.includes(tap.id)}
-                    disabled={false} //채점 전 임시
+                    onClick={() => togglecurrentQuestion(tap.id)}
+                    id={tap.id}
+                    currentProblemId={currentProblemId}
+                    disabled={
+                      tap.id === problemList[0].id
+                        ? false
+                        : !ableProblem.includes(tap.id) &&
+                          !completeArr.includes(tap.id)
+                    }
+                    bgColor={bgColor} //임시
                   >
                     {index + 1}
                   </Tap>
@@ -60,37 +127,53 @@ const Content = ({ chapterData }) => {
               <HelpIcon src={bulb_icon} />
             </HelpButton>
           </TapWrapper>
-          <ContentBox isModal={isModal}>
+          <ContentWrapper isModal={isModal} bgColor={bgColor}>
             {isModal ? (
               <HelpModal isModal={isModal} helpMsg={helpMessage} />
             ) : (
               <>
                 <ScenarioBox>
-                  <ScenarioText>
-                    {problemList[currentQuestion].scenario}
-                  </ScenarioText>
+                  <ScenarioText>{currentProblem.scenario}</ScenarioText>
                 </ScenarioBox>
-                <QuestionBox>
-                  {problemList[currentQuestion].question}
-                </QuestionBox>
+                {/*TODO 빈칸 채우기 유형 question 삼항연산자*/}
+                <QuestionBox>{currentProblem.type === 'ㄹ' ? "빈" : currentProblem.question}</QuestionBox>
                 <SubmitBox>
-                  {problemList[currentQuestion].type === 'MCQ' && (
+                  {currentProblem.type === 'MCQ' && (
                     <Type_Choice
-                      options={problemList[currentQuestion].answerOptions}
-                      handleComplete={handleComplete}
+                      options={currentProblem.answerOptions}
+                      handleComplete={(problemId, userAnswer) =>
+                        handleComplete(problemId, userAnswer)
+                      }
+                      problemId={currentProblem.id}
+                      completeArr={completeArr}
+                      onClick={() => handleNext()}
                     />
                   )}
-                  {problemList[currentQuestion].type === 'SAQ' && (
-                    <Type_ShortInput handleComplete={handleComplete} />
+                  {currentProblem.type === 'SAQ' && (
+                    <Type_ShortInput
+                      handleComplete={(problemId, userAnswer) =>
+                        handleComplete(problemId, userAnswer)
+                      }
+                      problemId={currentProblem.id}
+                      completeArr={completeArr}
+                      onClick={() => handleNext()}
+                    />
                   )}
-
-                  {problemList[currentQuestion].type === 'FITB' && (
-                    <Type_FillBlank handleComplete={handleComplete} />
+                  {currentProblem.type === 'FITB' && (
+                    <Type_FillBlank
+                      defaultMsg={currentProblem.question}
+                      handleComplete={(problemId, userAnswer) =>
+                        handleComplete(problemId, userAnswer)
+                      }
+                      problemId={currentProblem.id}
+                      completeArr={completeArr}
+                      onClick={() => handleNext()}
+                    />
                   )}
                 </SubmitBox>
               </>
             )}
-          </ContentBox>
+          </ContentWrapper>
         </>
       )}
     </ContentContainer>
@@ -135,35 +218,37 @@ const HelpIcon = styled.img`
 `;
 const Tap = styled.button`
   width: 60px;
-  height: ${({ currentQuestion, index }) =>
-    index === currentQuestion ? 60 : 50}px;
+  height: ${({ currentProblemId, id }) =>
+    id === currentProblemId ? 60 : 50}px;
   border-radius: 8px 8px 0 0;
   font-size: 36px;
   font-weight: bold;
   line-height: 50px;
   text-align: center;
   cursor: ${({ disabled }) => (disabled ? `default` : `pointer`)};
-  color: ${({ theme, disabled, currentQuestion, index }) => {
+  color: ${({ theme, disabled, currentProblemId, id }) => {
     if (!disabled) {
-      if (index === currentQuestion) return theme.colors.BTN_ABLE;
+      if (id === currentProblemId) return theme.colors.BTN_ABLE;
       else return `white`;
     } else return `white`;
   }};
-  background-color: ${({ theme, disabled, currentQuestion, index }) => {
+  background-color: ${({ theme, disabled, currentProblemId, id, bgColor }) => {
     if (!disabled) {
-      if (index === currentQuestion) return theme.colors.BG_SKYBLUE;
-      else return theme.colors.BTN_ABLE;
+      if (id === currentProblemId) {
+        return bgColor ? theme.colors[bgColor] : theme.colors.BG_SKYBLUE;
+      } else return theme.colors.BTN_ABLE;
     } else return theme.colors.BTN_DISABLE;
   }};
 `;
-const ContentBox = styled.div`
+const ContentWrapper = styled.div`
   margin: 0 auto;
   width: 880px;
   height: 590px;
   padding: 15px 70px 0 70px;
   border-radius: 25px;
-  background-color: #f1f8ff;
+  background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};
 `;
+
 const ScenarioBox = styled.div`
   width: 100%;
   height: 140px;
