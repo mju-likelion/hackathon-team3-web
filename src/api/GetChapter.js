@@ -2,9 +2,9 @@ import { Axios } from './Axios';
 
 export const GetChapter = (currentChapterId, accessToken, callbackFunction) => {
   Axios.get(`/chapters/${currentChapterId}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${accessToken}`,
+    // },
   })
     .then((res) => {
       callbackFunction(res);

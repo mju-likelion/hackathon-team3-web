@@ -2,9 +2,9 @@ import { Axios } from './Axios';
 
 export const GetRate = (type, accessToken, callbackFunction) => {
   Axios.get(`/learnings/progress`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${accessToken}`,
+    // },
     params: {
       type: type,
     },

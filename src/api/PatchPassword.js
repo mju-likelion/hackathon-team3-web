@@ -10,9 +10,9 @@ export const PatchPassword = (
     `/users/password`,
     { oldPassword, password },
     {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${accessToken}`,
+      // },
     }
   )
     .then((res) => {

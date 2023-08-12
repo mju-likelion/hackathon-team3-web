@@ -2,9 +2,9 @@ import { Axios } from './Axios';
 
 export const GetChapters = (type, accessToken, callbackFunction) => {
   Axios.get(`/learnings/chapters`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    // headers: {
+    //   Authorization: `Bearer ${accessToken}`,
+    // },
     params: {
       type: type,
     },
