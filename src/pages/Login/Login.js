@@ -17,6 +17,7 @@ const Login = () => {
     resolver: yupResolver(schemaLogin),
     mode: 'onChange',
   });
+
   const onClickLogin = (data) => {
     console.log(data);
     LoginApi(data, callbackFunctions);
