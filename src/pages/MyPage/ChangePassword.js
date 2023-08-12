@@ -3,6 +3,7 @@ import { schema } from './Validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
 import ChangePasswordInput from './ChangePasswordInput';
+import { PatchPassword } from '../../api/PatchPassword';
 const ChangePassword = () => {
   const {
     register,
@@ -15,22 +16,43 @@ const ChangePassword = () => {
     mode: 'onChange',
   });
   const inputValue = watch(); // 현재 필드의 값
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  const callbackFunction = () => {
+    console.log('성공!');
+  };
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+    // console.log(accessToken);
+    const { oldPassword, password } = data;
     // 비밀번호 변경 api 호출 및 처리
+    console.log(data);
+    PatchPassword(oldPassword, password, accessToken, callbackFunction);
   };
 
   return (
     <>
       <AllContainer>
-        <ChangePasswordBox onSubmit={handleSubmit(onSubmit)}>
+        <ChangePasswordForm onSubmit={handleSubmit(onSubmit)}>
           <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
           <InputBox>
             <DisplayBox>
-              <PasswordText>변경 비밀번호</PasswordText>
               <ChangePasswordInput
-                name='newPassword'
+                type='기존 비밀번호'
+                name='oldPassword'
+                placeholder='기존 비밀번호'
+                register={register}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                setValue={setValue}
+                inputValue={inputValue}
+              />
+            </DisplayBox>
+            <DisplayBox>
+              <ChangePasswordInput
+                type='변경 비밀번호'
+                name='password'
                 placeholder='변경할 비밀번호'
                 register={register}
                 handleSubmit={handleSubmit}
@@ -40,8 +62,8 @@ const ChangePassword = () => {
               />
             </DisplayBox>
             <DisplayBox>
-              <PasswordText>비밀번호 확인</PasswordText>
               <ChangePasswordInput
+                type='비밀번호 확인'
                 name='checkPassword'
                 placeholder='비밀번호 확인'
                 register={register}
@@ -53,7 +75,7 @@ const ChangePassword = () => {
             </DisplayBox>
           </InputBox>
           <ChangeButton type='submit'>변경하기</ChangeButton>
-        </ChangePasswordBox>
+        </ChangePasswordForm>
       </AllContainer>
     </>
   );
@@ -61,14 +83,13 @@ const ChangePassword = () => {
 
 export default ChangePassword;
 
-const AllContainer = styled.form`
+const ChangePasswordForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  last-child
 `;
 
-const ChangePasswordBox = styled.div`
+const AllContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,10 +111,6 @@ const DisplayBox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 32px;
-`;
-
-const PasswordText = styled.p`
-  font-size: 17px;
 `;
 
 const ChangeButton = styled.button`

@@ -4,20 +4,37 @@ import ButtonLong from '../../components/ButtonLong';
 import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { schema } from '../../hooks/validationYup';
+import { schemaLogin } from '../Hooks/ValidationYup';
+import { LoginApi } from '../../api/LoginApi';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaLogin),
     mode: 'onChange',
   });
+
   const onClickLogin = (data) => {
     console.log(data);
+    LoginApi(data, callbackFunctions);
   };
-
+  const callbackFunctions = {
+    navigateSuccess: () => {
+      alert('로그인되었습니다. 메인으로 돌아갑니다.');
+      navigate('/');
+    },
+    navigateError: (error) => {
+      if (error.response && error.response.status === 401)
+        alert('비밀번호가 일치하지 않습니다.');
+      else if (error.response && error.response.status === 404)
+        alert('존재하지 않는 사용자입니다.');
+      else navigate('/*');
+    },
+  };
   return (
     <>
       <Header />
@@ -40,7 +57,12 @@ const Login = () => {
             errorMsg={errors.pw && errors.pw.message}
             register={register}
           />
-          <ButtonLong type='submit' btnName='로그인' width={400} isBtnAble={true}/>
+          <ButtonLong
+            type='submit'
+            btnName='로그인'
+            width={400}
+            isBtnAble={true}
+          />
           <BottomText>
             회원이 아니신가요 ? <Link to='/join'>회원가입 하러가기</Link>
           </BottomText>

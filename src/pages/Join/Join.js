@@ -4,7 +4,8 @@ import ButtonLong from '../../components/ButtonLong';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { schema } from '../../hooks/validationYup';
+import { schemaJoin } from '../Hooks/ValidationYup';
+import { JoinApi } from '../../api/JoinApi';
 
 const Join = () => {
   const navigate = useNavigate();
@@ -12,38 +13,24 @@ const Join = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaJoin),
     mode: 'onChange',
   });
 
-  const getSavedUserInfos = () => {
-    const userInfosJSON = localStorage.getItem('userInfos');
-    try {
-      return userInfosJSON ? JSON.parse(userInfosJSON) : [];
-    } catch {
-      return [];
-    }
-  };
-  const userInfos = getSavedUserInfos();
-  const saveUserInfos = (userInfos) => {
-    localStorage.setItem('userInfos', JSON.stringify(userInfos));
-  };
   const onClickJoin = (data) => {
-    console.log(data);
-    if (userInfos.findIndex(({ email }) => email === data.email) === -1) {
-      userInfos.push({
-        email: data.email,
-        password: data.pw,
-      });
-      saveUserInfos(userInfos);
-      alert('회원가입이 완료되었습니다.');
+    JoinApi(data, callbackFunctions);
+  };
+  const callbackFunctions = {
+    navigateSuccess: () => {
+      alert('회원가입 성공! 로그인화면으로 돌아갑니다.');
       navigate('/login');
-    } else {
-      alert('이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.');
-      reset();
-    }
+    },
+    navigateError: (error) => {
+      error.response && error.response.status === 409
+        ? alert('이미 사용중인 이메일입니다. 다른 이메일을 입력해주세요.')
+        : navigate('/*');
+    },
   };
   return (
     <>
@@ -52,6 +39,14 @@ const Join = () => {
         <JoinBox onSubmit={handleSubmit(onClickJoin)}>
           {/* handleSubmit() 이용시 새로고침 현상 X => e.preventDefualt() 설정 필요없다! */}
           <h1>회원가입</h1>
+          <Input
+            id='nickname'
+            name='nickname'
+            type='text'
+            placeholder='닉네임'
+            register={register}
+            errorMsg={errors.nickname && errors.nickname.message}
+          />
           <Input
             id='email'
             name='email'
