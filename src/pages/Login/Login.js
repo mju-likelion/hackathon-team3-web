@@ -4,7 +4,7 @@ import ButtonLong from '../../components/ButtonLong';
 import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { schemaLogin } from '../../hooks/validationYup';
+import { schemaLogin } from '../../hooks/ValidationYup';
 const Login = () => {
   const {
     register,
