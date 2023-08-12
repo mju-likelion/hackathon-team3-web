@@ -13,7 +13,6 @@ import Login from './pages/Login/Login';
 import MyPageEducation from './pages/MyPage/MyPageEducation';
 import MyPageAccount from './pages/MyPage/MyPageAccount';
 import NotFound from './pages/Error/NotFound';
-import { CookiesProvider } from 'react-cookie';
 function App() {
   return (
     <>
