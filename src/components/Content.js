@@ -155,10 +155,7 @@ const Tap = styled.button`
       else return theme.colors.BTN_ABLE;
     } else return theme.colors.BTN_DISABLE;
   }};
-}
-
-;
-`;
+`
 const ContentBox = styled.div`
   margin: 0 auto;
   width: 880px;
