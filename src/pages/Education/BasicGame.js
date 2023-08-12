@@ -22,9 +22,9 @@ const BasicGame = () => {
 
   const accessToken = process.env.REACT_APP_TOKEN;
 
-  const toggleNextChapterBtn = () => {
-    setIsChapterComplete();
-  };
+  // const toggleNextChapterBtn = () => {
+  //   setIsChapterComplete();
+  // };
 
   const toggleChapter = (currentId) => {
     setCurrentChapterId(currentId);
@@ -71,7 +71,7 @@ const BasicGame = () => {
         <ContentWrapper>
           <Content
             chapterData={chapterData}
-            toggleComplete={toggleNextChapterBtn}
+            // toggleComplete={toggleNextChapterBtn}
             isChapterComplete={isChapterComplete}
           />
           <ButtonWrapper>

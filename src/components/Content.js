@@ -135,7 +135,8 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
                 <ScenarioBox>
                   <ScenarioText>{currentProblem.scenario}</ScenarioText>
                 </ScenarioBox>
-                <QuestionBox>{currentProblem.question}</QuestionBox>
+                {/*TODO 빈칸 채우기 유형 question 삼항연산자*/}
+                <QuestionBox>{currentProblem.type === 'ㄹ' ? "빈" : currentProblem.question}</QuestionBox>
                 <SubmitBox>
                   {currentProblem.type === 'MCQ' && (
                     <Type_Choice
