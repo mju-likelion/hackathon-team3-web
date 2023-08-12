@@ -4,7 +4,7 @@ import ButtonLong from '../../components/ButtonLong';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { schemaJoin } from '../../Hooks/ValidationYup';
+import { schemaJoin } from '../Hooks/ValidationYup';
 import { JoinApi } from '../../api/JoinApi';
 
 const Join = () => {
