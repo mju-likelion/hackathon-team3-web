@@ -1,8 +1,24 @@
 import MyPageCategory from './MyPageCategory';
 import styled from 'styled-components';
 import ChangePassword from './ChangePassword';
+import { DeleteUser } from '../../api/DeleteUser';
+import { useNavigate } from 'react-router-dom';
 
 const MyPageAccount = () => {
+  const navigate = useNavigate();
+  const accessToken = process.env.REACT_APP_TOKEN;
+
+  const callbackFunction = () => {
+    console.log('Delete UserInfo!');
+    alert('탈퇴되었습니다.');
+    navigate(`/`);
+  };
+
+  const deleteUserInfo = () => {
+    console.log('deleteUserInfo 클릭');
+    DeleteUser(accessToken, callbackFunction);
+  };
+
   return (
     <>
       <MyPageAccountBox>
@@ -16,7 +32,7 @@ const MyPageAccount = () => {
             <QuitAccountText>
               탈퇴하시면 모든 진행상황이 영구적으로 삭제됩니다.
             </QuitAccountText>
-            <QuitButton>탈퇴하기</QuitButton>
+            <QuitButton onClick={deleteUserInfo}>탈퇴하기</QuitButton>
           </QuitAccountBox>
         </MyPageAcc>
       </MyPageAccountBox>

@@ -11,8 +11,10 @@ export const Theme = {
     INPUT_GRAY2: '#EAEAEA', //input 그레이 2
     PLACEHOLDER: '#5C5C5C', // placeholder 그레이
     TEXT_BLACK: '#1E1E1E', // 검은색 테스트
-    YELLOW: '#FFEFA0',
-    GREEN: '#37D655', // 초록 버튼
     RED: '#FF4545', // 빨간 버튼
+    YELLOW: '#FFEFA0', // 초록 버튼
+    GREEN: '#37D655',
+    BG_LIGHTPINK: '#ffcaca',
+    BG_LIGHTGREEN: '#d2f6ce',
   },
 };
