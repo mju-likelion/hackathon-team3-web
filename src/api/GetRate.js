@@ -1,10 +1,7 @@
 import { Axios } from './Axios';
 
-export const GetRate = (type, accessToken, callbackFunction) => {
+export const GetRate = (type, callbackFunction) => {
   Axios.get(`/learnings/progress`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
     params: {
       type: type,
     },
@@ -12,9 +9,7 @@ export const GetRate = (type, accessToken, callbackFunction) => {
     .then((res) => {
       callbackFunction(res);
     })
-
     .catch((error) => {
-      // error.response.data.message.map((message) => console.log(message));
       console.log(error);
     });
 };

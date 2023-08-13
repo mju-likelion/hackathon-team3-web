@@ -7,7 +7,7 @@ import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
 import { PostScoring } from '../api/PostScoring';
 
-const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
+const Content = ({ chapterData, toggleCompleteChapter, ...attrProps }) => {
   const { helpMessage, problemList, title } = chapterData || {};
   const [isModal, setIsModal] = useState(false);
   const [currentProblemId, setCurrentProblemId] = useState(
@@ -18,9 +18,8 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
   const [ableProblem, setAbleProblem] = useState(problemList?.[0].id);
   const [isCorrect, setIsCorrect] = useState(null);
   const [bgColor, setBgColor] = useState('BG_SKYBLUE');
-  // const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
-  const accessToken = process.env.REACT_APP_TOKEN;
+  // const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
   const togglecurrentQuestion = (curProblemId) => {
     setCurrentProblemId(curProblemId);
@@ -28,12 +27,12 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
   const toggleModal = () => {
     setIsModal((prev) => !prev);
   };
-  const handleNext = () => {
-    setCurrentProblemId(problemList[completeArr.length].id);
-  };
   const handleComplete = (problemId, userAnswer) => {
     setIsCorrect(null); // 요청 전에 isCorrect를 초기화
-    PostScoring(problemId, accessToken, userAnswer, (res) => {
+    const tapIndex = problemList.findIndex(
+      (problem) => problem.id === problemId
+    );
+    PostScoring(problemId, userAnswer, tapIndex + 1, (res) => {
       if (res.data.isCorrect) {
         if (!completeArr.includes(problemId)) {
           setCompleteArr((prev) => [...prev, problemId]);
@@ -51,30 +50,26 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
   useEffect(() => {
     setCompleteArr([]);
   }, [chapterData]);
-
   useEffect(() => {
     setAbleProblem([]);
   }, [chapterData]);
-
   useEffect(() => {
     setCurrentProblemId(problemList?.[0]?.id || null);
   }, [chapterData]);
-
   useEffect(() => {
     setCurrentProblem(
       problemList.find((problem) => problem.id === currentProblemId)
     );
   }, [currentProblemId]);
-
   useEffect(() => {
     setCurrentProblem(problemList?.[0]);
   }, [chapterData]);
-
   useEffect(() => {
     if (completeArr.length === problemList.length) {
       setAbleProblem([]);
-      toggleComplete(true);
+      toggleCompleteChapter(true);
     } else {
+      toggleCompleteChapter(false);
       const nextProblemId = problemList[completeArr.length].id;
       if (!ableProblem.includes(nextProblemId)) {
         setAbleProblem((prev) => [...prev, nextProblemId]);
@@ -136,7 +131,11 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
                   <ScenarioText>{currentProblem.scenario}</ScenarioText>
                 </ScenarioBox>
                 {/*TODO 빈칸 채우기 유형 question 삼항연산자*/}
-                <QuestionBox>{currentProblem.type === 'ㄹ' ? "빈" : currentProblem.question}</QuestionBox>
+                <QuestionBox>
+                  {currentProblem.type === 'ㄹ'
+                    ? '빈'
+                    : currentProblem.question}
+                </QuestionBox>
                 <SubmitBox>
                   {currentProblem.type === 'MCQ' && (
                     <Type_Choice
@@ -146,7 +145,9 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
                       }
                       problemId={currentProblem.id}
                       completeArr={completeArr}
-                      onClick={() => handleNext()}
+                      onClick={() =>
+                        setCurrentProblemId(problemList[completeArr.length].id)
+                      }
                     />
                   )}
                   {currentProblem.type === 'SAQ' && (
@@ -156,7 +157,9 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
                       }
                       problemId={currentProblem.id}
                       completeArr={completeArr}
-                      onClick={() => handleNext()}
+                      onClick={() =>
+                        setCurrentProblemId(problemList[completeArr.length].id)
+                      }
                     />
                   )}
                   {currentProblem.type === 'FITB' && (
@@ -167,7 +170,9 @@ const Content = ({ chapterData, toggleComplete, ...attrProps }) => {
                       }
                       problemId={currentProblem.id}
                       completeArr={completeArr}
-                      onClick={() => handleNext()}
+                      onClick={() =>
+                        setCurrentProblemId(problemList[completeArr.length].id)
+                      }
                     />
                   )}
                 </SubmitBox>
