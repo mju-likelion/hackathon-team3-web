@@ -6,6 +6,14 @@ import LogoutIcon from '../assets/images/logout_icon.svg';
 const Header = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  const onClickLogout = () => {
+    setIsLogin(false);
+    if (window.confirm('로그아웃 하시겠습니까?')) {
+      setIsLogin(false);
+      alert('로그아웃 되었습니다.');
+    }
+  };
+
   return (
     <>
       <HeaderWrap>
@@ -18,7 +26,7 @@ const Header = () => {
               <UserPageBtn onClick={() => navigate('/mypage/education')}>
                 마이페이지
               </UserPageBtn>
-              <LogoutBtn onClick={() => navigate('/login')}>
+              <LogoutBtn onClick={onClickLogout}>
                 <img src={LogoutIcon} alt='logout-icon' />
               </LogoutBtn>
             </UserBox>
