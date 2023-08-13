@@ -1,18 +1,33 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { LoginState, userState } from '../recoil/LoginState';
+import LogoutIcon from '../assets/images/logout_icon.svg';
 const Header = () => {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useRecoilState(LoginState);
   return (
     <>
       <HeaderWrap>
         <HeaderBar>
           <Logo onClick={() => navigate('/')} />
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
-          <SignBox>
-            <LoginBtn onClick={() => navigate('/login')}>로그인</LoginBtn>
-            <JoinBtn onClick={() => navigate('/join')}>회원가입</JoinBtn>
-          </SignBox>
+          {isLogin ? (
+            <UserBox>
+              <p>환영해유~ddddddddddd</p>
+              <UserPageBtn onClick={() => navigate('/mypage/education')}>
+                마이페이지
+              </UserPageBtn>
+              <LogoutBtn onClick={() => navigate('/login')}>
+                <img src={LogoutIcon} alt='logout-icon' />
+              </LogoutBtn>
+            </UserBox>
+          ) : (
+            <SignBox>
+              <LoginBtn onClick={() => navigate('/login')}>로그인</LoginBtn>
+              <JoinBtn onClick={() => navigate('/join')}>회원가입</JoinBtn>
+            </SignBox>
+          )}
         </HeaderBar>
       </HeaderWrap>
     </>
@@ -55,7 +70,13 @@ const SignBox = styled.div`
   display: flex;
   margin-top: 20px;
 `;
-
+const UserBox = styled(SignBox)`
+  p {
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 13px;
+  }
+`;
 const LoginBtn = styled.button`
   height: 27px;
   width: 90px;
@@ -65,3 +86,9 @@ const LoginBtn = styled.button`
   background-color: white;
 `;
 const JoinBtn = styled(LoginBtn)``;
+const UserPageBtn = styled(LoginBtn)``;
+const LogoutBtn = styled.button`
+  margin-left: 20px;
+  border-style: none;
+  background-color: white;
+`;
