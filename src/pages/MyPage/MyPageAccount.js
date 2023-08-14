@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const MyPageAccount = () => {
   const navigate = useNavigate();
-  const accessToken = process.env.REACT_APP_TOKEN;
-
   const callbackFunction = () => {
     console.log('Delete UserInfo!');
     alert('탈퇴되었습니다.');

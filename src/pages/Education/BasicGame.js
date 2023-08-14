@@ -20,8 +20,6 @@ const BasicGame = () => {
   const [currentChapterId, setCurrentChapterId] = useState(undefined); // 현재 챕터
   const [isChapterComplete, setIsChapterComplete] = useState(false);
 
-  const accessToken = process.env.REACT_APP_TOKEN;
-
   // const toggleNextChapterBtn = () => {
   //   setIsChapterComplete();
   // };
@@ -31,18 +29,16 @@ const BasicGame = () => {
   };
 
   useEffect(() => {
-    GetChapters(0, accessToken, (res) => setSideBarData(res.data));
+    GetChapters(0, (res) => setSideBarData(res.data));
   }, []); //목차 불러오는 API
 
   useEffect(() => {
-    GetRate(0, accessToken, (res) => setRateData(res.data.progress));
+    GetRate(0, (res) => setRateData(res.data.progress));
   }, []);
 
   useEffect(() => {
     if (currentChapterId !== null) {
-      GetChapter(currentChapterId, accessToken, (res) =>
-        setChapterData(res.data.chapter)
-      );
+      GetChapter(currentChapterId, (res) => setChapterData(res.data.chapter));
     }
   }, [currentChapterId]);
 
