@@ -4,16 +4,25 @@ import search_icon from '../../assets/images/search_icon.svg';
 import next_icon from '../../assets/images/right_arrow_icon.svg'
 import { useEffect, useState } from 'react';
 
-const TypeShortInput = ({ problemId, handleComplete, completeArr, onClick }) => {
+const TypeShortInput = ({ problemId, handleComplete, completeArr, onClick, isChapterComplete }) => {
   const [isNextBtnAble, setIsNextBtnAble] = useState(false);
   const [userAnswer, setUserAnswer] = useState(undefined);
+
   const onSubmit = (event) => {
     event.preventDefault();
     handleComplete(problemId, userAnswer);
   };
+
+
   useEffect(() => {
-    setIsNextBtnAble(completeArr.includes(problemId));
-  }, [completeArr, problemId]);
+    if (isChapterComplete) {
+      setIsNextBtnAble(false); // 마지막 문제라면 버튼 비활성화
+    } else {
+      setIsNextBtnAble(completeArr.includes(problemId));
+    }
+  }, [completeArr, problemId, isChapterComplete]);
+
+
 
   return (
     <InputWrapper>

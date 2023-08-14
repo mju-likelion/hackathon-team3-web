@@ -3,18 +3,30 @@ import { useEffect, useState } from 'react';
 import ChoiceCircle from '../../components/ChoiceCircle';
 import ButtonLong from '../../components/ButtonLong';
 import SquareButton from '../../components/SquareButton';
-import next_icon from "../../assets/images/right_arrow_icon.svg";
+import next_icon from '../../assets/images/right_arrow_icon.svg';
 
-const TypeChoice = ({ options, problemId, handleComplete, completeArr, onClick }) => {
+const TypeChoice = ({
+  options,
+  problemId,
+  handleComplete,
+  completeArr,
+  onClick,
+  isChapterComplete,
+}) => {
   const [userAnswer, setUserAnswer] = useState(undefined);
   const [isNextBtnAble, setIsNextBtnAble] = useState(false);
   const [isBtnAble, setIsBtnAble] = useState(false);
   const toggleClick = (userans) => {
     setUserAnswer(userans);
   };
+
   useEffect(() => {
-    setIsNextBtnAble(completeArr.includes(problemId));
-  }, [completeArr, problemId]);
+    if (isChapterComplete) {
+      setIsNextBtnAble(false); // 마지막 문제라면 버튼 비활성화
+    } else {
+      setIsNextBtnAble(completeArr.includes(problemId));
+    }
+  }, [completeArr, problemId, isChapterComplete]);
   useEffect(() => {
     setIsBtnAble(userAnswer !== undefined);
   }, [userAnswer, isBtnAble]);
@@ -40,7 +52,11 @@ const TypeChoice = ({ options, problemId, handleComplete, completeArr, onClick }
           isBtnAble={isBtnAble}
           onClick={() => handleComplete(problemId, userAnswer)}
         />
-        <SquareButton disabled={!isNextBtnAble} asset={next_icon} onClick={() => onClick()}/>
+        <SquareButton
+          disabled={!isNextBtnAble}
+          asset={next_icon}
+          onClick={() => onClick()}
+        />
       </ButtonContainer>
     </ChoiceWrapper>
   );
