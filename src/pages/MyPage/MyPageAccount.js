@@ -20,7 +20,7 @@ const MyPageAccount = () => {
   return (
     <>
       <MyPageAccountBox>
-        <MyPageCategory />
+        <MyPageCategory type={1} />
         <MyPageAcc>
           <ChangePasswordBox>
             <ChangePassword />

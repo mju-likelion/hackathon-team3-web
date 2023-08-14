@@ -20,11 +20,10 @@ const MyPageEducation = () => {
   }, []);
 
   const navigate = useNavigate();
-
   return (
     <>
       <MyPageEduBox>
-        <MyPageCategory />
+        <MyPageCategory type={0} />
         <MyPageEdu>
           <MyPageEduTitle>{userName}님의 학습현황</MyPageEduTitle>
           <BlackHr />

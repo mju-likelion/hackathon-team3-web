@@ -1,17 +1,24 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const MyPageCategory = () => {
+const MyPageCategory = ({ type }) => {
+  // props를 0,1로 받고 0받으면 학습현황, 1받으면 내계정에 파란색 / 0 넘기고 / 1 넘기고
+  // const [colorType, setColorType] = useState(type);
   const navigate = useNavigate();
+  console.log(type);
   return (
     <>
       <CategoryBox>
         <MyPageText>마이페이지</MyPageText>
         <MyPageLine />
-        <CategoryEdu onClick={() => navigate('/mypage/education')}>
+        <CategoryEdu type={type} onClick={() => navigate('/mypage/education')}>
           학습현황
         </CategoryEdu>
-        <CategoryAccount onClick={() => navigate('/mypage/account')}>
+        <CategoryAccount
+          type={type}
+          onClick={() => navigate('/mypage/account')}
+        >
           내 계정
         </CategoryAccount>
       </CategoryBox>
@@ -47,13 +54,15 @@ const MyPageLine = styled.hr`
 `;
 
 const CategoryEdu = styled.button`
+  // state로 관리?
   font-size: 25px;
   margin-top: 38px;
   background: none;
   font-weight: 600;
+  color: ${({ type, theme }) => (type === 0 ? theme.colors.BLUE : `black`)};
 `;
 
 const CategoryAccount = styled(CategoryEdu)`
-  font-size: 25px;
   margin-top: 52px;
+  color: ${({ type, theme }) => (type === 1 ? theme.colors.BLUE : `black`)};
 `;
