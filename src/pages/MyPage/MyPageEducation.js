@@ -1,23 +1,28 @@
 import MyPageCategory from './MyPageCategory';
 import styled from 'styled-components';
 import ProgressRateBar from '../../components/ProgressRateBar';
-import {useEffect, useState} from "react";
-import {GetRate} from "../../api/GetRate";
+import { useEffect, useState } from 'react';
+import { GetRate } from '../../api/GetRate';
+import { GetUserInfo } from '../../api/GetUserInfo';
 
 const MyPageEducation = () => {
   const [rateBasic, setRateBasic] = useState(null);
   const [rateAdvanced, setRateAdvanced] = useState(null);
-  const accessToken = process.env.REACT_APP_TOKEN;
+  const [userName, setUserName] = useState('');
+
   useEffect(() => {
-   GetRate(0, accessToken, (res) => setRateBasic(res.data.progress));
-   GetRate(1, accessToken, (res) => setRateAdvanced(res.data.progress));
+    GetRate(0, (res) => setRateBasic(res.data.progress));
+    GetRate(1, (res) => setRateAdvanced(res.data.progress));
+  }, []);
+  useEffect(() => {
+    GetUserInfo((res) => setUserName(res.data.user.nickname));
   }, []);
   return (
     <>
       <MyPageEduBox>
         <MyPageCategory />
         <MyPageEdu>
-          <MyPageEduTitle>[username]님의 학습현황</MyPageEduTitle>
+          <MyPageEduTitle>{userName}님의 학습현황</MyPageEduTitle>
           <BlackHr />
           <BasicEduTitle>기초학습</BasicEduTitle>
           <EduBundle>

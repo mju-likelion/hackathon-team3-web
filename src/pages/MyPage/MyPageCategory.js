@@ -46,9 +46,11 @@ const MyPageLine = styled.hr`
   margin-bottom: 0;
 `;
 
-const CategoryEdu = styled.p`
+const CategoryEdu = styled.button`
   font-size: 25px;
   margin-top: 38px;
+  background: none;
+  font-weight: 600;
 `;
 
 const CategoryAccount = styled(CategoryEdu)`
