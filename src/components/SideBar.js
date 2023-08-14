@@ -21,9 +21,6 @@ const SideBar = ({ title, sideBarData, onClick, currentChapterId, rate }) => {
       <Contents>
         {sideBarData &&
           sideBarData.map((content, index) => {
-            console.log(ableChapterIndex);
-            console.log(content.isCompleted);
-
             return (
               <Title
                 key={content.id}
@@ -80,13 +77,13 @@ const Title = styled.button`
   font-weight: bold;
   margin-bottom: 35px;
   color: ${({
-              theme,
-              disabled,
-              ableChapterIndex,
-              currentChapterId,
-              id,
-              index,
-            }) => {
+    theme,
+    disabled,
+    ableChapterIndex,
+    currentChapterId,
+    id,
+    index,
+  }) => {
     if (!disabled) {
       if (id === currentChapterId) return theme.colors.BLUE;
       else if (index === ableChapterIndex) return theme.colors.TEXT_BLACK;
