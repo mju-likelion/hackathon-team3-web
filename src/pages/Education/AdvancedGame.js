@@ -24,22 +24,18 @@ const AdvancedGame = () => {
     setCurrentChapterId(currentId);
   };
 
-  const accessToken = process.env.REACT_APP_TOKEN;
-
   useEffect(() => {
-    GetChapters(1, accessToken, (res) => setSideBarData(res.data));
+    GetChapters(1, (res) => setSideBarData(res.data));
     if (sideBarData) console.log(sideBarData);
   }, []);
 
   useEffect(() => {
-    GetRate(1, accessToken, (res) => setRateData(res.data.progress));
+    GetRate(1, (res) => setRateData(res.data.progress));
   }, []);
 
   useEffect(() => {
     if (currentChapterId !== null) {
-      GetChapter(currentChapterId, accessToken, (res) =>
-        setChapterData(res.data.chapter)
-      );
+      GetChapter(currentChapterId, (res) => setChapterData(res.data.chapter));
     }
   }, [currentChapterId]);
 
