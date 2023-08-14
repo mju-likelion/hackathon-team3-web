@@ -4,6 +4,7 @@ import ProgressRateBar from '../../components/ProgressRateBar';
 import { useEffect, useState } from 'react';
 import { GetRate } from '../../api/GetRate';
 import { GetUserInfo } from '../../api/GetUserInfo';
+import { useNavigate } from 'react-router-dom';
 
 const MyPageEducation = () => {
   const [rateBasic, setRateBasic] = useState(null);
@@ -17,6 +18,9 @@ const MyPageEducation = () => {
   useEffect(() => {
     GetUserInfo((res) => setUserName(res.data.user.nickname));
   }, []);
+
+  const navigate = useNavigate();
+
   return (
     <>
       <MyPageEduBox>
@@ -34,7 +38,9 @@ const MyPageEducation = () => {
                 rate={rateBasic}
               />
             </Progressing>
-            <EduBtn>이어서 학습하기 &#62;</EduBtn>
+            <EduBtn onClick={() => navigate(`/education/basic`)}>
+              이어서 학습하기 &#62;
+            </EduBtn>
           </EduBundle>
           <GrayHr />
           <BasicEduTitle>심화학습</BasicEduTitle>
@@ -48,7 +54,9 @@ const MyPageEducation = () => {
                 rate={rateAdvanced}
               />
             </Progressing>
-            <EduBtn>이어서 학습하기 &#62;</EduBtn>
+            <EduBtn onClick={() => navigate(`/education/advanced`)}>
+              이어서 학습하기 &#62;
+            </EduBtn>
           </EduBundle>
         </MyPageEdu>
       </MyPageEduBox>
@@ -95,7 +103,7 @@ const Progressing = styled.div`
   width: 450px;
 `;
 
-const EduBtn = styled.div`
+const EduBtn = styled.button`
   width: 167px;
   height: 34px;
   background-color: #99ceff;
@@ -104,6 +112,8 @@ const EduBtn = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: 49px;
+  font-size: 16px;
+  font-weight: 600;
 `;
 
 const GrayHr = styled.hr`
