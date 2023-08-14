@@ -7,7 +7,12 @@ import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
 import { PostScoring } from '../api/PostScoring';
 
-const Content = ({ chapterData, toggleCompleteChapter, ...attrProps }) => {
+const Content = ({
+  chapterData,
+  isChapterComplete,
+  toggleCompleteChapter,
+  ...attrProps
+}) => {
   const { helpMessage, problemList, title } = chapterData || {};
   const [isModal, setIsModal] = useState(false);
   const [currentProblemId, setCurrentProblemId] = useState(
@@ -18,8 +23,6 @@ const Content = ({ chapterData, toggleCompleteChapter, ...attrProps }) => {
   const [ableProblem, setAbleProblem] = useState(problemList?.[0].id);
   const [isCorrect, setIsCorrect] = useState(null);
   const [bgColor, setBgColor] = useState('BG_SKYBLUE');
-
-  // const [AllComplete, setAllComplete] = useState(false); //todo 모두 정답 여부 : 다음 챕터 버튼 활성화
 
   const togglecurrentQuestion = (curProblemId) => {
     setCurrentProblemId(curProblemId);
@@ -148,6 +151,7 @@ const Content = ({ chapterData, toggleCompleteChapter, ...attrProps }) => {
                       onClick={() =>
                         setCurrentProblemId(problemList[completeArr.length].id)
                       }
+                      isChapterComplete={isChapterComplete}
                     />
                   )}
                   {currentProblem.type === 'SAQ' && (
@@ -160,6 +164,7 @@ const Content = ({ chapterData, toggleCompleteChapter, ...attrProps }) => {
                       onClick={() =>
                         setCurrentProblemId(problemList[completeArr.length].id)
                       }
+                      isChapterComplete={isChapterComplete}
                     />
                   )}
                   {currentProblem.type === 'FITB' && (
@@ -173,6 +178,7 @@ const Content = ({ chapterData, toggleCompleteChapter, ...attrProps }) => {
                       onClick={() =>
                         setCurrentProblemId(problemList[completeArr.length].id)
                       }
+                      isChapterComplete={isChapterComplete}
                     />
                   )}
                 </SubmitBox>
@@ -198,13 +204,11 @@ const TapWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
 const TapContainer = styled.div`
   margin-left: 40px;
   display: flex;
   align-items: flex-end;
 `;
-
 const HelpButton = styled.button`
   width: 70px;
   height: 70px;
