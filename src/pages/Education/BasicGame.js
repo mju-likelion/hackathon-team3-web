@@ -18,27 +18,32 @@ const BasicGame = () => {
   const [rateData, setRateData] = useState(null); // 진도율 데이터
   const [chapterData, setChapterData] = useState(null); // 문제 데이터
   const [currentChapterId, setCurrentChapterId] = useState(undefined); // 현재 챕터
+
+
+
   const [isChapterComplete, setIsChapterComplete] = useState(false);
 
-  // const toggleNextChapterBtn = () => {
-  //   setIsChapterComplete();
-  // };
 
-  const toggleChapter = (currentId) => {
-    setCurrentChapterId(currentId);
-  };
+  const toggleCompleteChapter = (iscomplete) => {
+    setIsChapterComplete(iscomplete)
+  }
+
+
+
 
   useEffect(() => {
     GetChapters(0, (res) => setSideBarData(res.data));
   }, []); //목차 불러오는 API
 
   useEffect(() => {
-    GetRate(0, (res) => setRateData(res.data.progress));
+    GetRate(0,  (res) => setRateData(res.data.progress));
   }, []);
 
   useEffect(() => {
     if (currentChapterId !== null) {
-      GetChapter(currentChapterId, (res) => setChapterData(res.data.chapter));
+      GetChapter(currentChapterId, (res) =>
+        setChapterData(res.data.chapter)
+      );
     }
   }, [currentChapterId]);
 
@@ -60,22 +65,30 @@ const BasicGame = () => {
         <SideBar
           title='기초 학습'
           sideBarData={sideBarData.chapters}
-          onClick={(currentId) => toggleChapter(currentId)}
+          onClick={(currentId) => setCurrentChapterId(currentId)}
           currentChapterId={currentChapterId}
           rate={rateData}
         />
+
+
         <ContentWrapper>
           <Content
             chapterData={chapterData}
-            // toggleComplete={toggleNextChapterBtn}
             isChapterComplete={isChapterComplete}
+            toggleCompleteChapter={(isComplete) => toggleCompleteChapter(isComplete)}
+
           />
+
+
           <ButtonWrapper>
             <SquareButton
               disabled={false}
               asset={logout_icon}
               onClick={() => navigate('/education')}
             />
+
+
+
             <NextBtn
               disabled={isChapterComplete}
               asset={next_icon}
