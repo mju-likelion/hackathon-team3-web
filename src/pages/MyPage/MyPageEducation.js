@@ -23,7 +23,7 @@ const MyPageEducation = () => {
   return (
     <>
       <MyPageEduBox>
-        <MyPageCategory type={0} />
+        <MyPageCategory type={'education'} />
         <MyPageEdu>
           <MyPageEduTitle>{userName}님의 학습현황</MyPageEduTitle>
           <BlackHr />

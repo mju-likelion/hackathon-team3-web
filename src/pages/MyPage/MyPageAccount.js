@@ -14,13 +14,13 @@ const MyPageAccount = () => {
 
   const deleteUserInfo = () => {
     console.log('deleteUserInfo 클릭');
-    DeleteUser(accessToken, callbackFunction);
+    DeleteUser(callbackFunction);
   };
 
   return (
     <>
       <MyPageAccountBox>
-        <MyPageCategory type={1} />
+        <MyPageCategory type={'account'} />
         <MyPageAcc>
           <ChangePasswordBox>
             <ChangePassword />
