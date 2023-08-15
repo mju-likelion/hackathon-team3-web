@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { LoginState } from '../recoil/LoginState';
 import LogoutIcon from '../assets/images/logout_icon.svg';
 import { useRecoilState } from 'recoil';
+import { GetUserInfo } from '../api/GetUserInfo';
+import { useEffect, useState } from 'react';
+
 const Header = () => {
   const navigate = useNavigate();
-
+  const [userName, setUserName] = useState('');
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
   const onClickLogout = () => {
@@ -13,6 +16,10 @@ const Header = () => {
       alert('로그아웃 되었습니다.');
     }
   };
+
+  useEffect(() => {
+    isLogin && GetUserInfo((res) => setUserName(res.data.user.nickname));
+  }, []);
 
   return (
     <>
@@ -22,7 +29,7 @@ const Header = () => {
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
           {isLogin ? (
             <UserBox>
-              <p>환영해유~ddddddddddd</p>
+              <p>{userName}님 환영합니다!</p>
               <UserPageBtn onClick={() => navigate('/mypage/education')}>
                 마이페이지
               </UserPageBtn>
