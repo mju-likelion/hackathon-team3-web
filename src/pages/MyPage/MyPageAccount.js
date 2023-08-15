@@ -12,9 +12,11 @@ const MyPageAccount = () => {
     navigate(`/`);
   };
 
-  const deleteUserInfo = () => {
-    console.log('deleteUserInfo 클릭');
-    DeleteUser(callbackFunction);
+  const deleteUserCheck = () => {
+    if (confirm('정말로 탈퇴하시겠습니까?') === true) {
+      DeleteUser(callbackFunction);
+      console.log('탈퇴성공!');
+    } else return false;
   };
 
   return (
@@ -30,7 +32,7 @@ const MyPageAccount = () => {
             <QuitAccountText>
               탈퇴하시면 모든 진행상황이 영구적으로 삭제됩니다.
             </QuitAccountText>
-            <QuitButton onClick={deleteUserInfo}>탈퇴하기</QuitButton>
+            <QuitButton onClick={deleteUserCheck}>탈퇴하기</QuitButton>
           </QuitAccountBox>
         </MyPageAcc>
       </MyPageAccountBox>
@@ -57,20 +59,19 @@ const ChangePasswordBox = styled.div`
 `;
 
 const AccountTitle = styled.h2`
-  font-size: 32px;
+  font-size: 35px;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const DoButton = styled.button`
-  width: 139px;
+  width: 200px;
   height: 45px;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 25px;
   border: none;
   color: white;
   font-weight: 600;
-  margin-top: 28px;
-  margin-left: 250px; // 다시 확인해야함
+  margin-top: 40px;
 `;
 
 const QuitButton = styled(DoButton)`
@@ -78,11 +79,11 @@ const QuitButton = styled(DoButton)`
 `;
 
 const QuitAccountBox = styled(ChangePasswordBox)`
-  margin-top: 109px;
+  margin-top: 90px;
 `;
 
 const QuitAccountText = styled.p`
   font-size: 17px;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
-  margin-top: 27px;
+  margin-top: 45px;
 `;
