@@ -16,19 +16,16 @@ const ChangePassword = () => {
     mode: 'onChange',
   });
   const inputValue = watch(); // 현재 필드의 값
-  const accessToken = process.env.REACT_APP_TOKEN;
-
   const callbackFunction = () => {
     console.log('성공!');
+    alert('비밀번호가 수정되었습니다.');
   };
 
   const onSubmit = (data) => {
-    // console.log(data);
-    // console.log(accessToken);
     const { oldPassword, password } = data;
     // 비밀번호 변경 api 호출 및 처리
     console.log(data);
-    PatchPassword(oldPassword, password, accessToken, callbackFunction);
+    PatchPassword(oldPassword, password, callbackFunction);
   };
 
   return (
@@ -97,8 +94,9 @@ const AllContainer = styled.div`
 `;
 
 const ChangePasswordTitle = styled.h2`
-  font-size: 32px;
-  margin: 94px 0 45px 0;
+  font-size: 35px;
+  margin: 75px 0 45px 0;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const InputBox = styled.div`
@@ -114,14 +112,13 @@ const DisplayBox = styled.div`
 `;
 
 const ChangeButton = styled.button`
-  width: 139px;
+  width: 200px;
   height: 45px;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 25px;
   border: none;
   color: white;
   font-weight: 600;
-  margin-top: 28px;
-  margin-left: 250px; // 재확인
+  margin-top: 40px;
   background-color: ${({ theme }) => theme.colors.GREEN};
 `;
