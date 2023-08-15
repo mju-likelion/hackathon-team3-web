@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { LoginState } from '../../recoil/LoginState';
 const Login = () => {
-  const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  // const [isLogin, setIsLogin] = useRecoilState(LoginState);
   const navigate = useNavigate();
   const {
     register,
@@ -28,7 +28,7 @@ const Login = () => {
   const callbackFunctions = {
     navigateSuccess: () => {
       alert('로그인되었습니다. 메인으로 돌아갑니다.');
-      setIsLogin(true);
+      // setIsLogin(true);
       navigate('/');
     },
     navigateError: (error) => {

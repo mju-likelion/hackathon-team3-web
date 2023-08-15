@@ -10,8 +10,15 @@ import { LogoutApi } from '../api/LogoutApi';
 const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
-  const [isLogin, setIsLogin] = useRecoilState(LoginState);
-  isLogin && GetUserInfo((res) => setUserName(res.data.user.nickname));
+  // const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    GetUserInfo((res) => {
+      setUserName(res.data.user.nickname);
+      setIsLogin(true);
+    });
+  }, []);
 
   const onClickLogout = (data) => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
