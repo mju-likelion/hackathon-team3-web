@@ -12,8 +12,6 @@ export const PostScoring = (
   })
     .then((res) => {
       callbackFunction(res);
-      console.log(res);
-      console.log(currentTab);
     })
     .catch((error) => {
       console.log(error);

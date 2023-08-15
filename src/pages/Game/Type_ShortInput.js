@@ -18,7 +18,6 @@ const TypeShortInput = ({
     event.preventDefault();
     await handleComplete(problemId, userAnswer);
     setTimeout(() => {
-      console.log('1초뒤');
       setUserAnswer('');
     }, 1000);
   };

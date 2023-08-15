@@ -35,7 +35,7 @@ const Content = ({
     const tapIndex = problemList.findIndex(
       (problem) => problem.id === problemId
     );
-     await PostScoring(problemId, userAnswer, tapIndex + 1, (res) => {
+    await PostScoring(problemId, userAnswer, tapIndex + 1, (res) => {
       if (res.data.isCorrect) {
         if (!completeArr.includes(problemId)) {
           setCompleteArr((prev) => [...prev, problemId]);
@@ -68,21 +68,12 @@ const Content = ({
     setCurrentProblem(problemList?.[0]);
   }, [chapterData]);
 
-
-
-
   useEffect(() => {
-    console.log(completeArr.length === problemList.length);
     if (completeArr.length === problemList.length) {
       setAbleProblem([]);
       toggleCompleteChapter(true);
     } else {
       toggleCompleteChapter(false);
-
-      console.log(problemList)
-      console.log(completeArr)
-
-
       const nextProblemId = problemList[completeArr.length]?.id;
       if (!ableProblem.includes(nextProblemId)) {
         setAbleProblem((prev) => [...prev, nextProblemId]);

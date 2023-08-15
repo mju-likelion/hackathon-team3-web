@@ -23,7 +23,7 @@ const BasicGame = () => {
   useEffect(() => {
     GetChapters(0, (res) => {
       setSideBarData(res.data);
-      setRateData(res.data.progress)
+      setRateData(res.data.progress);
       setCurrentChapterId(res.data.chapters[0].id);
     });
   }, []);
@@ -37,7 +37,6 @@ const BasicGame = () => {
   useEffect(() => {
     if (currentChapterId !== null) {
       GetChapter(currentChapterId, (res) => setChapterData(res.data.chapter));
-      console.log(currentChapterId)
     }
   }, [currentChapterId]);
 
@@ -52,7 +51,6 @@ const BasicGame = () => {
           onClick={(currentId) => setCurrentChapterId(currentId)}
           currentChapterId={currentChapterId}
           rate={rateData}
-
           ableChapterIndex={ableChapterIndex}
           setAbleChapterIndex={setAbleChapterIndex}
         />
@@ -81,12 +79,10 @@ const BasicGame = () => {
                   setCurrentChapterId(
                     sideBarData.chapters[currentChapterIndex + 1].id
                   );
-                }
-                else {
+                } else {
                   setCurrentChapterId(sideBarData.chapters.at(-1).id);
                 }
-              }
-            }
+              }}
             />
           </ButtonWrapper>
         </ContentWrapper>
