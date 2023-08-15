@@ -94,8 +94,8 @@ const AllContainer = styled.div`
 `;
 
 const ChangePasswordTitle = styled.h2`
-  font-size: 32px;
-  margin: 94px 0 45px 0;
+  font-size: 35px;
+  margin: 75px 0 45px 0;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
@@ -112,14 +112,13 @@ const DisplayBox = styled.div`
 `;
 
 const ChangeButton = styled.button`
-  width: 139px;
+  width: 200px;
   height: 45px;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 25px;
   border: none;
   color: white;
   font-weight: 600;
-  margin-top: 28px;
-  margin-left: 250px; // 재확인
+  margin-top: 40px;
   background-color: ${({ theme }) => theme.colors.GREEN};
 `;
