@@ -8,7 +8,6 @@ import logout_icon from '../../assets/images/logout_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
 
 import { GetChapters } from '../../api/GetChapters';
-import { GetRate } from '../../api/GetRate';
 import { GetChapter } from '../../api/GetChapter';
 
 const BasicGame = () => {
@@ -19,26 +18,28 @@ const BasicGame = () => {
   const [currentChapterId, setCurrentChapterId] = useState(undefined); // 현재 챕터
   const [isChapterComplete, setIsChapterComplete] = useState(false);
 
-  const toggleCompleteChapter = (iscomplete) => {
-    setIsChapterComplete(iscomplete);
-  };
+  const [ableChapterIndex, setAbleChapterIndex] = useState(0);
 
   useEffect(() => {
-    GetChapters(0, (res) => setSideBarData(res.data));
-  }, []); //목차 불러오는 API
-  useEffect(() => {
-    GetRate(0, (res) => setRateData(res.data.progress));
+    GetChapters(0, (res) => {
+      setSideBarData(res.data);
+      setRateData(res.data.progress)
+      setCurrentChapterId(res.data.chapters[0].id);
+    });
   }, []);
+
+  useEffect(() => {
+    GetChapters(0, (res) => {
+      setSideBarData(res.data);
+      setRateData(res.data.progress);
+    });
+  }, [currentChapterId, rateData]);
   useEffect(() => {
     if (currentChapterId !== null) {
       GetChapter(currentChapterId, (res) => setChapterData(res.data.chapter));
+      console.log(currentChapterId)
     }
   }, [currentChapterId]);
-  useEffect(() => {
-    if (sideBarData?.chapters?.length > 0) {
-      setCurrentChapterId(sideBarData.chapters[0].id);
-    }
-  }, [sideBarData]);
 
   return (
     sideBarData &&
@@ -51,13 +52,16 @@ const BasicGame = () => {
           onClick={(currentId) => setCurrentChapterId(currentId)}
           currentChapterId={currentChapterId}
           rate={rateData}
+
+          ableChapterIndex={ableChapterIndex}
+          setAbleChapterIndex={setAbleChapterIndex}
         />
         <ContentWrapper>
           <Content
             chapterData={chapterData}
             isChapterComplete={isChapterComplete}
             toggleCompleteChapter={(isComplete) =>
-              toggleCompleteChapter(isComplete)
+              setIsChapterComplete(isComplete)
             }
           />
           <ButtonWrapper>
@@ -67,7 +71,7 @@ const BasicGame = () => {
               onClick={() => navigate('/education')}
             />
             <NextBtn
-              disabled={!isChapterComplete} // 버튼 활성화 조건을 반대로 수정했습니다.
+              disabled={!isChapterComplete}
               asset={next_icon}
               onClick={() => {
                 const currentChapterIndex = sideBarData.chapters.findIndex(
@@ -78,7 +82,11 @@ const BasicGame = () => {
                     sideBarData.chapters[currentChapterIndex + 1].id
                   );
                 }
-              }}
+                else {
+                  setCurrentChapterId(sideBarData.chapters.at(-1).id);
+                }
+              }
+            }
             />
           </ButtonWrapper>
         </ContentWrapper>

@@ -1,15 +1,25 @@
 import styled from 'styled-components';
 import ProgressRateBar from './ProgressRateBar';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-const SideBar = ({ title, sideBarData, onClick, currentChapterId, rate }) => {
-  const [ableChapterIndex, setAbleChapterIndex] = useState(0);
-
+const SideBar = ({
+  title,
+  sideBarData,
+  onClick,
+  currentChapterId,
+  rate,
+  ableChapterIndex,
+  setAbleChapterIndex,
+}) => {
   useEffect(() => {
-    // isCompleted: true 값을 가지는 마지막 챕터의 다음 챕터 -> 접근 가능한 챕터
-    const reversedData = [...sideBarData].reverse(); // 배열을 역순으로 복사: sideBarData가 객체 배열 이므로 lastIndexOf 메소드 사용 불가
-    const lastCompletedIndex = reversedData.length - 1 - reversedData.findIndex((chapter) => chapter.isCompleted); // 원래 배열의 인덱스로 조정
-    setAbleChapterIndex(lastCompletedIndex + 1);
+    const reversedData = [...sideBarData].reverse();
+    const foundIndex = reversedData.findIndex((chapter) => chapter.isCompleted);
+    if (foundIndex === -1) {
+      setAbleChapterIndex(0);
+    } else {
+      const lastCompletedIndex = reversedData.length - 1 - foundIndex;
+      setAbleChapterIndex(lastCompletedIndex + 1);
+    }
   }, [sideBarData, currentChapterId]);
 
   return (

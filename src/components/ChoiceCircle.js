@@ -11,10 +11,13 @@ const ChoiceCircle = ({ value, onClick, userAnswer }) => {
 const Circle = styled.button`
   width: 175px;
   height: 175px;
+  padding: 20px;
   border-radius: 50%;
   font-size: 25px;
   font-weight: bold;
   text-align: center;
+  white-space: pre-line;
+  word-break: keep-all;
   background-color: ${({ theme, value, userAnswer }) =>
     value === userAnswer ? theme.colors.BLUE : theme.colors.SKYBLUE};
   color: ${({ theme, value, userAnswer }) =>

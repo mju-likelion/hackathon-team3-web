@@ -6,8 +6,8 @@ export const PostScoring = (
   currentTab,
   callbackFunction
 ) => {
-  Axios.post(`/problems/${problemId}/submit`, {
-    answer: answer, // body에 보낼 데이터를 여기에 추가
+  return Axios.post(`/problems/${problemId}/submit`, {
+    answer: answer,
     currentTab: currentTab,
   })
     .then((res) => {

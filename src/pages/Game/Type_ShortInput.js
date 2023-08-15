@@ -1,18 +1,27 @@
 import styled from 'styled-components';
 import SquareButton from '../../components/SquareButton';
 import search_icon from '../../assets/images/search_icon.svg';
-import next_icon from '../../assets/images/right_arrow_icon.svg'
+import next_icon from '../../assets/images/right_arrow_icon.svg';
 import { useEffect, useState } from 'react';
 
-const TypeShortInput = ({ problemId, handleComplete, completeArr, onClick, isChapterComplete }) => {
+const TypeShortInput = ({
+  problemId,
+  handleComplete,
+  completeArr,
+  onClick,
+  isChapterComplete,
+}) => {
   const [isNextBtnAble, setIsNextBtnAble] = useState(false);
   const [userAnswer, setUserAnswer] = useState(undefined);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    handleComplete(problemId, userAnswer);
+    await handleComplete(problemId, userAnswer);
+    setTimeout(() => {
+      console.log('1초뒤');
+      setUserAnswer('');
+    }, 1000);
   };
-
 
   useEffect(() => {
     if (isChapterComplete) {
@@ -21,8 +30,6 @@ const TypeShortInput = ({ problemId, handleComplete, completeArr, onClick, isCha
       setIsNextBtnAble(completeArr.includes(problemId));
     }
   }, [completeArr, problemId, isChapterComplete]);
-
-
 
   return (
     <InputWrapper>
@@ -37,7 +44,11 @@ const TypeShortInput = ({ problemId, handleComplete, completeArr, onClick, isCha
         </InputContainer>
         <SearchBtn able={true} asset={search_icon} type='submit' />
       </Form>
-      <NextBtn disabled={!isNextBtnAble} asset={next_icon} onClick={() => onClick()}/>
+      <NextBtn
+        disabled={!isNextBtnAble}
+        asset={next_icon}
+        onClick={() => onClick()}
+      />
     </InputWrapper>
   );
 };
