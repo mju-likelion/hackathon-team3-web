@@ -9,7 +9,8 @@ const TypeFillBlank = ({
   problemId,
   handleComplete,
   completeArr,
-    onClick
+    onClick,
+  isChapterComplete
 }) => {
   const [userAnswer, setUserAnswer] = useState(undefined);
   const [isNextBtnAble, setIsNextBtnAble] = useState(false);
@@ -20,9 +21,19 @@ const TypeFillBlank = ({
     event.preventDefault();
     handleComplete(problemId, userAnswer);
   };
+
+
   useEffect(() => {
-    setIsNextBtnAble(completeArr.includes(problemId));
-  }, [completeArr, problemId]);
+    if (isChapterComplete) {
+      setIsNextBtnAble(false); // 마지막 문제라면 버튼 비활성화
+    } else {
+      setIsNextBtnAble(completeArr.includes(problemId));
+    }
+  }, [completeArr, problemId, isChapterComplete]);
+
+
+
+
 
   return (
     <FillBlankWrapper>

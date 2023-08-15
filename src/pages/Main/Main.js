@@ -57,13 +57,13 @@ const FunctionBox = styled.div`
 `;
 
 // 아이콘 확정하기 전 임시
-const EduBtn = styled.div`
+const EduBtn = styled.button`
   width: 127px;
   height: 132px;
   background-color: green;
 `;
 
-const MyPageBtn = styled.div`
+const MyPageBtn = styled.button`
   width: 127px;
   height: 132px;
   background-color: pink;

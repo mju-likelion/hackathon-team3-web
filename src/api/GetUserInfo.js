@@ -1,10 +1,9 @@
 import { Axios } from './Axios';
 
-export const GetChapter = (currentChapterId, callbackFunction) => {
-  Axios.get(`/chapters/${currentChapterId}`, {})
+export const GetUserInfo = (callbackFunction) => {
+  Axios.get(`/users`)
     .then((res) => {
       callbackFunction(res);
-      console.log(res.data);
     })
     .catch((error) => {
       console.log(error);
