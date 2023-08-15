@@ -2,26 +2,30 @@ import styled from 'styled-components';
 import search_icon from '../../assets/images/search_icon.svg';
 import SquareButton from '../../components/SquareButton';
 import { useEffect, useState } from 'react';
-import next_icon from "../../assets/images/right_arrow_icon.svg";
+import next_icon from '../../assets/images/right_arrow_icon.svg';
 
 const TypeFillBlank = ({
   defaultMsg,
   problemId,
   handleComplete,
   completeArr,
-    onClick,
-  isChapterComplete
+  onClick,
+  isChapterComplete,
 }) => {
   const [userAnswer, setUserAnswer] = useState(undefined);
   const [isNextBtnAble, setIsNextBtnAble] = useState(false);
-  const inputTexts = defaultMsg.split('@');
-  const answerlength = inputTexts.length - 2;
+  const regex = /(@+)/; // "@" 문자가 1회 이상 연속적으로 나타나는 패턴을 찾는 정규표현식
+  const parts = defaultMsg.split(regex);
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    handleComplete(problemId, userAnswer);
-  };
 
+    await handleComplete(problemId, userAnswer);
+
+    setTimeout(() => {
+      setUserAnswer('');
+    }, 1000);
+  };
 
   useEffect(() => {
     if (isChapterComplete) {
@@ -31,29 +35,29 @@ const TypeFillBlank = ({
     }
   }, [completeArr, problemId, isChapterComplete]);
 
-
-
-
-
   return (
     <FillBlankWrapper>
       <Form onSubmit={onSubmit}>
         <QuestionBox>
           <InputContainer>
-            <QuestionText>{inputTexts[0]}</QuestionText>
+            <QuestionText>{parts[0]}</QuestionText>
             <AnswerInput
               placeHolder='정답'
-              answerlength={answerlength}
+              answerlength={parts[1].length}
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               autoFocus
             />
-            <QuestionText>{inputTexts[answerlength + 1]}</QuestionText>
+            <QuestionText>{parts[2]}</QuestionText>
           </InputContainer>
         </QuestionBox>
         <SearchBtn able={true} asset={search_icon} type='submit' />
       </Form>
-      <NextBtn disabled={!isNextBtnAble} asset={next_icon} onClick={() => onClick()}/>
+      <NextBtn
+        disabled={!isNextBtnAble}
+        asset={next_icon}
+        onClick={() => onClick()}
+      />
     </FillBlankWrapper>
   );
 };
@@ -72,7 +76,7 @@ const Form = styled.form`
 const QuestionBox = styled.div`
   width: 640px;
   height: 70px;
-  padding: 20px;
+  padding: 13px 20px 20px 20px;
   border-radius: 8px;
   background-color: white;
 `;
@@ -80,18 +84,18 @@ const InputContainer = styled.div`
   border-bottom: 5px solid ${({ theme }) => theme.colors.BLUE};
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 `;
 const QuestionText = styled.p`
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 23px;
+  font-weight: 400;
 `;
 const AnswerInput = styled.input`
-  width: ${({ answerlength }) => answerlength * 40}px;
+  width: ${({ answerlength }) => answerlength * 35}px;
   height: 35px;
   padding: 5px;
   border: none;
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 600;
   line-height: 35px;
   background-color: ${({ theme }) => theme.colors.BG_LIGHTGRAY};

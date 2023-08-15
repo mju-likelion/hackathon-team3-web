@@ -30,12 +30,12 @@ const Content = ({
   const toggleModal = () => {
     setIsModal((prev) => !prev);
   };
-  const handleComplete = (problemId, userAnswer) => {
+  const handleComplete = async (problemId, userAnswer) => {
     setIsCorrect(null); // 요청 전에 isCorrect를 초기화
     const tapIndex = problemList.findIndex(
       (problem) => problem.id === problemId
     );
-    PostScoring(problemId, userAnswer, tapIndex + 1, (res) => {
+    await PostScoring(problemId, userAnswer, tapIndex + 1, (res) => {
       if (res.data.isCorrect) {
         if (!completeArr.includes(problemId)) {
           setCompleteArr((prev) => [...prev, problemId]);
@@ -67,13 +67,14 @@ const Content = ({
   useEffect(() => {
     setCurrentProblem(problemList?.[0]);
   }, [chapterData]);
+
   useEffect(() => {
     if (completeArr.length === problemList.length) {
       setAbleProblem([]);
       toggleCompleteChapter(true);
     } else {
       toggleCompleteChapter(false);
-      const nextProblemId = problemList[completeArr.length].id;
+      const nextProblemId = problemList[completeArr.length]?.id;
       if (!ableProblem.includes(nextProblemId)) {
         setAbleProblem((prev) => [...prev, nextProblemId]);
       }
@@ -135,8 +136,8 @@ const Content = ({
                 </ScenarioBox>
                 {/*TODO 빈칸 채우기 유형 question 삼항연산자*/}
                 <QuestionBox>
-                  {currentProblem.type === 'ㄹ'
-                    ? '빈'
+                  {currentProblem.type === 'FITB'
+                    ? '빈칸에 들어갈 단어는?'
                     : currentProblem.question}
                 </QuestionBox>
                 <SubmitBox>

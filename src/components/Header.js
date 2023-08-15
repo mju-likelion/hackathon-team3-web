@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { LoginState } from '../recoil/LoginState';
 import LogoutIcon from '../assets/images/logout_icon.svg';
-import { useRecoilState } from 'recoil';
 import { GetUserInfo } from '../api/GetUserInfo';
 import { useEffect, useState } from 'react';
 import { LogoutApi } from '../api/LogoutApi';
@@ -11,11 +9,18 @@ import Logo from '../assets/images/surfing-logo.png';
 const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
-  const [isLogin, setIsLogin] = useRecoilState(LoginState);
-  isLogin && GetUserInfo((res) => setUserName(res.data.user.nickname));
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    GetUserInfo((res) => {
+      setUserName(res.data.user.nickname);
+      console.log(res);
+      setIsLogin(true);
+    });
+  }, []);
 
   const onClickLogout = (data) => {
-    if (window.confirm('로그아웃 하시겠습니까?')) {
+    if (confirm('로그아웃 하시겠습니까?')) {
       LogoutApi(data, callbackFunctions);
     }
   };
@@ -39,10 +44,12 @@ const Header = () => {
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
           {isLogin ? (
             <UserBox>
-              <p>{userName}님 환영합니다!</p>
               <UserPageBtn onClick={() => navigate('/mypage/education')}>
-                마이페이지
+                {userName} 님 환영합니다!
               </UserPageBtn>
+              {/* <UserPageBtn onClick={() => navigate('/mypage/education')}>
+                마이페이지
+              </UserPageBtn> */}
               <LogoutBtn onClick={onClickLogout}>
                 <img src={LogoutIcon} alt='logout-icon' />
               </LogoutBtn>
@@ -73,7 +80,7 @@ const HeaderBar = styled.div`
 `;
 
 const Learning = styled.button`
-  margin-left: 79px;
+  margin-left: 30px;
   font-size: 26px;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
   font-weight: bold;
@@ -88,21 +95,28 @@ const SignBox = styled.div`
 `;
 const UserBox = styled(SignBox)`
   p {
-    margin-right: 10px;
+    margin-right: 15px;
     padding: 5px;
-    font-size: 13px;
+    font-size: 18px;
   }
 `;
 const LoginBtn = styled.button`
   height: 27px;
   width: 90px;
   font-size: 23px;
-  font-weight: 600;
+  font-weight: bold;
   border-style: none;
   background-color: white;
+  margin-right: 15px;
 `;
 
-const UserPageBtn = styled(LoginBtn)``;
+const UserPageBtn = styled(LoginBtn)`
+  width: 200px;
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: bold;
+`;
 const LogoutBtn = styled.button`
   margin-left: 20px;
   border-style: none;
