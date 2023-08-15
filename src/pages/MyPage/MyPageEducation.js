@@ -25,15 +25,17 @@ const MyPageEducation = () => {
       <MyPageEduBox>
         <MyPageCategory type={'education'} />
         <MyPageEdu>
-          <MyPageEduTitle>{userName}님의 학습현황</MyPageEduTitle>
+          <MyPageEduTitle>
+            <UserNameStyle>{userName}</UserNameStyle>님의 학습현황
+          </MyPageEduTitle>
           <BlackHr />
           <BasicEduTitle>기초학습</BasicEduTitle>
           <EduBundle>
             <Progressing>
               <ProgressRateBar
                 text_size='24'
-                width='315'
-                height='41'
+                width='320'
+                height='45'
                 rate={rateBasic}
               />
             </Progressing>
@@ -48,8 +50,8 @@ const MyPageEducation = () => {
               <ProgressRateBar
                 className='ratebar'
                 text_size='24'
-                width='315'
-                height='41'
+                width='320'
+                height='45'
                 rate={rateAdvanced}
               />
             </Progressing>
@@ -82,10 +84,16 @@ const MyPageEduTitle = styled.h2`
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
+const UserNameStyle = styled.span`
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.BLUE};
+  font-size: 40px;
+`;
+
 const BlackHr = styled.hr`
   width: 988px;
   margin-left: 20px;
-  border: 1px solid ${({ theme }) => theme.colors.TEXT_BLACK};
+  border: 1px solid ${({ theme }) => theme.colors.INPUT_GRAY};
 `;
 
 const BasicEduTitle = styled.h3`
@@ -105,15 +113,15 @@ const Progressing = styled.div`
 `;
 
 const EduBtn = styled.button`
-  width: 167px;
-  height: 34px;
+  width: 170px;
+  height: 41px;
   background-color: ${({ theme }) => theme.colors.BTN_ABLE};
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 49px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;

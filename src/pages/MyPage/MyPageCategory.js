@@ -36,22 +36,21 @@ const CategoryBox = styled.div`
 
 const MyPageText = styled.p`
   font-size: 30px;
-  font-weight: 500;
+  font-weight: bold;
   color: ${({ theme }) => theme.colors.BLUE};
-  margin-top: 21px;
+  margin-top: 23px;
 `;
 
 const MyPageLine = styled.hr`
   width: 223px;
   height: 1px;
-  color: ${({ theme }) => theme.colors.BLUE};
   border: 1px solid ${({ theme }) => theme.colors.BLUE};
-  margin-top: 14px;
+  margin-top: 25px;
   margin-bottom: 0;
 `;
 
 const CategoryEdu = styled.button`
-  font-size: 25px;
+  font-size: 28px;
   margin-top: 38px;
   background: none;
   font-weight: 600;
