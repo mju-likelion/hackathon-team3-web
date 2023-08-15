@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import { GetUserInfo } from '../api/GetUserInfo';
 import { useEffect, useState } from 'react';
 import { LogoutApi } from '../api/LogoutApi';
+import Logo from '../assets/images/surfing-logo.png';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Header = () => {
     <>
       <HeaderWrap>
         <HeaderBar>
-          <Logo onClick={() => navigate('/')} />
+          <LogoIcon src={Logo} onClick={() => navigate('/')} />
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
           {isLogin ? (
             <UserBox>
@@ -56,7 +57,7 @@ const Header = () => {
           ) : (
             <SignBox>
               <LoginBtn onClick={() => navigate('/login')}>로그인</LoginBtn>
-              <JoinBtn onClick={() => navigate('/join')}>회원가입</JoinBtn>
+              <LoginBtn onClick={() => navigate('/join')}>회원가입</LoginBtn>
             </SignBox>
           )}
         </HeaderBar>
@@ -71,26 +72,18 @@ const HeaderWrap = styled.div`
   justify-content: center;
 `;
 const HeaderBar = styled.div`
-  width: 100%;
-  height: 63px;
+  width: 1280px;
+  height: 100px;
   box-shadow: 0 0 5px black;
   display: flex;
   align-items: center;
 `;
 
-const Logo = styled.button`
-  width: 99px;
-  height: 49px;
-  border-radius: 25px;
-  background-color: ${({ theme }) => theme.colors.BTN_ABLE};
-  margin: 7px 0 7px 22px;
-  border-style: none;
-`;
-
 const Learning = styled.button`
   margin-left: 79px;
-  font-size: 20px;
-  color: black;
+  font-size: 26px;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
+  font-weight: bold;
   border-style: none;
   background-color: white;
 `;
@@ -99,7 +92,6 @@ const SignBox = styled.div`
   margin-left: auto;
   margin-right: 67px;
   display: flex;
-  margin-top: 20px;
 `;
 const UserBox = styled(SignBox)`
   p {
@@ -111,15 +103,21 @@ const UserBox = styled(SignBox)`
 const LoginBtn = styled.button`
   height: 27px;
   width: 90px;
-  font-size: 17px;
+  font-size: 23px;
   font-weight: 600;
   border-style: none;
   background-color: white;
 `;
-const JoinBtn = styled(LoginBtn)``;
+
 const UserPageBtn = styled(LoginBtn)``;
 const LogoutBtn = styled.button`
   margin-left: 20px;
   border-style: none;
   background-color: white;
+`;
+const LogoIcon = styled.img`
+  width: 80px;
+  height: 80px;
+  margin-left: 30px;
+  cursor: pointer;
 `;
