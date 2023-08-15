@@ -9,14 +9,14 @@ import Logo from '../assets/images/surfing-logo.png';
 const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
-  const [isLogin, setIsLogin] = useState(false);
+  const loginState = JSON.parse(localStorage.getItem('loginState'));
 
   useEffect(() => {
-    GetUserInfo((res) => {
-      setUserName(res.data.user.nickname);
-      console.log(res);
-      setIsLogin(true);
-    });
+    if (loginState) {
+      GetUserInfo((res) => {
+        setUserName(res.data.user.nickname);
+      });
+    }
   }, []);
 
   const onClickLogout = (data) => {
@@ -26,9 +26,10 @@ const Header = () => {
   };
   const callbackFunctions = {
     navigateSuccess: () => {
+      window.localStorage.setItem('loginState', false);
       alert('로그아웃되었습니다. 메인으로 돌아갑니다.');
-      setIsLogin(false);
-      navigate('/');
+      location.replace('/');
+      // navigate('/');
     },
     navigateError: (error) => {
       console.log(error);
@@ -42,7 +43,7 @@ const Header = () => {
         <HeaderBar>
           <LogoIcon src={Logo} onClick={() => navigate('/')} />
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
-          {isLogin ? (
+          {loginState ? (
             <UserBox>
               <UserPageBtn onClick={() => navigate('/mypage/education')}>
                 {userName} 님 환영합니다!

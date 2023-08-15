@@ -19,7 +19,6 @@ const AdvancedGame = () => {
   const [chapterData, setChapterData] = useState(null); // 문제 데이터
   const [currentChapterId, setCurrentChapterId] = useState(null); // 현재 챕터
   const [isLastPage, setIsLastPage] = useState(false);
-
   const toggleChapter = (currentId) => {
     setCurrentChapterId(currentId);
   };

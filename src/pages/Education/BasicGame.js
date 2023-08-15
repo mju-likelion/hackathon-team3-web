@@ -17,7 +17,6 @@ const BasicGame = () => {
   const [chapterData, setChapterData] = useState(null); // 문제 데이터
   const [currentChapterId, setCurrentChapterId] = useState(undefined); // 현재 챕터
   const [isChapterComplete, setIsChapterComplete] = useState(false);
-
   const [ableChapterIndex, setAbleChapterIndex] = useState(0);
 
   useEffect(() => {
