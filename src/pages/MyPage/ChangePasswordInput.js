@@ -32,31 +32,30 @@ const InputContainer = styled.div`
 `;
 const DisplayBox = styled.div`
   display: flex;
-  //background: gold;
   align-items: center;
 `;
 
 const PasswordText = styled.p`
   font-size: 17px;
   justify-content: center;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const InputBox = styled.input`
   width: 260px;
   height: 38px;
-  border: 1px solid black;
+  border: 1px solid ${({ theme }) => theme.colors.TEXT_BLACK};
   border-radius: 8px;
   margin-left: 26px;
 `;
 
 const ErrorMsgBox = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: flex-end; // 얘 왜 안되지?
   margin-left: 10px;
 `;
 const ErrorMsg = styled.pre`
   font-size: 14px;
-  color: #ff5454;
+  color: ${({ theme }) => theme.colors.RED};
   margin-top: 5px;
-  //text-align: center;
 `;

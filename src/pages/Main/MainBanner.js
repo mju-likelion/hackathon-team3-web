@@ -30,7 +30,7 @@ const BannerSwiper = styled(Swiper)`
   width: 733px;
   height: 305px;
   border-radius: 20px;
-  background-color: #badeff;
+  background-color: ${({ theme }) => theme.colors.SKYBLUE};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,4 +41,5 @@ const BannerSwiperBox = styled(SwiperSlide)`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;

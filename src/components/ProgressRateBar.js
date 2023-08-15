@@ -21,6 +21,7 @@ const RateTitle = styled.p`
   font-size: ${({ text_size }) => text_size}px;
   font-weight: bold;
   white-space: nowrap;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 const Bar_background = styled.div`
   position: relative;

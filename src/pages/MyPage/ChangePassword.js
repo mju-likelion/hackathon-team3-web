@@ -96,6 +96,7 @@ const AllContainer = styled.div`
 const ChangePasswordTitle = styled.h2`
   font-size: 32px;
   margin: 94px 0 45px 0;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const InputBox = styled.div`

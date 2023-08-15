@@ -58,10 +58,7 @@ const ChangePasswordBox = styled.div`
 
 const AccountTitle = styled.h2`
   font-size: 32px;
-`;
-
-const MyAccountText = styled.p`
-  font-size: 17px;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const DoButton = styled.button`
@@ -77,13 +74,15 @@ const DoButton = styled.button`
 `;
 
 const QuitButton = styled(DoButton)`
-  background-color: #ff0000;
+  background-color: ${({ theme }) => theme.colors.RED};
 `;
 
 const QuitAccountBox = styled(ChangePasswordBox)`
   margin-top: 109px;
 `;
 
-const QuitAccountText = styled(MyAccountText)`
+const QuitAccountText = styled.p`
+  font-size: 17px;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
   margin-top: 27px;
 `;

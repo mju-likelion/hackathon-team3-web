@@ -30,25 +30,6 @@ const BannerBox = styled.div`
   align-items: center;
 `;
 
-// const MainBanner = styled.div`
-//   width: 733px;
-//   height: 305px;
-//   border-radius: 20px;
-//   background-color: #badeff;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
-// `;
-
-const PrevBtn = styled.img`
-  margin-right: 27px;
-`;
-
-const NextBtn = styled.img`
-  margin-left: 27px;
-`;
-
 const FunctionBox = styled.div`
   margin-top: 66px;
   width: 100%;
@@ -61,6 +42,7 @@ const EduBtn = styled.button`
   width: 127px;
   height: 132px;
   background-color: green;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const MyPageBtn = styled.button`
@@ -68,4 +50,5 @@ const MyPageBtn = styled.button`
   height: 132px;
   background-color: pink;
   margin-left: 133px;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;

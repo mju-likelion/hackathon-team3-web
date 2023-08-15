@@ -79,15 +79,17 @@ const MyPageEduTitle = styled.h2`
   font-size: 25px;
   font-weight: 500;
   margin: 17px 0 13px 20px;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const BlackHr = styled.hr`
   width: 988px;
   margin-left: 20px;
-  border: 1px solid;
+  border: 1px solid ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const BasicEduTitle = styled.h3`
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
   font-size: 26px;
   margin: 40px 0 0 38px;
 `;
@@ -105,7 +107,7 @@ const Progressing = styled.div`
 const EduBtn = styled.button`
   width: 167px;
   height: 34px;
-  background-color: #99ceff;
+  background-color: ${({ theme }) => theme.colors.BTN_ABLE};
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -113,10 +115,11 @@ const EduBtn = styled.button`
   margin-left: 49px;
   font-size: 16px;
   font-weight: 600;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 
 const GrayHr = styled.hr`
   width: 988px;
-  border: 1px solid #d3d3d3;
+  border: 1px solid ${({ theme }) => theme.colors.LIGHTGRAY};
   margin: 0 0 0 18px;
 `;

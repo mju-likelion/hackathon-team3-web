@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-
 const MyPageCategory = ({ type }) => {
   const navigate = useNavigate();
   console.log(type);
@@ -39,15 +37,15 @@ const CategoryBox = styled.div`
 const MyPageText = styled.p`
   font-size: 30px;
   font-weight: 500;
-  color: #59a4fb;
+  color: ${({ theme }) => theme.colors.BLUE};
   margin-top: 21px;
 `;
 
 const MyPageLine = styled.hr`
   width: 223px;
   height: 1px;
-  color: #59a4fb;
-  border: 1px solid #59a4fb;
+  color: ${({ theme }) => theme.colors.BLUE};
+  border: 1px solid ${({ theme }) => theme.colors.BLUE};
   margin-top: 14px;
   margin-bottom: 0;
 `;
@@ -58,11 +56,11 @@ const CategoryEdu = styled.button`
   background: none;
   font-weight: 600;
   color: ${({ type, theme }) =>
-    type === 'education' ? theme.colors.BLUE : `black`};
+    type === 'education' ? theme.colors.BLUE : theme.colors.TEXT_BLACK};
 `;
 
 const CategoryAccount = styled(CategoryEdu)`
   margin-top: 52px;
   color: ${({ type, theme }) =>
-    type === 'account' ? theme.colors.BLUE : `black`};
+    type === 'account' ? theme.colors.BLUE : theme.colors.TEXT_BLACK};
 `;
