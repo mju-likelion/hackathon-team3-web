@@ -1,8 +1,8 @@
 import { Axios } from './Axios';
 
-export const LoginApi = (data, callbackFunctions) => {
+export const LogoutApi = (data, callbackFunctions) => {
   const { navigateSuccess, navigateError } = callbackFunctions;
-  Axios.post(`/auth/login`, {
+  Axios.post(`/auth/logout`, {
     email: data.email,
     password: data.pw,
   })
@@ -12,6 +12,5 @@ export const LoginApi = (data, callbackFunctions) => {
     })
     .catch((error) => {
       navigateError(error);
-      console.log(error);
     });
 };

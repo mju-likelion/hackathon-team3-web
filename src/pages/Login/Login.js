@@ -27,8 +27,8 @@ const Login = () => {
   };
   const callbackFunctions = {
     navigateSuccess: () => {
-      setIsLogin(true);
       alert('로그인되었습니다. 메인으로 돌아갑니다.');
+      setIsLogin(true);
       navigate('/');
     },
     navigateError: (error) => {

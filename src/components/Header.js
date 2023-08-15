@@ -5,21 +5,30 @@ import LogoutIcon from '../assets/images/logout_icon.svg';
 import { useRecoilState } from 'recoil';
 import { GetUserInfo } from '../api/GetUserInfo';
 import { useEffect, useState } from 'react';
+import { LogoutApi } from '../api/LogoutApi';
 
 const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  isLogin && GetUserInfo((res) => setUserName(res.data.user.nickname));
 
-  const onClickLogout = () => {
+  const onClickLogout = (data) => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      alert('로그아웃 되었습니다.');
+      LogoutApi(data, callbackFunctions);
     }
   };
-
-  useEffect(() => {
-    isLogin && GetUserInfo((res) => setUserName(res.data.user.nickname));
-  }, []);
+  const callbackFunctions = {
+    navigateSuccess: () => {
+      alert('로그아웃되었습니다. 메인으로 돌아갑니다.');
+      setIsLogin(false);
+      navigate('/');
+    },
+    navigateError: (error) => {
+      console.log(error);
+      error.response && navigate('/*');
+    },
+  };
 
   return (
     <>
