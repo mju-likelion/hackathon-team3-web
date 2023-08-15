@@ -7,10 +7,7 @@ import { useForm } from 'react-hook-form';
 import { schemaLogin } from '../../Hooks/ValidationYup';
 import { LoginApi } from '../../api/LoginApi';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { LoginState } from '../../recoil/LoginState';
 const Login = () => {
-  // const [isLogin, setIsLogin] = useRecoilState(LoginState);
   const navigate = useNavigate();
   const {
     register,
@@ -28,8 +25,8 @@ const Login = () => {
   const callbackFunctions = {
     navigateSuccess: () => {
       alert('로그인되었습니다. 메인으로 돌아갑니다.');
-      // setIsLogin(true);
       navigate('/');
+      location.replace('/');
     },
     navigateError: (error) => {
       if (error.response && error.response.status === 401)
