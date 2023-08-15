@@ -2,53 +2,77 @@ import styled from 'styled-components';
 import MainBanner from './MainBanner';
 import { useNavigate } from 'react-router-dom';
 
+import EduIcon from '../../assets/images/icon_edu.png';
+import MyPage from '../../assets/images/icon_mypage.png';
+
 const Main = () => {
   const navigate = useNavigate();
   return (
     <>
-      <BannerBox>
-        <MainBanner />
-      </BannerBox>
-      <FunctionBox>
-        <EduBtn onClick={() => navigate('/education')}>학습</EduBtn>
-        <MyPageBtn onClick={() => navigate('/mypage/education')}>
-          마이페이지
-        </MyPageBtn>
-      </FunctionBox>
+      <MainContainer>
+        <BannerBox>
+          <MainBanner />
+        </BannerBox>
+        <FunctionBox>
+          <IconBox>
+            <EduBtn src={EduIcon} onClick={() => navigate('/education')} />
+            <IconText>학습</IconText>
+          </IconBox>
+          <IconBox>
+            <MyPageBtn
+              src={MyPage}
+              onClick={() => navigate('/mypage/education')}
+            />
+            <IconText>마이페이지</IconText>
+          </IconBox>
+        </FunctionBox>
+      </MainContainer>
     </>
   );
 };
 
 export default Main;
 
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const BannerBox = styled.div`
-  margin-top: 143px;
+  margin-top: 120px;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  //background: mediumpurple;
 `;
 
 const FunctionBox = styled.div`
   margin-top: 66px;
-  width: 100%;
+  width: 400px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
-// 아이콘 확정하기 전 임시
-const EduBtn = styled.button`
-  width: 127px;
-  height: 132px;
-  background-color: green;
-  color: ${({ theme }) => theme.colors.TEXT_BLACK};
+const IconBox = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
 `;
 
-const MyPageBtn = styled.button`
+const EduBtn = styled.img`
   width: 127px;
   height: 132px;
-  background-color: pink;
-  margin-left: 133px;
-  color: ${({ theme }) => theme.colors.TEXT_BLACK};
+`;
+const IconText = styled.p`
+  font-size: 30px;
+  font-weight: 500;
+`;
+
+const MyPageBtn = styled.img`
+  width: 127px;
+  height: 132px;
 `;
