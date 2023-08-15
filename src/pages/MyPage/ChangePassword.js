@@ -16,19 +16,16 @@ const ChangePassword = () => {
     mode: 'onChange',
   });
   const inputValue = watch(); // 현재 필드의 값
-  const accessToken = process.env.REACT_APP_TOKEN;
-
   const callbackFunction = () => {
     console.log('성공!');
+    alert('비밀번호가 수정되었습니다.');
   };
 
   const onSubmit = (data) => {
-    // console.log(data);
-    // console.log(accessToken);
     const { oldPassword, password } = data;
     // 비밀번호 변경 api 호출 및 처리
     console.log(data);
-    PatchPassword(oldPassword, password, accessToken, callbackFunction);
+    PatchPassword(oldPassword, password, callbackFunction);
   };
 
   return (
