@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { LoginState, userState } from '../recoil/LoginState';
+import { LoginState } from '../recoil/LoginState';
 import LogoutIcon from '../assets/images/logout_icon.svg';
+import { useRecoilState } from 'recoil';
 const Header = () => {
   const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
+
   const onClickLogout = () => {
-    setIsLogin(false);
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      setIsLogin(false);
       alert('로그아웃 되었습니다.');
     }
   };

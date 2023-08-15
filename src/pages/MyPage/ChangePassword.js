@@ -17,7 +17,6 @@ const ChangePassword = () => {
   });
   const inputValue = watch(); // 현재 필드의 값
   const accessToken = process.env.REACT_APP_TOKEN;
-
   const callbackFunction = () => {
     console.log('성공!');
   };
