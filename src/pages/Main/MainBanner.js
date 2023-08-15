@@ -5,6 +5,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
+import BannerContentImg from '../../assets/images/Banner2.svg';
+import Announce from '../../assets/images/Announcement.svg';
+import LastBanner from '../../assets/images/lastbanner.svg';
 const MainBanner = () => {
   return (
     <BannerSwiper
@@ -16,10 +19,15 @@ const MainBanner = () => {
       autoplay={{ delay: 2000 }}
       onSlideChange={() => console.log('slide change!')}
     >
-      <BannerSwiperBox>내용이</BannerSwiperBox>
-      <BannerSwiperBox>들어갑니다</BannerSwiperBox>
-      <BannerSwiperBox>여기에뭐넣을지도</BannerSwiperBox>
-      <BannerSwiperBox>정해야해요옹</BannerSwiperBox>
+      <BannerSwiperBox>
+        <BannerContent src={BannerContentImg} />
+      </BannerSwiperBox>
+      <BannerSwiperBox>
+        <BannerContent src={Announce} />
+      </BannerSwiperBox>
+      <BannerSwiperBox>
+        <BannerContent src={LastBanner} />
+      </BannerSwiperBox>
     </BannerSwiper>
   );
 };
@@ -42,4 +50,8 @@ const BannerSwiperBox = styled(SwiperSlide)`
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
+`;
+
+const BannerContent = styled.img`
+  width: 100%;
 `;
