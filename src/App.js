@@ -13,26 +13,30 @@ import Login from './pages/Login/Login';
 import MyPageEducation from './pages/MyPage/MyPageEducation';
 import MyPageAccount from './pages/MyPage/MyPageAccount';
 import NotFound from './pages/Error/NotFound';
+import { RecoilRoot } from 'recoil';
+
 function App() {
   return (
     <>
-      <ThemeProvider theme={Theme}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/education' element={<EducationSelect />} />
-            <Route path='/education/basic' element={<BasicGame />} />
-            <Route path='/education/advanced' element={<AdvancedGame />} />
-            <Route path='/join' element={<Join />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/mypage/education' element={<MyPageEducation />} />
-            <Route path='/mypage/account' element={<MyPageAccount />} />
-            <Route path='/*' element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+      <RecoilRoot>
+        <ThemeProvider theme={Theme}>
+          <GlobalStyle />
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path='/' element={<Main />} />
+              <Route path='/education' element={<EducationSelect />} />
+              <Route path='/education/basic' element={<BasicGame />} />
+              <Route path='/education/advanced' element={<AdvancedGame />} />
+              <Route path='/join' element={<Join />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/mypage/education' element={<MyPageEducation />} />
+              <Route path='/mypage/account' element={<MyPageAccount />} />
+              <Route path='/*' element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+      </RecoilRoot>
     </>
   );
 }
