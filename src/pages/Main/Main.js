@@ -40,7 +40,7 @@ const MainContainer = styled.div`
 `;
 
 const BannerBox = styled.div`
-  margin-top: 120px;
+  margin-top: 110px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -49,8 +49,8 @@ const BannerBox = styled.div`
 `;
 
 const FunctionBox = styled.div`
-  margin-top: 66px;
-  width: 400px;
+  margin-top: 55px;
+  width: 500px;
   display: flex;
   justify-content: space-between;
 `;
@@ -59,19 +59,26 @@ const IconBox = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background: none;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
 `;
 
 const EduBtn = styled.img`
   width: 127px;
   height: 132px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
 `;
 const IconText = styled.p`
+  margin-top: 10px;
   font-size: 30px;
-  font-weight: 500;
+  font-weight: bold;
 `;
 
 const MyPageBtn = styled.img`
   width: 127px;
   height: 132px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
 `;
