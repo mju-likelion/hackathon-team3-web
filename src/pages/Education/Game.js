@@ -4,39 +4,36 @@ import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar';
 import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
-import exit_icon from '../../assets/images/exit_icon.svg'
+import exit_icon from '../../assets/images/exit_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
 
 import { GetChapters } from '../../api/GetChapters';
 import { GetChapter } from '../../api/GetChapter';
 
-const BasicGame = () => {
+const Game = ({ type }) => {
+  const isBasic = type === 'basic';
   const navigate = useNavigate();
-  const [sideBarData, setSideBarData] = useState(null); // 목차 데이터
+  const [sideBarData, setSideBarData] = useState([]); // 목차 데이터
   const [rateData, setRateData] = useState(null); // 진도율 데이터
-  const [chapterData, setChapterData] = useState(null); // 문제 데이터
+  const [chapterData, setChapterData] = useState({}); // 문제 데이터
   const [currentChapterId, setCurrentChapterId] = useState(undefined); // 현재 챕터
   const [isChapterComplete, setIsChapterComplete] = useState(false);
-
   const [ableChapterIndex, setAbleChapterIndex] = useState(0);
 
   useEffect(() => {
-    GetChapters(0, (res) => {
+    GetChapters(isBasic ? 0 : 1, (res) => {
       setSideBarData(res.data);
       setRateData(res.data.progress);
-      setCurrentChapterId(res.data.chapters[0].id);
+      if (!currentChapterId) {
+        setCurrentChapterId(res.data?.chapters[0]?.id);
+      }
     });
-  }, []);
-
+  }, [currentChapterId]);
   useEffect(() => {
-    GetChapters(0, (res) => {
-      setSideBarData(res.data);
-      setRateData(res.data.progress);
-    });
-  }, [currentChapterId, rateData]);
-  useEffect(() => {
-    if (currentChapterId !== null) {
-      GetChapter(currentChapterId, (res) => setChapterData(res.data.chapter));
+    if (currentChapterId !== undefined) {
+      GetChapter(currentChapterId, (res) => {
+        setChapterData(res.data?.chapter);
+      });
     }
   }, [currentChapterId]);
 
@@ -46,7 +43,7 @@ const BasicGame = () => {
     chapterData && (
       <PageContainer>
         <SideBar
-          title='기초 학습'
+          title={isBasic ? '기초 학습' : '심화 학습'}
           sideBarData={sideBarData.chapters}
           onClick={(currentId) => setCurrentChapterId(currentId)}
           currentChapterId={currentChapterId}
@@ -113,4 +110,4 @@ const ButtonWrapper = styled.div`
 `;
 const NextBtn = styled(SquareButton)``;
 
-export default BasicGame;
+export default Game;
