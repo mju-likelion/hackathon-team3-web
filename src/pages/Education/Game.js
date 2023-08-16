@@ -28,7 +28,7 @@ const Game = ({ type }) => {
         setCurrentChapterId(res.data?.chapters[0]?.id);
       }
     });
-  }, [sideBarData, type]);
+  }, [currentChapterId, sideBarData, type]);
   useEffect(() => {
     if (currentChapterId !== undefined) {
       GetChapter(currentChapterId, (res) => {
