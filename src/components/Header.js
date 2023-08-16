@@ -44,21 +44,18 @@ const Header = () => {
           <LogoIcon src={Logo} onClick={() => navigate('/')} />
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
           {loginState ? (
-            <UserBox>
+            <SignBox>
               <UserPageBtn onClick={() => navigate('/mypage/education')}>
                 {userName} 님 환영합니다!
               </UserPageBtn>
-              {/* <UserPageBtn onClick={() => navigate('/mypage/education')}>
-                마이페이지
-              </UserPageBtn> */}
               <LogoutBtn onClick={onClickLogout}>
                 <img src={LogoutIcon} alt='logout-icon' />
               </LogoutBtn>
-            </UserBox>
+            </SignBox>
           ) : (
             <SignBox>
-              <LoginBtn onClick={() => navigate('/login')}>로그인</LoginBtn>
-              <LoginBtn onClick={() => navigate('/join')}>회원가입</LoginBtn>
+              <SignBtn onClick={() => navigate('/login')}>로그인</SignBtn>
+              <SignBtn onClick={() => navigate('/join')}>회원가입</SignBtn>
             </SignBox>
           )}
         </HeaderBar>
@@ -74,7 +71,7 @@ const HeaderWrap = styled.div`
 `;
 const HeaderBar = styled.div`
   width: 1280px;
-  height: 100px;
+  height: 70px;
   box-shadow: 0 0 5px black;
   display: flex;
   align-items: center;
@@ -94,14 +91,8 @@ const SignBox = styled.div`
   margin-right: 67px;
   display: flex;
 `;
-const UserBox = styled(SignBox)`
-  p {
-    margin-right: 15px;
-    padding: 5px;
-    font-size: 18px;
-  }
-`;
-const LoginBtn = styled.button`
+
+const SignBtn = styled.button`
   height: 27px;
   width: 90px;
   font-size: 23px;
@@ -111,8 +102,8 @@ const LoginBtn = styled.button`
   margin-right: 15px;
 `;
 
-const UserPageBtn = styled(LoginBtn)`
-  width: 200px;
+const UserPageBtn = styled(SignBtn)`
+  width: 100%;
   margin-right: 10px;
   padding: 5px;
   font-size: 18px;
@@ -124,8 +115,8 @@ const LogoutBtn = styled.button`
   background-color: white;
 `;
 const LogoIcon = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 65px;
+  height: 65px;
   margin-left: 30px;
   cursor: pointer;
 `;
