@@ -71,15 +71,15 @@ const Content = ({
 
   useEffect(() => {
     if (completeArr && problemList) {
-      if (completeArr.length === problemList.length) {
-        setAbleProblem([]);
-        toggleCompleteChapter(true);
-      } else {
-        toggleCompleteChapter(false);
-        const nextProblemId =
-          problemList && problemList[completeArr.length]?.id;
-        if (!ableProblem.includes(nextProblemId)) {
+      if (completeArr && problemList) {
+        const isCompleted = completeArr.length === problemList.length;
+        const nextProblemIndex = completeArr.length;
+        const nextProblemId = problemList[nextProblemIndex]?.id;
+        toggleCompleteChapter(isCompleted);
+        if (!isCompleted && !ableProblem.includes(nextProblemId)) {
           setAbleProblem((prev) => [...prev, nextProblemId]);
+        } else {
+          setAbleProblem([]);
         }
       }
     }

@@ -24,16 +24,11 @@ const Game = ({ type }) => {
     GetChapters(isBasic ? 0 : 1, (res) => {
       setSideBarData(res.data);
       setRateData(res.data.progress);
-      setCurrentChapterId(res.data?.chapters[0]?.id);
+      if (!currentChapterId) {
+        setCurrentChapterId(res.data?.chapters[0]?.id);
+      }
     });
-  }, []);
-
-  useEffect(() => {
-    GetChapters(isBasic ? 0 : 1, (res) => {
-      setSideBarData(res.data);
-      setRateData(res.data.progress);
-    });
-  }, [currentChapterId, rateData]);
+  }, [currentChapterId]);
   useEffect(() => {
     if (currentChapterId !== undefined) {
       GetChapter(currentChapterId, (res) => {
