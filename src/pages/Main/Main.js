@@ -7,6 +7,14 @@ import MyPage from '../../assets/images/icon_mypage.png';
 
 const Main = () => {
   const navigate = useNavigate();
+  const loginState = JSON.parse(localStorage.getItem('loginState'));
+
+  const onClickMypage = () => {
+    if (loginState === false) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    } else navigate('/mypage/education');
+  };
   return (
     <>
       <MainContainer>
@@ -19,10 +27,7 @@ const Main = () => {
             <IconText>학습</IconText>
           </IconBox>
           <IconBox>
-            <MyPageBtn
-              src={MyPage}
-              onClick={() => navigate('/mypage/education')}
-            />
+            <MyPageBtn src={MyPage} onClick={onClickMypage} />
             <IconText>마이페이지</IconText>
           </IconBox>
         </FunctionBox>

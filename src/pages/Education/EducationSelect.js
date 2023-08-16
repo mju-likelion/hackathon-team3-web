@@ -9,6 +9,21 @@ const EducationSelect = () => {
   const navigate = useNavigate();
   const [rateBasic, setRateBasic] = useState(0);
   const [rateAdvanced, setRateAdvanced] = useState(0);
+  const loginState = JSON.parse(localStorage.getItem('loginState'));
+
+  const onClickBasic = () => {
+    if (loginState === false) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    } else navigate('/education/basic');
+  };
+
+  const onClickAdvanced = () => {
+    if (loginState === false) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    } else navigate('/education/advanced');
+  };
 
   useEffect(() => {
     GetRate(0, (res) => setRateBasic(res.data.progress));
@@ -19,10 +34,7 @@ const EducationSelect = () => {
     <PageContainer>
       <ContentContainer>
         <MenuContainer>
-          <CircleBtn
-            onClick={() => navigate('/education/basic')}
-            value='기초 학습 하기'
-          />
+          <CircleBtn onClick={onClickBasic} value='기초 학습 하기' />
           <ProgressRateBar
             text_size={30}
             width={300}
@@ -31,10 +43,7 @@ const EducationSelect = () => {
           />
         </MenuContainer>
         <MenuContainer>
-          <CircleBtn
-            onClick={() => navigate('/education/advanced')}
-            value='심화 학습 하기'
-          />
+          <CircleBtn onClick={onClickAdvanced} value='심화 학습 하기' />
           <ProgressRateBar
             text_size={30}
             width={300}
