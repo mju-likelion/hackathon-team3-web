@@ -2,11 +2,13 @@ import styled from 'styled-components';
 import ProgressRateBar from '../../components/ProgressRateBar';
 import { useNavigate } from 'react-router-dom';
 import CircleButton from '../../components/CircleButton';
+import { GetRate } from '../../api/GetRate';
+import { useEffect, useState } from 'react';
 
 const EducationSelect = () => {
-  const basicValue = 40;
-  const advancedValue = 60;
   const navigate = useNavigate();
+  const [rateBasic, setRateBasic] = useState(0);
+  const [rateAdvanced, setRateAdvanced] = useState(0);
   const loginState = JSON.parse(localStorage.getItem('loginState'));
 
   const onClickBasic = () => {
@@ -23,6 +25,11 @@ const EducationSelect = () => {
     } else navigate('/education/advanced');
   };
 
+  useEffect(() => {
+    GetRate(0, (res) => setRateBasic(res.data.progress));
+    GetRate(1, (res) => setRateAdvanced(res.data.progress));
+  }, []);
+
   return (
     <PageContainer>
       <ContentContainer>
@@ -32,7 +39,7 @@ const EducationSelect = () => {
             text_size={30}
             width={300}
             height={50}
-            rate={basicValue}
+            rate={rateBasic}
           />
         </MenuContainer>
         <MenuContainer>
@@ -41,7 +48,7 @@ const EducationSelect = () => {
             text_size={30}
             width={300}
             height={50}
-            rate={advancedValue}
+            rate={rateAdvanced}
           />
         </MenuContainer>
       </ContentContainer>
@@ -52,7 +59,6 @@ const EducationSelect = () => {
 const PageContainer = styled.div`
   width: 1280px;
   height: 769px;
-  border: 1px solid black;
 `;
 const ContentContainer = styled.div`
   display: flex;
@@ -65,9 +71,9 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
+  gap: 55px;
 `;
 const CircleBtn = styled(CircleButton)`
-  margin-left: 50px;
+  margin-left: 55px;
 `;
 export default EducationSelect;
