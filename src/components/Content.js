@@ -20,7 +20,7 @@ const Content = ({
   );
   const [currentProblem, setCurrentProblem] = useState(problemList?.[0]);
   const [completeArr, setCompleteArr] = useState([]);
-  const [ableProblem, setAbleProblem] = useState(problemList?.[0].id);
+  const [ableProblem, setAbleProblem] = useState(problemList?.[0]?.id || []);
   const [isCorrect, setIsCorrect] = useState(null);
   const [bgColor, setBgColor] = useState('BG_SKYBLUE');
 
@@ -60,23 +60,27 @@ const Content = ({
     setCurrentProblemId(problemList?.[0]?.id || null);
   }, [chapterData]);
   useEffect(() => {
-    setCurrentProblem(
-      problemList.find((problem) => problem.id === currentProblemId)
-    );
+    problemList &&
+      setCurrentProblem(
+        problemList.find((problem) => problem?.id === currentProblemId)
+      );
   }, [currentProblemId]);
   useEffect(() => {
     setCurrentProblem(problemList?.[0]);
   }, [chapterData]);
 
   useEffect(() => {
-    if (completeArr.length === problemList.length) {
-      setAbleProblem([]);
-      toggleCompleteChapter(true);
-    } else {
-      toggleCompleteChapter(false);
-      const nextProblemId = problemList[completeArr.length]?.id;
-      if (!ableProblem.includes(nextProblemId)) {
-        setAbleProblem((prev) => [...prev, nextProblemId]);
+    if (completeArr && problemList) {
+      if (completeArr.length === problemList.length) {
+        setAbleProblem([]);
+        toggleCompleteChapter(true);
+      } else {
+        toggleCompleteChapter(false);
+        const nextProblemId =
+          problemList && problemList[completeArr.length]?.id;
+        if (!ableProblem.includes(nextProblemId)) {
+          setAbleProblem((prev) => [...prev, nextProblemId]);
+        }
       }
     }
   }, [chapterData, completeArr, problemList]);
@@ -134,7 +138,6 @@ const Content = ({
                 <ScenarioBox>
                   <ScenarioText>{currentProblem.scenario}</ScenarioText>
                 </ScenarioBox>
-                {/*TODO 빈칸 채우기 유형 question 삼항연산자*/}
                 <QuestionBox>
                   {currentProblem.type === 'FITB'
                     ? '빈칸에 들어갈 단어는?'
