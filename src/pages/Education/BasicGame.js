@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar';
 import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
-import logout_icon from '../../assets/images/logout_icon.svg';
+import exit_icon from '../../assets/images/exit_icon.svg'
 import next_icon from '../../assets/images/next_icon.svg';
 
 import { GetChapters } from '../../api/GetChapters';
@@ -65,7 +65,7 @@ const BasicGame = () => {
           <ButtonWrapper>
             <SquareButton
               disabled={false}
-              asset={logout_icon}
+              asset={exit_icon}
               onClick={() => navigate('/education')}
             />
             <NextBtn

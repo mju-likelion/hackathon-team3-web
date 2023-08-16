@@ -46,6 +46,7 @@ const BannerBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  //background: mediumpurple;
 `;
 
 const FunctionBox = styled.div`
@@ -71,6 +72,7 @@ const EduBtn = styled.img`
   height: 132px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
 `;
+
 const IconText = styled.p`
   margin-top: 10px;
   font-size: 30px;

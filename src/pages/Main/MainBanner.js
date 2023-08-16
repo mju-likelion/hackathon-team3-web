@@ -5,6 +5,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
+import BannerContentImg from '../../assets/images/Banner2.svg';
+import Announce from '../../assets/images/Announcement.svg';
+import LastBanner from '../../assets/images/lastbanner.svg';
 const MainBanner = () => {
   return (
     <BannerSwiper
@@ -95,4 +98,8 @@ const BannerContentThird = styled.p`
   font-size: 36px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
+`;
+
+const BannerContent = styled.img`
+  width: 100%;
 `;
