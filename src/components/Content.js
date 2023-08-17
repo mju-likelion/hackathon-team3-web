@@ -130,7 +130,7 @@ const Content = ({
               <HelpIcon src={bulb_icon} />
             </HelpButton>
           </TapWrapper>
-          <ContentWrapper isModal={isModal} bgColor={bgColor}>
+          <ContentWrapper bgColor={bgColor}>
             {isModal ? (
               <HelpModal isModal={isModal} helpMsg={helpMessage} />
             ) : (
@@ -261,7 +261,6 @@ const ContentWrapper = styled.div`
   border-radius: 25px;
   background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};
 `;
-
 const ScenarioBox = styled.div`
   width: 100%;
   height: 140px;

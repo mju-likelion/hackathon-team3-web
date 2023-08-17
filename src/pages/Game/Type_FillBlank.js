@@ -19,9 +19,7 @@ const TypeFillBlank = ({
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
     await handleComplete(problemId, userAnswer);
-
     setTimeout(() => {
       setUserAnswer('');
     }, 1000);
@@ -43,7 +41,7 @@ const TypeFillBlank = ({
             <QuestionText>{parts[0]}</QuestionText>
             <AnswerInput
               placeHolder='정답'
-              answerlength={parts[1].length}
+              answerlengthprop={parts[1].length}
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               autoFocus
@@ -91,7 +89,7 @@ const QuestionText = styled.p`
   font-weight: 400;
 `;
 const AnswerInput = styled.input`
-  width: ${({ answerlength }) => answerlength * 35}px;
+  width: ${({ answerlengthprop }) => answerlengthprop * 35}px;
   height: 35px;
   padding: 5px;
   border: none;

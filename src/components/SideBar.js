@@ -35,11 +35,11 @@ const SideBar = ({
               <Title
                 key={content.id}
                 disabled={!content.isCompleted && index !== ableChapterIndex}
-                ableChapterIndex={ableChapterIndex}
-                currentChapterId={currentChapterId}
+                $ableChapterIndex={ableChapterIndex}
+                $currentChapterId={currentChapterId}
                 onClick={() => onClick(content.id)}
                 id={content.id}
-                index={index}
+                $index={index}
               >
                 {index + 1}. {content.title}
               </Title>
@@ -47,7 +47,12 @@ const SideBar = ({
           })}
       </Contents>
       <RateBarContainer>
-        <ProgressRateBar text_size={18} width={150} height={25} rate={rate} />
+        <ProgressRateBar
+          $text_size={18}
+          $width={150}
+          $height={25}
+          rate={rate}
+        />
       </RateBarContainer>
     </SideBarContainer>
   );
@@ -89,14 +94,14 @@ const Title = styled.button`
   color: ${({
     theme,
     disabled,
-    ableChapterIndex,
-    currentChapterId,
+    $ableChapterIndex,
+    $currentChapterId,
     id,
-    index,
+    $index,
   }) => {
     if (!disabled) {
-      if (id === currentChapterId) return theme.colors.BLUE;
-      else if (index === ableChapterIndex) return theme.colors.TEXT_BLACK;
+      if (id === $currentChapterId) return theme.colors.BLUE;
+      else if ($index === $ableChapterIndex) return theme.colors.TEXT_BLACK;
     } else return theme.colors.LIGHTGRAY;
   }};
   cursor: ${({ disabled }) => (disabled ? `default` : `pointer`)};
