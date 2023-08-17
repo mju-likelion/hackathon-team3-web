@@ -28,7 +28,7 @@ const InputContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 `;
 const DisplayBox = styled.div`
   display: flex;
@@ -50,8 +50,6 @@ const InputBox = styled.input`
 `;
 
 const ErrorMsgBox = styled.div`
-  display: flex;
-  align-items: flex-end; // 얘 왜 안되지?
   margin-left: 10px;
 `;
 const ErrorMsg = styled.pre`
