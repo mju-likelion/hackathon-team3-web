@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetUserInfo } from '../api/GetUserInfo';
-import { LogoutApi } from '../api/LogoutApi';
+import { GetUserInfo } from '../api/Auth/GetUserInfo';
+import { LogoutApi } from '../api/Auth/LogoutApi';
 import Logo from '../assets/images/surfing-logo.png';
 import LogoutIcon from '../assets/images/logout_icon.svg';
 

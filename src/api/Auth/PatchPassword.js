@@ -1,4 +1,4 @@
-import { Axios } from './Axios';
+import { Axios } from '../Axios';
 
 export const PatchPassword = (oldPassword, password, callbackFunction) => {
   Axios.patch(`/users/password`, { oldPassword, password }, {})

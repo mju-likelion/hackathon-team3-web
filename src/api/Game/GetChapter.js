@@ -1,4 +1,4 @@
-import { Axios } from './Axios';
+import { Axios } from '../Axios';
 
 export const GetChapter = (currentChapterId, callbackFunction) => {
   Axios.get(`/chapters/${currentChapterId}`, {})

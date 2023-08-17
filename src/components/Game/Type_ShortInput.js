@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import SquareButton from '../../components/SquareButton';
+import SquareButton from './SquareButton';
 import search_icon from '../../assets/images/search_icon.svg';
 import next_icon from '../../assets/images/right_arrow_icon.svg';
 
@@ -54,7 +54,7 @@ const TypeShortInput = ({
 
 const InputWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { PostScoring } from '../api/PostScoring';
-import Type_Choice from '../pages/Game/Type_Choice';
-import Type_ShortInput from '../pages/Game/Type_ShortInput';
-import Type_FillBlank from '../pages/Game/Type_FillBlank';
+import { PostScoring } from '../../api/Game/PostScoring';
+import Type_Choice from './Type_Choice';
+import Type_ShortInput from './Type_ShortInput';
+import Type_FillBlank from './Type_FillBlank';
 import HelpModal from './HelpModal';
-import bulb_icon from '../assets/images/bulb_icon.svg';
+import bulb_icon from '../../assets/images/bulb_icon.svg';
 
 const Content = ({
   chapterData,

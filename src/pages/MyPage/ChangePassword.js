@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { schema } from './Validation';
+import { schema } from '../../Hooks/Validation';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PatchPassword } from '../../api/PatchPassword';
-import ChangePasswordInput from './ChangePasswordInput';
+import { PatchPassword } from '../../api/Auth/PatchPassword';
+import ChangePasswordInput from '../../components/MyPage/ChangePasswordInput';
 
 const ChangePassword = () => {
   const {

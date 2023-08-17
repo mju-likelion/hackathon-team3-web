@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import ChoiceCircle from '../../components/ChoiceCircle';
-import ButtonLong from '../../components/ButtonLong';
-import SquareButton from '../../components/SquareButton';
+import ChoiceCircle from '../Button/ChoiceCircle';
+import ButtonLong from '../Button/ButtonLong';
+import SquareButton from './SquareButton';
 import next_icon from '../../assets/images/right_arrow_icon.svg';
 
 const TypeChoice = ({

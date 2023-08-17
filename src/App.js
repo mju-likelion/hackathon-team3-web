@@ -15,7 +15,6 @@ import NotFound from './pages/Error/NotFound';
 
 function App() {
   return (
-    <>
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <BrowserRouter>
@@ -34,7 +33,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
-    </>
   );
 }
 

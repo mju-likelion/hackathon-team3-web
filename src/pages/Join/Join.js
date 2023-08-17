@@ -3,9 +3,9 @@ import { schemaJoin } from '../../Hooks/ValidationYup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { JoinApi } from '../../api/JoinApi';
+import { JoinApi } from '../../api/Auth/JoinApi';
 import Input from '../../components/Input';
-import ButtonLong from '../../components/ButtonLong';
+import ButtonLong from '../../components/Button/ButtonLong';
 
 const Join = () => {
   const navigate = useNavigate();

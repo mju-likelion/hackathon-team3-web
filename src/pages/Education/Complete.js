@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Wave_SVG from '../../components/WaveSVG';
+import Wave_SVG from '../../components/Main/WaveSVG';
 import { useNavigate } from 'react-router-dom';
 
 const Complete = () => {

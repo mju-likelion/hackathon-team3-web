@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetChapters } from '../../api/GetChapters';
-import { GetChapter } from '../../api/GetChapter';
-import SideBar from '../../components/SideBar';
-import SquareButton from '../../components/SquareButton';
-import Content from '../../components/Content';
+import { GetChapters } from '../../api/Game/GetChapters';
+import { GetChapter } from '../../api/Game/GetChapter';
+import SideBar from '../../components/Game/SideBar';
+import SquareButton from '../../components/Game/SquareButton';
+import Content from '../../components/Game/Content';
 import exit_icon from '../../assets/images/exit_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
 
@@ -101,7 +101,7 @@ const PageContainer = styled.div`
 `;
 const ContentWrapper = styled.div`
   width: 1030px;
-  height: 669px;
+  height: 730px;
   padding: 30px;
   display: flex;
   justify-content: space-between;

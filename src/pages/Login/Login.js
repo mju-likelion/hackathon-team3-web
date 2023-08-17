@@ -4,9 +4,9 @@ import { schemaLogin } from '../../Hooks/ValidationYup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { LoginApi } from '../../api/LoginApi';
+import { LoginApi } from '../../api/Auth/LoginApi';
 import Input from '../../components/Input';
-import ButtonLong from '../../components/ButtonLong';
+import ButtonLong from '../../components/Button/ButtonLong';
 
 const Login = () => {
   const navigate = useNavigate();

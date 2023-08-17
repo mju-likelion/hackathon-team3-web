@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { GetRate } from '../../api/GetRate';
-import CircleButton from '../../components/CircleButton';
+import { GetRate } from '../../api/Game/GetRate';
+import CircleButton from '../../components/Button/CircleButton';
 import ProgressRateBar from '../../components/ProgressRateBar';
 
 const EducationSelect = () => {

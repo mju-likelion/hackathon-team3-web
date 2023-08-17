@@ -1,7 +1,7 @@
-import { Axios } from './Axios';
+import { Axios } from '../Axios';
 
-export const GetChapters = (type, callbackFunction) => {
-  Axios.get(`/learnings/chapters`, {
+export const GetRate = (type, callbackFunction) => {
+  Axios.get(`/learnings/progress`, {
     params: {
       type: type,
     },

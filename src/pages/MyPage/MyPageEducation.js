@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetRate } from '../../api/GetRate';
-import { GetUserInfo } from '../../api/GetUserInfo';
-import MyPageCategory from './MyPageCategory';
+import { GetRate } from '../../api/Game/GetRate';
+import { GetUserInfo } from '../../api/Auth/GetUserInfo';
+import MyPageCategory from '../../components/MyPage/MyPageCategory';
 import ProgressRateBar from '../../components/ProgressRateBar';
 
 const MyPageEducation = () => {

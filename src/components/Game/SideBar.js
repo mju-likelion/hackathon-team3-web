@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import ProgressRateBar from './ProgressRateBar';
+import ProgressRateBar from '../ProgressRateBar';
 
 const SideBar = ({
   title,

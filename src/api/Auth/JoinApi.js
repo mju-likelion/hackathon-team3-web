@@ -1,8 +1,8 @@
-import { Axios } from './Axios';
-
-export const LoginApi = (data, callbackFunctions) => {
+import { Axios } from '../Axios';
+export const JoinApi = (data, callbackFunctions) => {
   const { navigateSuccess, navigateError } = callbackFunctions;
-  Axios.post(`/auth/login`, {
+  Axios.post(`/auth/join`, {
+    nickname: data.nickname,
     email: data.email,
     password: data.pw,
   })

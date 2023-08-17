@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { DeleteUser } from '../../api/DeleteUser';
-import MyPageCategory from './MyPageCategory';
+import { DeleteUser } from '../../api/Auth/DeleteUser';
+import MyPageCategory from '../../components/MyPage/MyPageCategory';
 import ChangePassword from './ChangePassword';
 
 const MyPageAccount = () => {
