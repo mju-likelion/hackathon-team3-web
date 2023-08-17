@@ -1,11 +1,11 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { PostScoring } from '../api/PostScoring';
 import Type_Choice from '../pages/Game/Type_Choice';
 import Type_ShortInput from '../pages/Game/Type_ShortInput';
 import Type_FillBlank from '../pages/Game/Type_FillBlank';
-import { useEffect, useState } from 'react';
-import bulb_icon from '../assets/images/bulb_icon.svg';
 import HelpModal from './HelpModal';
-import { PostScoring } from '../api/PostScoring';
+import bulb_icon from '../assets/images/bulb_icon.svg';
 
 const Content = ({
   chapterData,
@@ -119,7 +119,7 @@ const Content = ({
                         : !ableProblem.includes(tap.id) &&
                           !completeArr.includes(tap.id)
                     }
-                    bgColor={bgColor} //임시
+                    bgColor={bgColor}
                   >
                     {index + 1}
                   </Tap>
@@ -200,7 +200,7 @@ const ContentContainer = styled.div`
   height: 100%;
 `;
 const ChapterTitle = styled.p`
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   text-align: center;
 `;
@@ -256,12 +256,11 @@ const Tap = styled.button`
 const ContentWrapper = styled.div`
   margin: 0 auto;
   width: 880px;
-  height: 590px;
+  height: 550px;
   padding: 15px 70px 0 70px;
   border-radius: 25px;
   background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};
 `;
-
 const ScenarioBox = styled.div`
   width: 100%;
   height: 140px;

@@ -10,6 +10,5 @@ export const GetRate = (type, callbackFunction) => {
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };

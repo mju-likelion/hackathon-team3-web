@@ -23,10 +23,11 @@ const Complete = () => {
 
 const CompletePageWrapper = styled.div`
   width: 1280px;
+  height: 730px;
 `;
 const MsgBox = styled.div`
   width: 100%;
-  margin-top: 30px;
+  margin-top: 80px;
 `;
 const MsgTxt = styled.p`
   font-size: 40px;

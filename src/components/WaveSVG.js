@@ -28,7 +28,7 @@ const WaveSVG = ({ ...attrProps }) => {
         `}
       </style>
       <svg
-        viewBox='0 210 1440 450'
+        viewBox='0 160 1440 420'
         xmlns='http://www.w3.org/2000/svg'
         className='transition duration-300 ease-in-out delay-150'
       >

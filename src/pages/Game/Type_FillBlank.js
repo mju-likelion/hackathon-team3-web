@@ -19,7 +19,6 @@ const TypeFillBlank = ({
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
     await handleComplete(problemId, userAnswer);
 
     setTimeout(() => {

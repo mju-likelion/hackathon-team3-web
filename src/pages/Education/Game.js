@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GetChapters } from '../../api/GetChapters';
+import { GetChapter } from '../../api/GetChapter';
 import SideBar from '../../components/SideBar';
 import SquareButton from '../../components/SquareButton';
 import Content from '../../components/Content';
 import exit_icon from '../../assets/images/exit_icon.svg';
 import next_icon from '../../assets/images/next_icon.svg';
-
-import { GetChapters } from '../../api/GetChapters';
-import { GetChapter } from '../../api/GetChapter';
 
 const Game = ({ type }) => {
   const isBasic = type === 'basic';
@@ -37,7 +36,7 @@ const Game = ({ type }) => {
     }
   }, [currentChapterId, type]);
   useEffect(() => {
-      setCurrentChapterId(0);
+    setCurrentChapterId(0);
   }, [type]);
 
   return (
@@ -81,8 +80,10 @@ const Game = ({ type }) => {
                   );
                 } else {
                   setCurrentChapterId(sideBarData.chapters.at(-1).id);
-                  console.log(type)
-                  navigate(type==='basic' ? '/education/advanced' : '/complete');
+                  console.log(type);
+                  navigate(
+                    type === 'basic' ? '/education/advanced' : '/complete'
+                  );
                 }
               }}
             />
@@ -95,12 +96,12 @@ const Game = ({ type }) => {
 
 const PageContainer = styled.div`
   width: 1280px;
-  height: 769px;
+  height: 730px;
   display: flex;
 `;
 const ContentWrapper = styled.div`
   width: 1030px;
-  height: 769px;
+  height: 669px;
   padding: 30px;
   display: flex;
   justify-content: space-between;

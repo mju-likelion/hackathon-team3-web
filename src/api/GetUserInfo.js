@@ -6,6 +6,5 @@ export const GetUserInfo = (callbackFunction) => {
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ProgressRateBar from './ProgressRateBar';
 import { useEffect } from 'react';
+import ProgressRateBar from './ProgressRateBar';
 
 const SideBar = ({
   title,
@@ -55,7 +55,7 @@ const SideBar = ({
 
 const SideBarContainer = styled.div`
   width: 250px;
-  height: 769px;
+  height: 730px;
   padding: 20px;
   box-shadow: 0 2px 1px rgba(37, 37, 37, 0.5);
   position: relative;

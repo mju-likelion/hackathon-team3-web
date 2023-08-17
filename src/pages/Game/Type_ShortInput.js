@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import SquareButton from '../../components/SquareButton';
 import search_icon from '../../assets/images/search_icon.svg';
 import next_icon from '../../assets/images/right_arrow_icon.svg';
-import { useEffect, useState } from 'react';
 
 const TypeShortInput = ({
   problemId,

@@ -6,6 +6,5 @@ export const GetChapter = (currentChapterId, callbackFunction) => {
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };

@@ -8,7 +8,6 @@ export const LogoutApi = (data, callbackFunctions) => {
   })
     .then((res) => {
       navigateSuccess();
-      console.log(res);
     })
     .catch((error) => {
       navigateError(error);

@@ -14,6 +14,5 @@ export const PostScoring = (
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };

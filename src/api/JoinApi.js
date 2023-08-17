@@ -7,7 +7,6 @@ export const JoinApi = (data, callbackFunctions) => {
     password: data.pw,
   })
     .then((res) => {
-      console.log(res);
       navigateSuccess();
     })
     .catch((error) => {

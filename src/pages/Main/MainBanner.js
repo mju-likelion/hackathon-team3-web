@@ -5,9 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import BannerContentImg from '../../assets/images/Banner2.svg';
-import Announce from '../../assets/images/Announcement.svg';
-import LastBanner from '../../assets/images/lastbanner.svg';
+
 const MainBanner = () => {
   return (
     <BannerSwiper
@@ -54,14 +52,12 @@ const BannerSwiper = styled(Swiper)`
   background-color: ${({ theme }) => theme.colors.SKYBLUE};
   box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
 `;
-
 const BannerSwiperBox = styled(SwiperSlide)`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 `;
-
 const BannerContentTitle = styled.p`
   font-size: 35px;
   font-weight: bold;
@@ -74,14 +70,12 @@ const BannerContentTitle = styled.p`
   margin-bottom: 20px;
   margin-top: -20px;
 `;
-
 const BannerContentText = styled.p`
   margin-top: 15px;
   font-size: 25px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
-
 const BannerImportant = styled.span`
   margin-left: 13px;
   font-size: 50px;
@@ -92,14 +86,9 @@ const BannerImportant = styled.span`
     1px -1px 1px rgb(0, 0, 0, 0.3),
     -1px 1px 1px rgb(0, 0, 0, 0.3);
 `;
-
 const BannerContentThird = styled.p`
   margin-top: 15px;
   font-size: 36px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
-`;
-
-const BannerContent = styled.img`
-  width: 100%;
 `;

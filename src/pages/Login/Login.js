@@ -1,12 +1,13 @@
 import { styled } from 'styled-components';
-import Input from '../../components/Input';
-import ButtonLong from '../../components/ButtonLong';
 import { Link } from 'react-router-dom';
+import { schemaLogin } from '../../Hooks/ValidationYup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { schemaLogin } from '../../Hooks/ValidationYup';
-import { LoginApi } from '../../api/LoginApi';
 import { useNavigate } from 'react-router-dom';
+import { LoginApi } from '../../api/LoginApi';
+import Input from '../../components/Input';
+import ButtonLong from '../../components/ButtonLong';
+
 const Login = () => {
   const navigate = useNavigate();
   const {
@@ -37,47 +38,41 @@ const Login = () => {
     },
   };
   return (
-    <>
-      <Header />
-      <LoginFrame>
-        <LoginBox onSubmit={handleSubmit(onClickLogin)}>
-          <h1>로그인</h1>
-          <Input
-            id='email'
-            name='email'
-            type='text'
-            placeholder='이메일'
-            register={register}
-            errorMsg={errors.email && errors.email.message}
-          />
-          <Input
-            id='password'
-            name='pw'
-            type='password'
-            placeholder='비밀번호'
-            errorMsg={errors.pw && errors.pw.message}
-            register={register}
-          />
-          <ButtonLong
-            type='submit'
-            btnName='로그인'
-            width={400}
-            isBtnAble={true}
-          />
-          <BottomText>
-            회원이 아니신가요 ? <Link to='/join'>회원가입 하러가기</Link>
-          </BottomText>
-        </LoginBox>
-      </LoginFrame>
-    </>
+    <LoginFrame>
+      <LoginBox onSubmit={handleSubmit(onClickLogin)}>
+        <h1>로그인</h1>
+        <Input
+          id='email'
+          name='email'
+          type='text'
+          placeholder='이메일'
+          register={register}
+          errorMsg={errors.email && errors.email.message}
+        />
+        <Input
+          id='password'
+          name='pw'
+          type='password'
+          placeholder='비밀번호'
+          errorMsg={errors.pw && errors.pw.message}
+          register={register}
+        />
+        <ButtonLong
+          type='submit'
+          btnName='로그인'
+          width={400}
+          isBtnAble={true}
+        />
+        <BottomText>
+          회원이 아니신가요 ? <Link to='/join'>회원가입 하러가기</Link>
+        </BottomText>
+      </LoginBox>
+    </LoginFrame>
   );
 };
 
-const Header = styled.div`
-  height: 100px;
-`;
-
 const LoginFrame = styled.div`
+  margin-top: 70px;
   height: 660px;
   display: flex;
   justify-content: center;

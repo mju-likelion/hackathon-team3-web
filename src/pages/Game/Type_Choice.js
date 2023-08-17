@@ -66,7 +66,7 @@ const ChoiceWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 20px;
 `;
 const CircleContainer = styled.div`
   display: flex;

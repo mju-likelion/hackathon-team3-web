@@ -10,6 +10,5 @@ export const GetChapters = (type, callbackFunction) => {
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };
