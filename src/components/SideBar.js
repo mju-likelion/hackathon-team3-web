@@ -83,6 +83,7 @@ const Contents = styled.div`
   align-items: start;
 `;
 const Title = styled.button`
+  text-align: start;
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 35px;

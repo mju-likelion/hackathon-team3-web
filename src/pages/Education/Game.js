@@ -28,14 +28,17 @@ const Game = ({ type }) => {
         setCurrentChapterId(res.data?.chapters[0]?.id);
       }
     });
-  }, [currentChapterId]);
+  }, [currentChapterId, sideBarData, type]);
   useEffect(() => {
     if (currentChapterId !== undefined) {
       GetChapter(currentChapterId, (res) => {
         setChapterData(res.data?.chapter);
       });
     }
-  }, [currentChapterId]);
+  }, [currentChapterId, type]);
+  useEffect(() => {
+      setCurrentChapterId(0);
+  }, [type]);
 
   return (
     sideBarData &&
@@ -78,6 +81,7 @@ const Game = ({ type }) => {
                   );
                 } else {
                   setCurrentChapterId(sideBarData.chapters.at(-1).id);
+                  navigate('/education/advanced');
                 }
               }}
             />
