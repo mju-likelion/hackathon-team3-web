@@ -39,7 +39,6 @@ const Header = () => {
 
   return (
     <>
-      <HeaderWrap>
         <HeaderBar>
           <LogoIcon src={Logo} onClick={() => navigate('/')} />
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
@@ -59,16 +58,12 @@ const Header = () => {
             </SignBox>
           )}
         </HeaderBar>
-      </HeaderWrap>
     </>
   );
 };
 
 export default Header;
-const HeaderWrap = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+
 const HeaderBar = styled.div`
   width: 1280px;
   height: 70px;

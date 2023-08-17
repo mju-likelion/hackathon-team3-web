@@ -91,13 +91,15 @@ const QuestionText = styled.p`
   font-weight: 400;
 `;
 const AnswerInput = styled.input`
-  width: ${({ answerlength }) => answerlength * 35}px;
+  min-width: 50px;
+  width: ${({ answerlength }) => answerlength * 20}px;
   height: 35px;
   padding: 5px;
   border: none;
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 600;
   line-height: 35px;
+  letter-spacing: 1px;
   background-color: ${({ theme }) => theme.colors.BG_LIGHTGRAY};
   &:focus {
     outline: none;
