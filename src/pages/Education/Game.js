@@ -81,7 +81,8 @@ const Game = ({ type }) => {
                   );
                 } else {
                   setCurrentChapterId(sideBarData.chapters.at(-1).id);
-                  navigate('/education/advanced');
+                  console.log(type)
+                  navigate(type==='basic' ? '/education/advanced' : '/complete');
                 }
               }}
             />
