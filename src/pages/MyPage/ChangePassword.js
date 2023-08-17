@@ -17,14 +17,23 @@ const ChangePassword = () => {
     mode: 'onChange',
   });
   const inputValue = watch(); // 현재 필드의 값
-  const callbackFunction = () => {
-    console.log('성공!');
-    alert('비밀번호가 수정되었습니다.');
+  const callbackFunction = {
+    changedSuccess: () => {
+      console.log('성공!');
+      alert('비밀번호가 수정되었습니다.');
+    },
+    changedError: (error) => {
+      if (error.response && error.response.status === 401)
+        alert('기존 비밀번호가 일치하지 않습니다.');
+      else if (error.response && error.response.status === 400)
+        alert(
+          '기존 비밀번호와 변경할 비밀번호가 같습니다. 다른 비밀번호를 입력해주세요.'
+        );
+    },
   };
 
   const onSubmit = (data) => {
     const { oldPassword, password } = data;
-    // 비밀번호 변경 api 호출 및 처리
     console.log(data);
     PatchPassword(oldPassword, password, callbackFunction);
   };
