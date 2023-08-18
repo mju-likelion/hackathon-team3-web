@@ -1,42 +1,54 @@
 import styled from 'styled-components';
-import ProgressRateBar from '../../components/ProgressRateBar';
 import { useNavigate } from 'react-router-dom';
-import CircleButton from '../../components/CircleButton';
+import { useEffect, useState } from 'react';
+import { GetRate } from '../../api/Game/GetRate';
+import CircleButton from '../../components/Button/CircleButton';
+import ProgressRateBar from '../../components/ProgressRateBar';
 
 const EducationSelect = () => {
-  const basicValue = 40;
-  const advancedValue = 60;
   const navigate = useNavigate();
+  const [rateBasic, setRateBasic] = useState(0);
+  const [rateAdvanced, setRateAdvanced] = useState(0);
+  const loginState = JSON.parse(localStorage.getItem('loginState'));
+
+  const onClickBasic = () => {
+    if (loginState === false) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    } else navigate('/education/basic');
+  };
+
+  const onClickAdvanced = () => {
+    if (loginState === false) {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    } else navigate('/education/advanced');
+  };
+
+  useEffect(() => {
+    GetRate(0, (res) => setRateBasic(res.data.progress));
+    GetRate(1, (res) => setRateAdvanced(res.data.progress));
+  }, []);
 
   return (
     <PageContainer>
       <ContentContainer>
         <MenuContainer>
-          <CircleButton
-            onClick={() => navigate('/education/basic')}
-            value='기초 학습 하기'
-            width='300'
-            fontsize='40'
-          />
+          <CircleBtn onClick={onClickBasic} value='기초 학습 하기' />
           <ProgressRateBar
             text_size={30}
             width={300}
             height={50}
-            rate={basicValue}
+            rate={rateBasic}
           />
         </MenuContainer>
         <MenuContainer>
-          <CircleButton
-            onClick={() => navigate('/education/advanced')}
-            value='심화 학습 하기'
-            width='300'
-            fontsize='40'
-          />
+          <CircleBtn onClick={onClickAdvanced} value='심화 학습 하기' />
           <ProgressRateBar
             text_size={30}
             width={300}
             height={50}
-            rate={advancedValue}
+            rate={rateAdvanced}
           />
         </MenuContainer>
       </ContentContainer>
@@ -46,8 +58,7 @@ const EducationSelect = () => {
 
 const PageContainer = styled.div`
   width: 1280px;
-  height: 769px;
-  border: 1px solid black;
+  height: 730px;
 `;
 const ContentContainer = styled.div`
   display: flex;
@@ -60,7 +71,9 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
+  gap: 55px;
 `;
-
+const CircleBtn = styled(CircleButton)`
+  margin-left: 55px;
+`;
 export default EducationSelect;

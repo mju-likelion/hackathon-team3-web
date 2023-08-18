@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const ProgressRateBar = ({ className, text_size, width, height, rate }) => {
+const ProgressRateBar = ({ text_size, width, height, rate, ...attrProps }) => {
   return (
-    <BarBox className={className}>
+    <BarBox {...attrProps}>
       <RateTitle text_size={text_size}>진도율</RateTitle>
       <Bar_background width={width} height={height}>
         <Bar_value height={height} value={rate} />
@@ -21,12 +21,13 @@ const RateTitle = styled.p`
   font-size: ${({ text_size }) => text_size}px;
   font-weight: bold;
   white-space: nowrap;
+  color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
 const Bar_background = styled.div`
   position: relative;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  background-color: #ededed;
+  background-color: ${({ theme }) => theme.colors.BG_LIGHTGRAY};
   border-radius: 8px;
   overflow: hidden;
 `;
