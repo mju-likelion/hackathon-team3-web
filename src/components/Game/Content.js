@@ -204,8 +204,8 @@ const shakeAnimation = keyframes`
   40%, 60% {transform: translate3d(2px, 0, 0);}
 `;
 const ContentContainer = styled.div`
-  width: 900px;
-  height: 100%;
+  width: calc(100vw - 240px);
+  height: calc(100vh - 130px);
 `;
 const ChapterTitle = styled.p`
   font-size: 35px;
@@ -215,16 +215,17 @@ const ChapterTitle = styled.p`
 const TapWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  width: calc(100vw - 350px);
 `;
 const TapContainer = styled.div`
-  margin-left: 40px;
+  margin-left: 60px;
   display: flex;
   align-items: flex-end;
 `;
 const HelpButton = styled.button`
   width: 70px;
   height: 70px;
-  margin-right: 25px;
+  margin-right: 55px;
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme, isModal }) =>
     isModal ? `#ffe755` : theme.colors.YELLOW};
@@ -263,8 +264,8 @@ const Tap = styled.button`
 `;
 const ContentWrapper = styled.div`
   margin: 0 auto;
-  width: 880px;
-  height: 550px;
+  width: calc(100vw - 250px - 60px - 100px);
+  height: 75vh;
   padding: 15px 70px 0 70px;
   border-radius: 25px;
   background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};

@@ -63,7 +63,7 @@ const TypeFillBlank = ({
 
 const FillBlankWrapper = styled.div`
   width: 100%;
-  height: 250px;
+  height: calc(40vh);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -73,13 +73,13 @@ const Form = styled.form`
   justify-content: space-between;
 `;
 const QuestionBox = styled.div`
-  width: 640px;
-  height: 70px;
+  width: calc(100vw - 250px - 60px - 200px - 140px);
   padding: 13px 20px 20px 20px;
   border-radius: 8px;
   background-color: white;
 `;
 const InputContainer = styled.div`
+  width: calc(100vw - 250px - 60px - 200px - 140px - 30px);
   border-bottom: 5px solid ${({ theme }) => theme.colors.BLUE};
   display: flex;
   align-items: center;

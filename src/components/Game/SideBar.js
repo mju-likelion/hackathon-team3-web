@@ -55,7 +55,7 @@ const SideBar = ({
 
 const SideBarContainer = styled.div`
   width: 250px;
-  height: 730px;
+  height: calc(100vh - 70px);
   padding: 20px;
   box-shadow: 0 2px 1px rgba(37, 37, 37, 0.5);
   position: relative;
@@ -78,6 +78,7 @@ const Hr = styled.hr`
 `;
 const Contents = styled.div`
   white-space: normal;
+  height: calc(100vh - 70px - 55px - 40px);
   display: flex;
   flex-direction: column;
   align-items: start;

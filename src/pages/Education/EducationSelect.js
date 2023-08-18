@@ -57,8 +57,8 @@ const EducationSelect = () => {
 };
 
 const PageContainer = styled.div`
-  width: 1280px;
-  height: 730px;
+  width: 100vw;
+  height: calc(100vh - 250px);
 `;
 const ContentContainer = styled.div`
   display: flex;

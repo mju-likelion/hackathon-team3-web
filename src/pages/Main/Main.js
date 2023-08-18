@@ -37,8 +37,9 @@ const Main = () => {
 export default Main;
 
 const MainContainer = styled.div`
-  width: 1280px;
-  height: 730px;
+  width: 100vw;
+  height: calc(100vh - 100px);
+  
   display: flex;
   flex-direction: column;
   align-items: center;

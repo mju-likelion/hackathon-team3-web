@@ -67,13 +67,13 @@ export default MyPageEducation;
 
 const MyPageEduBox = styled.div`
   display: flex;
-  width: 1280px;
-  height: 730px;
+  width: calc(100vw);
 `;
 const MyPageEdu = styled.div`
   display: flex;
-  width: 1052px;
+  width: calc(100vw - 278px);
   flex-direction: column;
+  margin-left: 50px;
 `;
 const MyPageEduTitle = styled.h2`
   font-size: 25px;

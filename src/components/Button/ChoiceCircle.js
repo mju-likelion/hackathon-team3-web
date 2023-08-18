@@ -9,6 +9,9 @@ const ChoiceCircle = ({ value, onClick, userAnswer }) => {
 };
 
 const Circle = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 175px;
   height: 175px;
   padding: 20px;
