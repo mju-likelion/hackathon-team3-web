@@ -1,6 +1,5 @@
 {
-  "rewrites": [{ "source": "/about", "destination": "/about-our-company.html" }],
   "scripts": {
-    "build": "[my-framework] build --output public"
+    "build": "yarn build --output public"
   }
 }
