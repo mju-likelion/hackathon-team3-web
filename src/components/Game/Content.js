@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
 import { useEffect, useState } from 'react';
 import { PostScoring } from '../../api/Game/PostScoring';
 import Type_Choice from './Type_Choice';
@@ -87,9 +88,9 @@ const Content = ({
 
   useEffect(() => {
     if (isCorrect) {
-      setBgColor('BG_LIGHTGREEN'); // 정답일 경우의 배경색으로 설정
+      setBgColor('BG_LIGHTGREEN');
     } else if (isCorrect === false) {
-      setBgColor('BG_LIGHTPINK'); // 오답일 경우의 배경색으로 설정
+      setBgColor('BG_LIGHTPINK');
     } else setBgColor('BG_SKYBLUE'); // 초기 true/ false 모두 아닌 경우
 
     const timeout = setTimeout(() => {
@@ -130,6 +131,7 @@ const Content = ({
               <HelpIcon src={bulb_icon} />
             </HelpButton>
           </TapWrapper>
+
           <ContentWrapper isModal={isModal} bgColor={bgColor}>
             {isModal ? (
               <HelpModal isModal={isModal} helpMsg={helpMessage} />
@@ -195,6 +197,12 @@ const Content = ({
   );
 };
 
+const shakeAnimation = keyframes`
+  10%, 90% {transform: translate3d(-1px, 0, 0);}
+  20%, 80% {transform: translate3d(2px, 0, 0);}
+  30%, 50%, 70% {transform: translate3d(-1px, 0, 0);}
+  40%, 60% {transform: translate3d(2px, 0, 0);}
+`;
 const ContentContainer = styled.div`
   width: 900px;
   height: 100%;
@@ -260,6 +268,12 @@ const ContentWrapper = styled.div`
   padding: 15px 70px 0 70px;
   border-radius: 25px;
   background-color: ${({ theme, bgColor }) => theme.colors[bgColor]};
+  animation: ${({ bgColor }) =>
+    bgColor === 'BG_LIGHTPINK'
+      ? css`
+          ${shakeAnimation} 1s
+        `
+      : 'none'};
 `;
 const ScenarioBox = styled.div`
   width: 100%;
