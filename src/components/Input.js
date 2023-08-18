@@ -1,15 +1,6 @@
 import { styled } from 'styled-components';
 
-const Input = ({
-  id,
-  name,
-  type,
-  value,
-  placeholder,
-  register,
-  errorMsg,
-  onChange,
-}) => {
+const Input = ({ id, name, type, value, placeholder, register, errorMsg }) => {
   return (
     <>
       <InputWrap>

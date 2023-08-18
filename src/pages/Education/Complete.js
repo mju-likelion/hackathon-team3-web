@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Wave_SVG from '../../components/WaveSVG';
+import Wave_SVG from '../../components/Main/WaveSVG';
 import { useNavigate } from 'react-router-dom';
 
 const Complete = () => {
@@ -23,10 +23,11 @@ const Complete = () => {
 
 const CompletePageWrapper = styled.div`
   width: 1280px;
+  height: 730px;
 `;
 const MsgBox = styled.div`
   width: 100%;
-  margin-top: 30px;
+  margin-top: 80px;
 `;
 const MsgTxt = styled.p`
   font-size: 40px;

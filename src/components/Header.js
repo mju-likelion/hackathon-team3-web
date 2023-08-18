@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import LogoutIcon from '../assets/images/logout_icon.svg';
-import { GetUserInfo } from '../api/GetUserInfo';
 import { useEffect, useState } from 'react';
-import { LogoutApi } from '../api/LogoutApi';
+import { useNavigate } from 'react-router-dom';
+import { GetUserInfo } from '../api/Auth/GetUserInfo';
+import { LogoutApi } from '../api/Auth/LogoutApi';
 import Logo from '../assets/images/surfing-logo.png';
+import LogoutIcon from '../assets/images/logout_icon.svg';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ const Header = () => {
       window.localStorage.setItem('loginState', false);
       alert('로그아웃되었습니다. 메인으로 돌아갑니다.');
       location.replace('/');
-      // navigate('/');
     },
     navigateError: (error) => {
       console.log(error);
@@ -38,27 +37,25 @@ const Header = () => {
   };
 
   return (
-    <>
-        <HeaderBar>
-          <LogoIcon src={Logo} onClick={() => navigate('/')} />
-          <Learning onClick={() => navigate('/education')}>학습하기</Learning>
-          {loginState ? (
-            <SignBox>
-              <UserPageBtn onClick={() => navigate('/mypage/education')}>
-                {userName} 님 환영합니다!
-              </UserPageBtn>
-              <LogoutBtn onClick={onClickLogout}>
-                <img src={LogoutIcon} alt='logout-icon' />
-              </LogoutBtn>
-            </SignBox>
-          ) : (
-            <SignBox>
-              <SignBtn onClick={() => navigate('/login')}>로그인</SignBtn>
-              <SignBtn onClick={() => navigate('/join')}>회원가입</SignBtn>
-            </SignBox>
-          )}
-        </HeaderBar>
-    </>
+    <HeaderBar>
+      <LogoIcon src={Logo} onClick={() => navigate('/')} />
+      <Learning onClick={() => navigate('/education')}>학습하기</Learning>
+      {loginState ? (
+        <SignBox>
+          <UserPageBtn onClick={() => navigate('/mypage/education')}>
+            {userName} 님 환영합니다!
+          </UserPageBtn>
+          <LogoutBtn onClick={onClickLogout}>
+            <img src={LogoutIcon} alt='logout-icon' />
+          </LogoutBtn>
+        </SignBox>
+      ) : (
+        <SignBox>
+          <SignBtn onClick={() => navigate('/login')}>로그인</SignBtn>
+          <SignBtn onClick={() => navigate('/join')}>회원가입</SignBtn>
+        </SignBox>
+      )}
+    </HeaderBar>
   );
 };
 
@@ -71,7 +68,6 @@ const HeaderBar = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const Learning = styled.button`
   margin-left: 30px;
   font-size: 26px;
@@ -80,13 +76,11 @@ const Learning = styled.button`
   border-style: none;
   background-color: white;
 `;
-
 const SignBox = styled.div`
   margin-left: auto;
   margin-right: 67px;
   display: flex;
 `;
-
 const SignBtn = styled.button`
   height: 27px;
   width: 90px;
@@ -96,7 +90,6 @@ const SignBtn = styled.button`
   background-color: white;
   margin-right: 15px;
 `;
-
 const UserPageBtn = styled(SignBtn)`
   width: 100%;
   margin-right: 10px;
