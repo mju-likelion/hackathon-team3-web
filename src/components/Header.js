@@ -52,7 +52,7 @@ const Header = () => {
       ) : (
         <SignBox>
           <SignBtn onClick={() => navigate('/login')}>로그인</SignBtn>
-          <SignBtn onClick={() => navigate('/join')}>회원가입</SignBtn>
+          <SignUpBtn onClick={() => navigate('/join')}>회원가입</SignUpBtn>
         </SignBox>
       )}
     </HeaderBar>
@@ -89,6 +89,10 @@ const SignBtn = styled.button`
   border-style: none;
   background-color: white;
   margin-right: 15px;
+`;
+
+const SignUpBtn = styled(SignBtn)`
+  width: 110px;
 `;
 const UserPageBtn = styled(SignBtn)`
   width: 100%;
