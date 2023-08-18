@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 import Carousel from 'nuka-carousel';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/autoplay';
-
 const renderCenterLeftControls = ({ previousSlide }) => (
   <PreviousButton onClick={previousSlide}>&#60;</PreviousButton>
 );
@@ -67,8 +60,6 @@ const BannerBox = styled.div`
 `;
 
 const StyledCarousel = styled(Carousel)`
-  //width: 733px;
-  //height: 305px;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.SKYBLUE};
   box-shadow: 0 0 5px rgb(0, 0, 0, 0.3);
