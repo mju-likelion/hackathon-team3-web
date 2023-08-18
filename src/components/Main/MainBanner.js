@@ -7,14 +7,23 @@ import Carousel from 'nuka-carousel';
 // import 'swiper/css/pagination';
 // import 'swiper/css/autoplay';
 
+const renderCenterLeftControls = ({ previousSlide }) => (
+  <PreviousButton onClick={previousSlide}>&#60;</PreviousButton>
+);
+const renderCenterRightControls = ({ nextSlide }) => (
+  <NextButton onClick={nextSlide}>&#62;</NextButton>
+);
+
 const MainBanner = () => {
   return (
     <BannerBox>
       <StyledCarousel
         autoplay={true} // 자동
         autoplayInterval={2000} // 초
-        disableEdgeSwiping={false} // 마지막에서 처음으로
-        withoutControls={true} // 다음버튼, 밑에 동그라미
+        disableEdgeSwiping={true}
+        withoutControls={false} // 다음버튼, 밑에 동그라미
+        renderCenterLeftControls={renderCenterLeftControls}
+        renderCenterRightControls={renderCenterRightControls}
       >
         <BannerCarouselBox>
           <BannerContentTitle>
@@ -61,7 +70,6 @@ const StyledCarousel = styled(Carousel)`
 `;
 
 const BannerCarouselBox = styled.div`
-  //width: 733px;
   height: 305px;
   display: flex;
   justify-content: center;
@@ -101,4 +109,18 @@ const BannerContentThird = styled.p`
   font-size: 36px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
+`;
+
+const PreviousButton = styled.button`
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin-left: 10px;
+`;
+
+const NextButton = styled.button`
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin-right: 10px;
 `;
