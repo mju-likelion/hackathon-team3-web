@@ -6,7 +6,7 @@ export const LoginApi = (data, callbackFunctions) => {
     email: data.email,
     password: data.pw,
   })
-    .then((res) => {
+    .then(() => {
       navigateSuccess();
     })
     .catch((error) => {

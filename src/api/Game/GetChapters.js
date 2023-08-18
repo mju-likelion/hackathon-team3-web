@@ -9,6 +9,6 @@ export const GetChapters = (type, callbackFunction) => {
     .then((res) => {
       callbackFunction(res);
     })
-    .catch((error) => {
+    .catch(() => {
     });
 };

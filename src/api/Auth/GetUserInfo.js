@@ -5,6 +5,6 @@ export const GetUserInfo = (callbackFunction) => {
     .then((res) => {
       callbackFunction(res);
     })
-    .catch((error) => {
+    .catch(() => {
     });
 };

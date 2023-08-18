@@ -5,6 +5,6 @@ export const GetChapter = (currentChapterId, callbackFunction) => {
     .then((res) => {
       callbackFunction(res);
     })
-    .catch((error) => {
+    .catch(() => {
     });
 };

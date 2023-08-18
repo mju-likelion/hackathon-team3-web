@@ -3,10 +3,10 @@ import { Axios } from '../Axios';
 export const PatchPassword = (oldPassword, password, callbackFunction) => {
   const { changedSuccess, changedError } = callbackFunction;
   Axios.patch(`/users/password`, { oldPassword, password }, {})
-    .then((res) => {
+    .then(() => {
       callbackFunction();
     })
-    .catch((error) => {
+    .catch(() => {
       changedSuccess();
     })
     .catch((error) => {

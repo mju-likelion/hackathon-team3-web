@@ -13,6 +13,6 @@ export const PostScoring = (
     .then((res) => {
       callbackFunction(res);
     })
-    .catch((error) => {
+    .catch(() => {
     });
 };
