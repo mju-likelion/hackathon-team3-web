@@ -1,9 +1,10 @@
-import { useForm } from 'react-hook-form';
-import { schema } from './Validation';
-import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
-import ChangePasswordInput from './ChangePasswordInput';
-import { PatchPassword } from '../../api/PatchPassword';
+import { schema } from '../../Hooks/Validation';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { PatchPassword } from '../../api/Auth/PatchPassword';
+import ChangePasswordInput from '../../components/MyPage/ChangePasswordInput';
+
 const ChangePassword = () => {
   const {
     register,
@@ -38,52 +39,50 @@ const ChangePassword = () => {
   };
 
   return (
-    <>
-      <AllContainer>
-        <ChangePasswordForm onSubmit={handleSubmit(onSubmit)}>
-          <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
-          <InputBox>
-            <DisplayBox>
-              <ChangePasswordInput
-                type='기존 비밀번호'
-                name='oldPassword'
-                placeholder='기존 비밀번호'
-                register={register}
-                handleSubmit={handleSubmit}
-                errors={errors}
-                setValue={setValue}
-                inputValue={inputValue}
-              />
-            </DisplayBox>
-            <DisplayBox>
-              <ChangePasswordInput
-                type='변경 비밀번호'
-                name='password'
-                placeholder='변경할 비밀번호'
-                register={register}
-                handleSubmit={handleSubmit}
-                errors={errors}
-                setValue={setValue}
-                inputValue={inputValue}
-              />
-            </DisplayBox>
-            <DisplayBox>
-              <ChangePasswordInput
-                type='비밀번호 확인'
-                name='checkPassword'
-                placeholder='비밀번호 확인'
-                register={register}
-                handleSubmit={handleSubmit}
-                errors={errors}
-                setValue={setValue}
-                inputValue={inputValue}
-              />
-            </DisplayBox>
-          </InputBox>
-          <ChangeButton type='submit'>변경하기</ChangeButton>
-        </ChangePasswordForm>
-      </AllContainer>
-    </>
+    <AllContainer>
+      <ChangePasswordForm onSubmit={handleSubmit(onSubmit)}>
+        <ChangePasswordTitle>비밀번호 변경</ChangePasswordTitle>
+        <InputBox>
+          <DisplayBox>
+            <ChangePasswordInput
+              type='기존 비밀번호'
+              name='oldPassword'
+              placeholder='기존 비밀번호'
+              register={register}
+              handleSubmit={handleSubmit}
+              errors={errors}
+              setValue={setValue}
+              inputValue={inputValue}
+            />
+          </DisplayBox>
+          <DisplayBox>
+            <ChangePasswordInput
+              type='변경 비밀번호'
+              name='password'
+              placeholder='변경할 비밀번호'
+              register={register}
+              handleSubmit={handleSubmit}
+              errors={errors}
+              setValue={setValue}
+              inputValue={inputValue}
+            />
+          </DisplayBox>
+          <DisplayBox>
+            <ChangePasswordInput
+              type='비밀번호 확인'
+              name='checkPassword'
+              placeholder='비밀번호 확인'
+              register={register}
+              handleSubmit={handleSubmit}
+              errors={errors}
+              setValue={setValue}
+              inputValue={inputValue}
+            />
+          </DisplayBox>
+        </InputBox>
+        <ChangeButton type='submit'>변경하기</ChangeButton>
+      </ChangePasswordForm>
+    </AllContainer>
   );
 };
 
@@ -94,32 +93,27 @@ const ChangePasswordForm = styled.form`
   flex-direction: column;
   align-items: center;
 `;
-
 const AllContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 1052px;
 `;
-
 const ChangePasswordTitle = styled.h2`
   font-size: 35px;
   margin: 75px 0 45px 0;
   color: ${({ theme }) => theme.colors.TEXT_BLACK};
 `;
-
 const InputBox = styled.div`
   :last-child {
     margin-bottom: 0;
   }
 `;
-
 const DisplayBox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 32px;
 `;
-
 const ChangeButton = styled.button`
   width: 200px;
   height: 45px;

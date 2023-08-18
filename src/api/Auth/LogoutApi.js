@@ -1,13 +1,12 @@
-import { Axios } from './Axios';
-export const JoinApi = (data, callbackFunctions) => {
+import { Axios } from '../Axios';
+
+export const LogoutApi = (data, callbackFunctions) => {
   const { navigateSuccess, navigateError } = callbackFunctions;
-  Axios.post(`/auth/join`, {
-    nickname: data.nickname,
+  Axios.post(`/auth/logout`, {
     email: data.email,
     password: data.pw,
   })
     .then((res) => {
-      console.log(res);
       navigateSuccess();
     })
     .catch((error) => {

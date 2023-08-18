@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import ProgressRateBar from '../../components/ProgressRateBar';
 import { useNavigate } from 'react-router-dom';
-import CircleButton from '../../components/CircleButton';
-import { GetRate } from '../../api/GetRate';
 import { useEffect, useState } from 'react';
+import { GetRate } from '../../api/Game/GetRate';
+import CircleButton from '../../components/Button/CircleButton';
+import ProgressRateBar from '../../components/ProgressRateBar';
 
 const EducationSelect = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ const EducationSelect = () => {
 
 const PageContainer = styled.div`
   width: 1280px;
-  height: 769px;
+  height: 730px;
 `;
 const ContentContainer = styled.div`
   display: flex;

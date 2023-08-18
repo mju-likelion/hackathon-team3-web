@@ -1,4 +1,4 @@
-import { Axios } from './Axios';
+import { Axios } from '../Axios';
 
 export const GetRate = (type, callbackFunction) => {
   Axios.get(`/learnings/progress`, {
@@ -10,6 +10,5 @@ export const GetRate = (type, callbackFunction) => {
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };

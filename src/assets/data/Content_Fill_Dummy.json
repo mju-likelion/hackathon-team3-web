@@ -1,9 +1,0 @@
-[
-  {
-    "type": "c",
-    "title": "사이트 특정 검색",
-    "scenario": "특정 사이트에서만 검색하려면 'site:'을 사용하세요. 예를 들어 \"site:wikipedia.org python\"이라고 검색하면 위키백과 내에서 파이썬에 대한 페이지만 검색합니다.",
-    "question": "→기후 변화를 New York Times 사이트에서 검색하려면? ",
-    "help": "도움말"
-  }
-]

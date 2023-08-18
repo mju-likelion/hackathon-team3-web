@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import ChoiceCircle from '../../components/ChoiceCircle';
-import ButtonLong from '../../components/ButtonLong';
-import SquareButton from '../../components/SquareButton';
+import ChoiceCircle from '../Button/ChoiceCircle';
+import ButtonLong from '../Button/ButtonLong';
+import SquareButton from './SquareButton';
 import next_icon from '../../assets/images/right_arrow_icon.svg';
 
 const TypeChoice = ({
@@ -66,7 +66,7 @@ const ChoiceWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 20px;
 `;
 const CircleContainer = styled.div`
   display: flex;

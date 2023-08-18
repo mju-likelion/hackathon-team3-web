@@ -1,4 +1,4 @@
-import { Axios } from './Axios';
+import { Axios } from '../Axios';
 
 export const PostScoring = (
   problemId,
@@ -14,6 +14,5 @@ export const PostScoring = (
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };

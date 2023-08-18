@@ -1,4 +1,4 @@
-import { Axios } from './Axios';
+import { Axios } from '../Axios';
 
 export const GetUserInfo = (callbackFunction) => {
   Axios.get(`/users`)
@@ -6,6 +6,5 @@ export const GetUserInfo = (callbackFunction) => {
       callbackFunction(res);
     })
     .catch((error) => {
-      console.log(error);
     });
 };

@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import { styled } from 'styled-components';
 
 const ButtonLong = ({ btnName, width, isBtnAble, ...attrProps }) => {
   return (
-    <>
-      <LongBtn width={width} isBtnAble={isBtnAble} {...attrProps} >
-        {btnName}
-      </LongBtn>
-    </>
+    <LongBtn width={width} isBtnAble={isBtnAble} {...attrProps}>
+      {btnName}
+    </LongBtn>
   );
 };
 const LongBtn = styled.button`
