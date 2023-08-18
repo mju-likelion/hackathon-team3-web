@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { schema } from '../../Hooks/Validation';
+import { schema } from '../../hooks/Validation';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PatchPassword } from '../../api/Auth/PatchPassword';

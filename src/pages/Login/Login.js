@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { schemaLogin } from '../../Hooks/ValidationYup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { schemaLogin } from '../../hooks/ValidationYup';
 import { useNavigate } from 'react-router-dom';
 import { LoginApi } from '../../api/Auth/LoginApi';
 import Input from '../../components/Input';
