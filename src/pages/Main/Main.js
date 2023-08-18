@@ -9,7 +9,7 @@ const Main = () => {
   const loginState = JSON.parse(localStorage.getItem('loginState'));
 
   const onClickMypage = () => {
-    if (loginState === false) {
+    if (!loginState) {
       alert('로그인이 필요합니다.');
       navigate('/login');
     } else navigate('/mypage/education');

@@ -12,14 +12,14 @@ const EducationSelect = () => {
   const loginState = JSON.parse(localStorage.getItem('loginState'));
 
   const onClickBasic = () => {
-    if (loginState === false) {
+    if (!loginState) {
       alert('로그인이 필요합니다.');
       navigate('/login');
     } else navigate('/education/basic');
   };
 
   const onClickAdvanced = () => {
-    if (loginState === false) {
+    if (!loginState) {
       alert('로그인이 필요합니다.');
       navigate('/login');
     } else navigate('/education/advanced');
