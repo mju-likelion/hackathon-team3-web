@@ -8,7 +8,6 @@ export const PatchPassword = (oldPassword, password, callbackFunction) => {
     })
     .catch((error) => {
       changedSuccess();
-      console.log(res);
     })
     .catch((error) => {
       changedError(error);
