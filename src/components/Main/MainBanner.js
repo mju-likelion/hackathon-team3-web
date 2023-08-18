@@ -18,12 +18,17 @@ const MainBanner = () => {
   return (
     <BannerBox>
       <StyledCarousel
-        autoplay={true} // 자동
-        autoplayInterval={2000} // 초
-        disableEdgeSwiping={true}
-        withoutControls={false} // 다음버튼, 밑에 동그라미
+        autoplay={true}
+        autoplayInterval={2000}
+        withoutControls={false}
         renderCenterLeftControls={renderCenterLeftControls}
         renderCenterRightControls={renderCenterRightControls}
+        defaultControlsConfig={{
+          pagingDotsStyle: {
+            padding: '1px',
+          },
+        }}
+        wrapAround
       >
         <BannerCarouselBox>
           <BannerContentTitle>
