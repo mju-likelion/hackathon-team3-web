@@ -62,7 +62,7 @@ const Header = () => {
 export default Header;
 
 const HeaderBar = styled.div`
-  width: 1280px;
+  width: 100vw;
   height: 70px;
   box-shadow: 0 0 5px black;
   display: flex;

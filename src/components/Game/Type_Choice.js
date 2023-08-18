@@ -46,6 +46,7 @@ const TypeChoice = ({
         })}
       </CircleContainer>
       <ButtonContainer>
+        <SquareButton disabled={true} />
         <SubmitBtn
           btnName='제출하기'
           width={300}
@@ -63,9 +64,10 @@ const TypeChoice = ({
 };
 const ChoiceWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 40vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   gap: 20px;
 `;
 const CircleContainer = styled.div`
@@ -75,10 +77,9 @@ const CircleContainer = styled.div`
 `;
 const ButtonContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
-const SubmitBtn = styled(ButtonLong)`
-  margin: 0 auto 0 220px;
-`;
+const SubmitBtn = styled(ButtonLong)``;
 
 export default TypeChoice;

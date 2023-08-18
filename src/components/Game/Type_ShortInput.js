@@ -54,7 +54,7 @@ const TypeShortInput = ({
 
 const InputWrapper = styled.div`
   width: 100%;
-  height: 250px;
+  height: calc(40vh);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -64,7 +64,7 @@ const Form = styled.form`
   justify-content: space-between;
 `;
 const InputContainer = styled.div`
-  width: 640px;
+  width: calc(100vw - 250px - 60px - 200px - 140px);
   height: 70px;
   padding: 0 20px;
   border-radius: 8px;
@@ -72,7 +72,7 @@ const InputContainer = styled.div`
 `;
 const AnswerInput = styled.input`
   margin: 5px 0;
-  width: 600px;
+  width: calc(100vw - 250px - 60px - 200px - 140px - 30px);
   height: 50px;
   border: none;
   border-bottom: 5px solid ${({ theme }) => theme.colors.BLUE};

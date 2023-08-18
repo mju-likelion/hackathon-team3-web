@@ -21,7 +21,7 @@ export default MyPageCategory;
 
 const CategoryBox = styled.div`
   width: 228px;
-  height: 730px;
+  height: calc(100vh - 70px);
   display: flex;
   flex-direction: column;
   align-items: center;

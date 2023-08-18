@@ -100,8 +100,8 @@ const PageContainer = styled.div`
   display: flex;
 `;
 const ContentWrapper = styled.div`
-  width: 1030px;
-  height: 730px;
+  width: calc(100vw - 240px);
+  height: calc(100vh - 70px);
   padding: 30px;
   display: flex;
   justify-content: space-between;
