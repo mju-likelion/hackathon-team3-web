@@ -9,7 +9,7 @@ import LogoutIcon from '../assets/images/logout_icon.svg';
 const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
-  const loginState = JSON.parse(localStorage.getItem('loginState'));
+  const loginState = JSON.parse(sessionStorage.getItem('loginState'));
 
   useEffect(() => {
     if (loginState) {
@@ -26,7 +26,7 @@ const Header = () => {
   };
   const callbackFunctions = {
     navigateSuccess: () => {
-      window.localStorage.setItem('loginState', false);
+      window.sessionStorage.setItem('loginState', false);
       alert('로그아웃되었습니다. 메인으로 돌아갑니다.');
       location.replace('/');
     },
