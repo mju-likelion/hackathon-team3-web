@@ -6,7 +6,7 @@ import MyPage from '../../assets/images/icon_mypage.png';
 
 const Main = () => {
   const navigate = useNavigate();
-  const loginState = JSON.parse(localStorage.getItem('loginState'));
+  const loginState = JSON.parse(sessionStorage.getItem('loginState'));
 
   const onClickMypage = () => {
     if (!loginState) {
@@ -39,7 +39,7 @@ export default Main;
 const MainContainer = styled.div`
   width: 100vw;
   height: calc(100vh - 100px);
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
