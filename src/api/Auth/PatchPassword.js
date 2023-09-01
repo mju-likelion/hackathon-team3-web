@@ -6,9 +6,6 @@ export const PatchPassword = (oldPassword, password, callbackFunction) => {
     .then(() => {
       callbackFunction();
     })
-    .catch(() => {
-      changedSuccess();
-    })
     .catch((error) => {
       changedError(error);
     });
