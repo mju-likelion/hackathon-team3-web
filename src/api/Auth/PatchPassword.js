@@ -4,7 +4,7 @@ export const PatchPassword = (oldPassword, password, callbackFunction) => {
   const { changedSuccess, changedError } = callbackFunction;
   Axios.patch(`/users/password`, { oldPassword, password }, {})
     .then(() => {
-      callbackFunction();
+      changedSuccess();
     })
     .catch((error) => {
       changedError(error);
