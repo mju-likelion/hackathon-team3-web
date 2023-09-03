@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PatchPassword } from '../../api/Auth/PatchPassword';
 import ChangePasswordInput from '../../components/MyPage/ChangePasswordInput';
+import { useState } from 'react';
 
 const ChangePassword = () => {
   const {
@@ -12,11 +13,13 @@ const ChangePassword = () => {
     formState: { errors },
     watch,
     setValue, // 입력 필드의 값 수동 변경. register로 등록된 값을 변화시킬 수 있음
+    onChange,
   } = useForm({
     resolver: yupResolver(schema),
-    mode: 'onChange',
+    // mode: 'onChange',
   });
   const inputValue = watch(); // 현재 필드의 값
+
   const callbackFunction = {
     changedSuccess: () => {
       console.log('성공!');
@@ -25,10 +28,10 @@ const ChangePassword = () => {
     changedError: (error) => {
       if (error.response && error.response.status === 401)
         alert('기존 비밀번호가 일치하지 않습니다.');
-      else if (error.response && error.response.status === 400)
-        alert(
-          '기존 비밀번호와 변경할 비밀번호가 같습니다. 다른 비밀번호를 입력해주세요.'
-        );
+      // else if (error.response && error.response.status === 400)
+      //   alert(
+      //     '기존 비밀번호와 변경할 비밀번호가 같습니다. 다른 비밀번호를 입력해주세요.'
+      //   );
     },
   };
 
@@ -36,6 +39,25 @@ const ChangePassword = () => {
     const { oldPassword, password } = data;
     console.log(data);
     PatchPassword(oldPassword, password, callbackFunction);
+  };
+
+  const [checkPassword, setCheckPassword] = useState('');
+  const [checkChangePassword, setCheckChangePassword] = useState('');
+
+  const handlePassword = (e) => {
+    setCheckPassword(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setCheckChangePassword(e.target.value);
+  };
+
+  const handleClick = () => {
+    if (checkPassword === checkChangePassword) {
+      alert(
+        '기존 비밀번호와 변경할 비밀번호가 같습니다. 다른 비밀번호를 입력해주세요.'
+      );
+    }
   };
 
   return (
@@ -53,6 +75,7 @@ const ChangePassword = () => {
               errors={errors}
               setValue={setValue}
               inputValue={inputValue}
+              onChange={handlePassword}
             />
           </DisplayBox>
           <DisplayBox>
@@ -65,6 +88,7 @@ const ChangePassword = () => {
               errors={errors}
               setValue={setValue}
               inputValue={inputValue}
+              onChange={handleChangePassword}
             />
           </DisplayBox>
           <DisplayBox>
@@ -80,7 +104,9 @@ const ChangePassword = () => {
             />
           </DisplayBox>
         </InputBox>
-        <ChangeButton type='submit'>변경하기</ChangeButton>
+        <ChangeButton type='submit' onClick={handleClick}>
+          변경하기
+        </ChangeButton>
       </ChangePasswordForm>
     </AllContainer>
   );

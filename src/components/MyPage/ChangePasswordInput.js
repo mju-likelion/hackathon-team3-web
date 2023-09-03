@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
-const ChangePasswordInput = ({ type, name, placeholder, register, errors }) => {
+const ChangePasswordInput = ({
+  type,
+  name,
+  placeholder,
+  register,
+  errors,
+  onChange,
+}) => {
   return (
     <InputContainer>
       <DisplayBox>
@@ -10,6 +17,7 @@ const ChangePasswordInput = ({ type, name, placeholder, register, errors }) => {
           name={name}
           type='password'
           placeholder={placeholder}
+          onChange={onChange}
           {...register(name)}
         />
       </DisplayBox>
