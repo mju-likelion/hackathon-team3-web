@@ -7,6 +7,7 @@ import ChangePasswordInput from '../../components/MyPage/ChangePasswordInput';
 import { useState } from 'react';
 
 const ChangePassword = () => {
+  // console.log(location);
   const {
     register,
     handleSubmit, // 폼 유효성검사, 제출처리, onSubmit 콜백을 인자로 받음
@@ -16,22 +17,17 @@ const ChangePassword = () => {
     onChange,
   } = useForm({
     resolver: yupResolver(schema),
-    // mode: 'onChange',
+    mode: 'onChange', // 언제 유효성 검사를 할지
   });
   const inputValue = watch(); // 현재 필드의 값
 
   const callbackFunction = {
     changedSuccess: () => {
-      console.log('성공!');
       alert('비밀번호가 수정되었습니다.');
     },
     changedError: (error) => {
       if (error.response && error.response.status === 401)
         alert('기존 비밀번호가 일치하지 않습니다.');
-      // else if (error.response && error.response.status === 400)
-      //   alert(
-      //     '기존 비밀번호와 변경할 비밀번호가 같습니다. 다른 비밀번호를 입력해주세요.'
-      //   );
     },
   };
 
@@ -42,18 +38,16 @@ const ChangePassword = () => {
   };
 
   const [checkPassword, setCheckPassword] = useState('');
-  const [checkChangePassword, setCheckChangePassword] = useState('');
 
-  const handlePassword = (e) => {
-    setCheckPassword(e.target.value);
-  };
-
-  const handleChangePassword = (e) => {
-    setCheckChangePassword(e.target.value);
+  const handleCheckPassword = (e) => {
+    setCheckPassword({
+      ...setCheckPassword, // checkPassword 객체의 모든 속성을 새 객체에 복사
+      [e.target.id]: e.target.value,
+    });
   };
 
   const handleClick = () => {
-    if (checkPassword === checkChangePassword) {
+    if (inputValue.oldPassword === inputValue.password) {
       alert(
         '기존 비밀번호와 변경할 비밀번호가 같습니다. 다른 비밀번호를 입력해주세요.'
       );
@@ -75,7 +69,7 @@ const ChangePassword = () => {
               errors={errors}
               setValue={setValue}
               inputValue={inputValue}
-              onChange={handlePassword}
+              onChange={handleCheckPassword}
             />
           </DisplayBox>
           <DisplayBox>
@@ -88,7 +82,7 @@ const ChangePassword = () => {
               errors={errors}
               setValue={setValue}
               inputValue={inputValue}
-              onChange={handleChangePassword}
+              onChange={handleCheckPassword}
             />
           </DisplayBox>
           <DisplayBox>
