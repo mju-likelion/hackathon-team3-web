@@ -9,7 +9,7 @@ const EducationSelect = () => {
   const navigate = useNavigate();
   const [rateBasic, setRateBasic] = useState(0);
   const [rateAdvanced, setRateAdvanced] = useState(0);
-  const loginState = JSON.parse(localStorage.getItem('loginState'));
+  const loginState = JSON.parse(sessionStorage.getItem('loginState'));
 
   const onClickBasic = () => {
     if (!loginState) {
