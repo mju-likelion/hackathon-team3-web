@@ -5,11 +5,16 @@ import { GetUserInfo } from '../api/Auth/GetUserInfo';
 import { LogoutApi } from '../api/Auth/LogoutApi';
 import Logo from '../assets/images/surfing-logo.png';
 import LogoutIcon from '../assets/images/logout_icon.svg';
+import { HeaderAtom } from '../assets/atom/HeaderAtom';
+import { useRecoilValue } from 'recoil';
 
 const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
+  const showHeader = useRecoilValue(HeaderAtom);
+
+  if (showHeader === '/*') return false;
 
   useEffect(() => {
     if (loginState) {

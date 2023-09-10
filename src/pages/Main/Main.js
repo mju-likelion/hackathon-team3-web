@@ -1,12 +1,18 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import MainBanner from '../../components/Main/MainBanner';
 import EduIcon from '../../assets/images/icon_edu.png';
 import MyPage from '../../assets/images/icon_mypage.png';
+import { useEffect } from 'react';
 
 const Main = () => {
   const navigate = useNavigate();
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
+
+  const location = useLocation();
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
 
   const onClickMypage = () => {
     if (!loginState) {
