@@ -9,11 +9,6 @@ const Main = () => {
   const navigate = useNavigate();
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
 
-  const location = useLocation();
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
-
   const onClickMypage = () => {
     if (!loginState) {
       alert('로그인이 필요합니다.');
