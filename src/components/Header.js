@@ -13,8 +13,22 @@ const Header = () => {
   const [userName, setUserName] = useState('');
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
   const showHeader = useRecoilValue(HeaderAtom);
+  // const pathname = [
+  //   '/',
+  //   '/education',
+  //   '/education/basic',
+  //   '/education/advanced',
+  //   '/join',
+  //   '/login',
+  //   '/mypage/education',
+  //   '/mypage/account',
+  //   'complete',
+  // ];
 
-  if (showHeader === '/*') return false;
+  // if (!showHeader.includes(pathname)) return false;
+  // if (!pathname.some((path) => showHeader.includes(path))) return false;
+  // const intersection = pathname.filter((value) => showHeader.includes(value));
+  // if (intersection.length === 0) return false;
 
   useEffect(() => {
     if (loginState) {
