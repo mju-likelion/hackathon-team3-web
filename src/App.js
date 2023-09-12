@@ -1,11 +1,5 @@
 import Main from './pages/Main/Main';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useLocation,
-  useRoutes,
-} from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
@@ -34,57 +28,13 @@ function App() {
   const setHeaderController = useSetRecoilState(HeaderAtom);
 
   useEffect(() => {
-    setHeaderController(location.pathname); // 아톰값 업데이트
-    console.log(headerControllerValue);
+    setHeaderController(location.pathname); // 아톰값 업데이트 -> useRecoilValue 값 변경?
+    console.log(headerControllerValue, typeof headerControllerValue); // 타입값 string
   }, [location]);
 
   //   return setHeaderController;
   // };
 
-  // let element = useRoutes([
-  //   {
-  //     path: '/*',
-  //     element: <Main />,
-  //     children: [
-  //       {
-  //         path: 'education',
-  //         element: <EducationSelect />,
-  //       },
-  //       {
-  //         path: 'education/basic',
-  //         element: <Game type='basic' />,
-  //       },
-  //       {
-  //         path: 'education/advanced',
-  //         element: <Game type='advanced' />,
-  //       },
-  //       {
-  //         path: 'join',
-  //         element: <Join />,
-  //       },
-  //       {
-  //         path: 'login',
-  //         element: <Login />,
-  //       },
-  //       {
-  //         path: 'mypage/education',
-  //         element: <MyPageEducation />,
-  //       },
-  //       {
-  //         path: 'mypage/account',
-  //         element: <MyPageAccount />,
-  //       },
-  //       {
-  //         path: 'complete',
-  //         element: <Complete />,
-  //       },
-  //       {
-  //         path: '*',
-  //         element: <NotFound />,
-  //       },
-  //     ],
-  //   },
-  // ]);
   // const [header, setHeader] = useRecoilState(HeaderAtom);
   // const showHeader = useRecoilValue(HeaderAtom);
   // const setShowHeader = useSetRecoilState(HeaderAtom);
@@ -97,21 +47,20 @@ function App() {
     '/login',
     '/mypage/education',
     '/mypage/account',
-    'complete',
+    '/complete',
   ];
+
+  // 근데 얘도 useEffect로 관리해야하나..?
   const handleHeader = () => {
+    // some()은 배열 내의 적어도 하나의 요소가 제공된 함수를 통과하는지 테스트함. 참/거짓 반환
     if (pathname.some((path) => !headerControllerValue.includes(path)))
       return false;
   };
-  // const handleHeader = () => {
-  //   // pathname에 없는 애면
-  //   setShowHeader('false');
-  // };
+
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       {handleHeader && <Header />}
-      {/*{element}*/}
       {/*  /!*{header && <Header />}*!/*/}
       {/*  {headerController && <Header />}*/}
       <Routes>
