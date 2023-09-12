@@ -12,7 +12,7 @@ const BackgroundImg = styled.div`
   background-size: cover;
   background-position: center;
   position: absolute;
-  width: 100%;
-  height: 730px;
+  width: 1280px;
+  height: 832px;
   overflow: auto;
 `;
