@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import EmailVerificationApi from '../../api/Auth/EmailVerificationApi';
-import { useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const EmailVerification = () => {
+  const navigate = useNavigate();
   const [isVerified, setIsVerified] = useState(null);
   const urlParams = new URLSearchParams(window.location.search);
   const verifyToken = urlParams.get('verifyToken');
@@ -23,15 +23,24 @@ const EmailVerification = () => {
     <>
       <EmailVerificationWrap>
         <EmailVerificationBox>
-          <VerificationText>
-            {isVerified === true && (
+          {isVerified === true && (
+            <VerifiedBox>
               <p>인증완료! 회원가입이 성공적으로 완료되었습니다.</p>
-            )}
-            {isVerified === false && (
+              <button onClick={() => navigate('/login')}>로그인하러가기</button>
+            </VerifiedBox>
+          )}
+          {isVerified === false && (
+            <VerifiedBox>
               <p>인증이 실패되었습니다. 다시 시도해주세요.</p>
-            )}
-            {isVerified === null && <p>인증을 확인하고 있습니다...</p>}
-          </VerificationText>
+              <button onClick={() => navigate('/')}>메인으로</button>
+            </VerifiedBox>
+          )}
+          {isVerified === null && (
+            <VerifiedBox>
+              <p>인증을 하고 있습니다...</p>
+              <button onClick={() => navigate('/')}>메인으로</button>
+            </VerifiedBox>
+          )}
         </EmailVerificationBox>
       </EmailVerificationWrap>
     </>
@@ -43,10 +52,10 @@ const EmailVerificationWrap = styled.div`
   justify-content: center;
 `;
 const EmailVerificationBox = styled.div`
-  background-color: pink;
+  background-color: ${({ theme }) => theme.colors.BG_SKYBLUE};
   margin-top: 80px;
   height: 200px;
-  width: 600px;
+  width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,10 +67,22 @@ const EmailVerificationBox = styled.div`
     margin: 50px;
   }
 `;
-
-const VerificationText = styled.p`
-  width: 500px;
-  font-weight: 900;
-  font-size: 25px;
+const VerifiedBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-size: 25px;
+    margin-bottom: 40px;
+  }
+  button {
+    background-color: ${({ theme }) => theme.colors.BLUE};
+    padding: 10px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 24px;
+    color: white;
+    font-weight: 600;
+  }
 `;
 export default EmailVerification;
