@@ -4,15 +4,12 @@ import EmailVerificationApi from '../../api/Auth/EmailVerificationApi';
 import { useParams } from 'react-router-dom';
 
 const EmailVerification = () => {
-  //   const { verifyToken } = useParams();
   const [isVerified, setIsVerified] = useState(null);
   const urlParams = new URLSearchParams(window.location.search);
   const verifyToken = urlParams.get('verifyToken');
-  //   const verifyToken = '2f9ac20d-0b99-471b-9f8e-158f597f8f38';
   useEffect(() => {
-    // 이메일 인증을 처리하기 위한 API 호출
     EmailVerificationApi(verifyToken, callbackFunctions);
-  });
+  }, [verifyToken]);
   const callbackFunctions = {
     navigateSuccess: (res) => {
       console.log(res);
