@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GetUserInfo } from '../api/Auth/GetUserInfo';
 import { LogoutApi } from '../api/Auth/LogoutApi';
 import Logo from '../assets/images/surfing-logo.png';
@@ -12,23 +12,6 @@ const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
-  const showHeader = useRecoilValue(HeaderAtom);
-  // const pathname = [
-  //   '/',
-  //   '/education',
-  //   '/education/basic',
-  //   '/education/advanced',
-  //   '/join',
-  //   '/login',
-  //   '/mypage/education',
-  //   '/mypage/account',
-  //   'complete',
-  // ];
-
-  // if (!showHeader.includes(pathname)) return false;
-  // if (!pathname.some((path) => showHeader.includes(path))) return false;
-  // const intersection = pathname.filter((value) => showHeader.includes(value));
-  // if (intersection.length === 0) return false;
 
   useEffect(() => {
     if (loginState) {
@@ -37,6 +20,11 @@ const Header = () => {
       });
     }
   }, []);
+
+  // useEffect(() => {
+  //   setHeaderController(location.pathname); // 아톰값 업데이트 -> useRecoilValue 값 변경?
+  //   console.log(headerControllerValue, typeof headerControllerValue); // 타입값 string
+  // }, [location]);
 
   const onClickLogout = (data) => {
     if (confirm('로그아웃 하시겠습니까?')) {
@@ -78,7 +66,19 @@ const Header = () => {
   );
 };
 
+export const showHeader = () => {
+  const locationNow = useLocation();
+  if (locationNow.pathname === '/') return null;
+  // return false;
+};
+console.log(showHeader); // true/false가 떠야하는데. . . . ..
+
 export default Header;
+// export const showHeader = () => {
+//   const locationNow = useLocation();
+//   console.log(locationNow);
+//   if (locationNow.pathname === '/*') return false;
+// };
 
 const HeaderBar = styled.div`
   width: 100vw;

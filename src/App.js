@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
-import Header from './components/Header';
+import Header, { showHeader } from './components/Header';
 import EducationSelect from './pages/Education/EducationSelect';
 import Game from './pages/Education/Game';
 import Join from './pages/Join/Join';
@@ -24,45 +24,12 @@ import { HeaderAtom } from './assets/atom/HeaderAtom';
 function App() {
   // const headerController = () => {
   const location = useLocation();
-  const headerControllerValue = useRecoilValue(HeaderAtom);
-  const setHeaderController = useSetRecoilState(HeaderAtom);
-
-  useEffect(() => {
-    setHeaderController(location.pathname); // 아톰값 업데이트 -> useRecoilValue 값 변경?
-    console.log(headerControllerValue, typeof headerControllerValue); // 타입값 string
-  }, [location]);
-
-  //   return setHeaderController;
-  // };
-
-  // const [header, setHeader] = useRecoilState(HeaderAtom);
-  // const showHeader = useRecoilValue(HeaderAtom);
-  // const setShowHeader = useSetRecoilState(HeaderAtom);
-  const pathname = [
-    '/',
-    '/education',
-    '/education/basic',
-    '/education/advanced',
-    '/join',
-    '/login',
-    '/mypage/education',
-    '/mypage/account',
-    '/complete',
-  ];
-
-  // 근데 얘도 useEffect로 관리해야하나..?
-  const handleHeader = () => {
-    // some()은 배열 내의 적어도 하나의 요소가 제공된 함수를 통과하는지 테스트함. 참/거짓 반환
-    if (pathname.some((path) => !headerControllerValue.includes(path)))
-      return false;
-  };
-
+  console.log(location);
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
-      {handleHeader && <Header />}
-      {/*  /!*{header && <Header />}*!/*/}
-      {/*  {headerController && <Header />}*/}
+      {showHeader && <Header />}
+      {/*<Header />*/}
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/education' element={<EducationSelect />} />
@@ -73,6 +40,7 @@ function App() {
         <Route path='/mypage/education' element={<MyPageEducation />} />
         <Route path='/mypage/account' element={<MyPageAccount />} />
         <Route path='/complete' element={<Complete />} />
+        {/*헤더 숨기고 싶은 페이지*/}
         <Route path='/*' element={<NotFound />} />
       </Routes>
     </ThemeProvider>
