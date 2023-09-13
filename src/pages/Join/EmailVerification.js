@@ -69,8 +69,8 @@ const EmailVerification = () => {
                 유의사항
                 <p>
                   인증 메일은 발송 시점으로부터 5분 동안만 유효하며, 재발송 시
-                  기존 인증코드는 만료됩니다. 반드시 마지막에 수신된 메일을
-                  확인바랍니다.
+                  기존 인증코드는 만료됩니다. <br /> 반드시 마지막에 수신된
+                  메일을 확인바랍니다.
                 </p>
               </Note>
               <JoinAgain>이메일을 잘못 입력하셨나요?</JoinAgain>
@@ -173,7 +173,7 @@ const VerifiedNull = styled.div`
     font-size: 20px;
     color: white;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 50px;
   }
 `;
@@ -181,14 +181,14 @@ const Note = styled.div`
   background-color: #f8f9fa;
   margin-top: 80px;
   height: 100px;
-  padding: 25px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 15px;
   p {
     font-size: 14px;
-    width: 500px;
+    width: 530px;
     margin-top: 8px;
     color: ${({ theme }) => theme.colors.INPUT_GRAY};
     line-height: 20px;
