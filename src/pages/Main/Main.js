@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import MainBanner from '../../components/Main/MainBanner';
 import EduIcon from '../../assets/images/icon_edu.png';
 import MyPage from '../../assets/images/icon_mypage.png';
@@ -7,7 +7,6 @@ import MyPage from '../../assets/images/icon_mypage.png';
 const Main = () => {
   const navigate = useNavigate();
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
-
   const onClickMypage = () => {
     if (!loginState) {
       alert('로그인이 필요합니다.');

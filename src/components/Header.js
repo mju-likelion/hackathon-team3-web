@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GetUserInfo } from '../api/Auth/GetUserInfo';
 import { LogoutApi } from '../api/Auth/LogoutApi';
 import Logo from '../assets/images/surfing-logo.png';
@@ -10,14 +10,8 @@ const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
-
-  useEffect(() => {
-    if (loginState) {
-      GetUserInfo((res) => {
-        setUserName(res.data.user.nickname);
-      });
-    }
-  }, []);
+  const location = useLocation();
+  const [nowPath, setNowPath] = useState('');
 
   const onClickLogout = (data) => {
     if (confirm('로그아웃 하시겠습니까?')) {
@@ -36,26 +30,52 @@ const Header = () => {
     },
   };
 
+  useEffect(() => {
+    if (loginState) {
+      GetUserInfo((res) => {
+        setUserName(res.data.user.nickname);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    setNowPath(location.pathname);
+    console.log(nowPath);
+  }, [location]);
+
   return (
-    <HeaderBar>
-      <LogoIcon src={Logo} onClick={() => navigate('/')} />
-      <Learning onClick={() => navigate('/education')}>학습하기</Learning>
-      {loginState ? (
-        <SignBox>
-          <UserPageBtn onClick={() => navigate('/mypage/education')}>
-            {userName} 님 환영합니다!
-          </UserPageBtn>
-          <LogoutBtn onClick={onClickLogout}>
-            <img src={LogoutIcon} alt='logout-icon' />
-          </LogoutBtn>
-        </SignBox>
-      ) : (
-        <SignBox>
-          <SignBtn onClick={() => navigate('/login')}>로그인</SignBtn>
-          <SignUpBtn onClick={() => navigate('/join')}>회원가입</SignUpBtn>
-        </SignBox>
-      )}
-    </HeaderBar>
+    <>
+      {nowPath === '/' ||
+      nowPath === '/education' ||
+      nowPath === '/mypage' ||
+      nowPath === '/education/basic' ||
+      nowPath === '/education/advanced' ||
+      nowPath === '/join' ||
+      nowPath === '/login' ||
+      nowPath === '/mypage/education' ||
+      nowPath === '/mypage/account' ||
+      nowPath === '/complete' ? (
+        <HeaderBar>
+          <LogoIcon src={Logo} onClick={() => navigate('/')} />
+          <Learning onClick={() => navigate('/education')}>학습하기</Learning>
+          {loginState ? (
+            <SignBox>
+              <UserPageBtn onClick={() => navigate('/mypage/education')}>
+                {userName} 님 환영합니다!
+              </UserPageBtn>
+              <LogoutBtn onClick={onClickLogout}>
+                <img src={LogoutIcon} alt='logout-icon' />
+              </LogoutBtn>
+            </SignBox>
+          ) : (
+            <SignBox>
+              <SignBtn onClick={() => navigate('/login')}>로그인</SignBtn>
+              <SignUpBtn onClick={() => navigate('/join')}>회원가입</SignUpBtn>
+            </SignBox>
+          )}
+        </HeaderBar>
+      ) : null}
+    </>
   );
 };
 

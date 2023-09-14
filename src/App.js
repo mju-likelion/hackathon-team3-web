@@ -1,5 +1,5 @@
 import Main from './pages/Main/Main';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/Theme';
 import GlobalStyle from './styles/GlobalStyle';
@@ -15,24 +15,22 @@ import NotFound from './pages/Error/NotFound';
 
 function App() {
   return (
-      <ThemeProvider theme={Theme}>
-        <GlobalStyle />
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/education' element={<EducationSelect />} />
-            <Route path='/education/basic' element={<Game type='basic' />} />
-            <Route path='/education/advanced' element={<Game type='advanced' />} />
-            <Route path='/join' element={<Join />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/mypage/education' element={<MyPageEducation />} />
-            <Route path='/mypage/account' element={<MyPageAccount />} />
-            <Route path='/complete' element={<Complete />} />
-            <Route path='/*' element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+    <ThemeProvider theme={Theme}>
+      <GlobalStyle />
+      <Header />
+      <Routes>
+        <Route path='/' element={<Main />} />
+        <Route path='/education' element={<EducationSelect />} />
+        <Route path='/education/basic' element={<Game type='basic' />} />
+        <Route path='/education/advanced' element={<Game type='advanced' />} />
+        <Route path='/join' element={<Join />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/mypage/education' element={<MyPageEducation />} />
+        <Route path='/mypage/account' element={<MyPageAccount />} />
+        <Route path='/complete' element={<Complete />} />
+        <Route path='/*' element={<NotFound />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 
