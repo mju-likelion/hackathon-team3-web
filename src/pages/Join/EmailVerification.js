@@ -92,7 +92,6 @@ const EmailVerificationWrap = styled.div`
 `;
 const EmailVerificationBox = styled.div`
   margin-top: 80px;
-  /* height: 600px; */
   width: 700px;
   display: flex;
   flex-direction: column;
