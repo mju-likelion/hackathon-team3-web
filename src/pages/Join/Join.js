@@ -23,8 +23,10 @@ const Join = () => {
   };
   const callbackFunctions = {
     navigateSuccess: () => {
-      alert('회원가입 성공! 로그인화면으로 돌아갑니다.');
-      navigate('/login');
+      alert(
+        '이메일을 확인해주세요. 이메일 인증이 완료되면 회원가입이 완료됩니다!'
+      );
+      navigate('/email-verification');
     },
     navigateError: (error) => {
       error.response && error.response.status === 409

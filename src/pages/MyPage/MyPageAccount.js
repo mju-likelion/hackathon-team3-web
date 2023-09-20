@@ -12,7 +12,7 @@ const MyPageAccount = () => {
   };
   const deleteUserCheck = () => {
     if (confirm('정말로 탈퇴하시겠습니까?') === true) {
-      window.localStorage.setItem('loginState', false);
+      window.sessionStorage.setItem('loginState', false);
       DeleteUser(callbackFunction);
     } else return false;
   };

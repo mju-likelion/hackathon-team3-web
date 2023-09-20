@@ -12,7 +12,7 @@ import MyPageEducation from './pages/MyPage/MyPageEducation';
 import MyPageAccount from './pages/MyPage/MyPageAccount';
 import Complete from './pages/Education/Complete';
 import NotFound from './pages/Error/NotFound';
-
+import EmailVerification from './pages/Join/EmailVerification';
 function App() {
   return (
     <ThemeProvider theme={Theme}>
@@ -29,6 +29,7 @@ function App() {
         <Route path='/mypage/account' element={<MyPageAccount />} />
         <Route path='/complete' element={<Complete />} />
         <Route path='/*' element={<NotFound />} />
+        <Route path='/email-verification' element={<EmailVerification />} />
       </Routes>
     </ThemeProvider>
   );
