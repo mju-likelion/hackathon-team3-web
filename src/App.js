@@ -13,6 +13,7 @@ import MyPageAccount from './pages/MyPage/MyPageAccount';
 import Complete from './pages/Education/Complete';
 import NotFound from './pages/Error/NotFound';
 import EmailVerification from './pages/Join/EmailVerification';
+import AdminPage from './pages/Admin/AdminPage';
 function App() {
   return (
     <ThemeProvider theme={Theme}>
@@ -20,6 +21,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />
+        <Route path='/admin' element={<AdminPage />} />
         <Route path='/education' element={<EducationSelect />} />
         <Route path='/education/basic' element={<Game type='basic' />} />
         <Route path='/education/advanced' element={<Game type='advanced' />} />

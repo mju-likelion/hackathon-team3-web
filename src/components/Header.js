@@ -12,6 +12,7 @@ const Header = () => {
   const loginState = JSON.parse(sessionStorage.getItem('loginState'));
   const location = useLocation();
   const [nowPath, setNowPath] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const onClickLogout = (data) => {
     if (confirm('로그아웃 하시겠습니까?')) {
@@ -34,6 +35,7 @@ const Header = () => {
     if (loginState) {
       GetUserInfo((res) => {
         setUserName(res.data.user.nickname);
+        console.log(res);
       });
     }
   }, []);
@@ -43,7 +45,14 @@ const Header = () => {
     console.log(nowPath);
   }, [location]);
 
+  useEffect(() => {
+    GetUserInfo((res) => {
+      if (res.data.user.role === 'ADMIN') setIsAdmin(true);
+    });
+  }, []);
+
   return (
+    // 관리자 아이디로 로그인 했을시 헤더에 따로 띄우기
     <>
       {nowPath === '/' ||
       nowPath === '/education' ||
@@ -60,6 +69,9 @@ const Header = () => {
           <Learning onClick={() => navigate('/education')}>학습하기</Learning>
           {loginState ? (
             <SignBox>
+              {isAdmin && (
+                <GoAdmin onClick={() => navigate('/admin')}>admin</GoAdmin>
+              )}
               <UserPageBtn onClick={() => navigate('/mypage/education')}>
                 {userName} 님 환영합니다!
               </UserPageBtn>
@@ -100,6 +112,7 @@ const SignBox = styled.div`
   margin-left: auto;
   margin-right: 67px;
   display: flex;
+  //justify-content: center;
 `;
 const SignBtn = styled.button`
   height: 27px;
@@ -131,4 +144,13 @@ const LogoIcon = styled.img`
   height: 65px;
   margin-left: 30px;
   cursor: pointer;
+`;
+
+const GoAdmin = styled.button`
+  width: 50px;
+  background: gold;
+  font-size: 15px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.RED};
+  padding-right: 20px;
 `;
