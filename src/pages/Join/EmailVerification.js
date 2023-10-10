@@ -6,7 +6,7 @@ import MailIcon from '../../assets/images/email.png';
 import SurfingLogo from '../../assets/images/surfing-logo.png';
 const EmailVerification = () => {
   const navigate = useNavigate();
-  const [isVerified, setIsVerified] = useState(true);
+  const [isVerified, setIsVerified] = useState(null);
   const urlParams = new URLSearchParams(window.location.search);
   const verifyToken = urlParams.get('verifyToken');
   useEffect(() => {
