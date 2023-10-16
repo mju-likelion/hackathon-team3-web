@@ -21,7 +21,7 @@ const Header = () => {
   const callbackFunctions = {
     navigateSuccess: () => {
       window.sessionStorage.setItem('loginState', false);
-      location.replace('/login');
+      window.location.replace('/login');
       alert('로그아웃되었습니다. 다시 로그인화면으로 돌아갑니다.');
     },
     navigateError: (error) => {
