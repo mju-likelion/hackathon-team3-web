@@ -21,8 +21,8 @@ const Header = () => {
   const callbackFunctions = {
     navigateSuccess: () => {
       window.sessionStorage.setItem('loginState', false);
-      alert('로그아웃되었습니다. 메인으로 돌아갑니다.');
-      location.replace('/');
+      location.replace('/login');
+      alert('로그아웃되었습니다. 다시 로그인화면으로 돌아갑니다.');
     },
     navigateError: (error) => {
       console.log(error);
